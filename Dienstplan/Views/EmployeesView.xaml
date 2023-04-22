@@ -86,7 +86,7 @@
 
             <Label Grid.Row="4"
                    Grid.Column="0"
-                   Content="Nachname:"/>
+                   Content="Gruppe:"/>
 
             <ComboBox ItemsSource="{Binding Groups}"
                       SelectedValue="{Binding SelectedGroup}"
