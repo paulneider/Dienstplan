@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -52,10 +51,10 @@ internal class GroupsViewModel : VMBase
     public ICommand CancleCommand => new Command(Cancle);
 
     private bool isAdd = true;
+    private readonly List<Group> newGroups = new List<Group>();
     public GroupsViewModel()
     {   
     }
-
     private void AddGroup(object param)
     {
         NewName = "";
@@ -71,8 +70,6 @@ internal class GroupsViewModel : VMBase
             return;
 
         SelectedItem.IsOut = true;
-        SelectedItem.IsEdit = true;
-
         Groups.Remove(SelectedItem);
     }
     private void UpdateGroup(object param)
@@ -89,8 +86,8 @@ internal class GroupsViewModel : VMBase
     }
     private void Save(object param)
     {
-        IEnumerable<Group> newItems = Groups.Where(x => x.Id == -1L);
-        SaveAndClose?.Invoke(this, newItems.ToList());
+        SaveAndClose?.Invoke(this, newGroups);
+        newGroups.Clear();
     }
     private void Okay(object param)
     {
@@ -103,12 +100,12 @@ internal class GroupsViewModel : VMBase
             newGroup.Name = NewName;
             newGroup.Type = NewType;
             Groups.Add(newGroup);
+            newGroups.Add(newGroup);
         }
         else 
         {
             SelectedItem.Name = NewName;
             SelectedItem.Type = NewType;
-            SelectedItem.IsEdit = true;
 
             Groups = new ObservableCollection<Group>(Groups);
         }

@@ -7,10 +7,9 @@ internal enum GroupType
 }
 internal class Group
 {
-    public long Id { get; set; } = -1;
+    public long Id { get; set; }
     public string Name { get; set; }
     public GroupType Type { get; set; }
     public bool IsOut { get; set; }
-    public bool IsEdit { get; set; }
-    //Name Versions
+    //Name History
 }
