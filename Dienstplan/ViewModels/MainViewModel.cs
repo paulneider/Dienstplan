@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
@@ -24,18 +25,25 @@ internal class MainViewModel : VMBase
     public ICommand EditEmployeesCommand => new Command(EditEmployees);
     public ICommand EditGroupsCommand => new Command(EditGroups);
 
-    public EmployeesViewModel EmployeesViewModel { get; init; }
-    public GroupsViewModel GroupsViewModel { get; init; }
-
+    public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
+    public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
 
     public MainViewModel()
     {
-        EmployeesViewModel = new EmployeesViewModel();
-        GroupsViewModel = new GroupsViewModel();
         GroupsViewModel.SaveAndClose += GroupsViewModel_SaveAndClose;
+        EmployeesViewModel.SaveAndClose += EmployeesViewModel_SaveAndClose;
 
         context.Database.EnsureCreated();
         context.Groups.Load();
+        context.Employees.Load();
+    }
+
+    private void EmployeesViewModel_SaveAndClose(object? sender, IList<Employee> newItems)
+    {
+        StackPanelVisibility = Visibility.Visible;
+        EmployeesViewModel.Visibility = Visibility.Collapsed;
+        context.Employees.AddRange(newItems);
+        context.SaveChanges();
     }
 
     private void GroupsViewModel_SaveAndClose(object? sender, IList<Group> newItems)
@@ -48,12 +56,16 @@ internal class MainViewModel : VMBase
 
     private void EditEmployees(object param)
     {
+        EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+        EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+
         StackPanelVisibility = Visibility.Collapsed;
         EmployeesViewModel.Visibility = Visibility.Visible;
     }
     private void EditGroups(object param)
     {
         GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+
         StackPanelVisibility = Visibility.Collapsed;
         GroupsViewModel.Visibility = Visibility.Visible;
     }

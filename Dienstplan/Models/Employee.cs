@@ -10,7 +10,7 @@ internal class Employee
     public long Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public double Hourse { get; set; }
+    public double Hours { get; set; }
     public double WrittingHours { get; set; }
     public bool IsOut { get; set; }
     public Group Group { get; set; }

@@ -52,9 +52,7 @@ internal class GroupsViewModel : VMBase
 
     private bool isAdd = true;
     private readonly List<Group> newGroups = new List<Group>();
-    public GroupsViewModel()
-    {   
-    }
+
     private void AddGroup(object param)
     {
         NewName = "";

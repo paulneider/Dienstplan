@@ -4,6 +4,7 @@ namespace Dienstplan;
 internal class ModelContext : DbContext
 {
     public DbSet<Group> Groups { get; set; }
+    public DbSet<Employee> Employees { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
