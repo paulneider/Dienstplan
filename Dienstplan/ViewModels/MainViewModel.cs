@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Dienstplan;
 internal class MainViewModel : VMBase
 {
-    private readonly ModelContext context = new ModelContext();
+    private readonly ApplicationDbContext context = new ApplicationDbContext();
 
     private Visibility stackPanelVisibility = Visibility.Visible;
     public Visibility StackPanelVisibility
@@ -26,6 +26,7 @@ internal class MainViewModel : VMBase
 
     public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
     public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
+    
 
     public MainViewModel()
     {

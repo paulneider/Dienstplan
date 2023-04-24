@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace Dienstplan;
-internal class ModelContext : DbContext
+internal class ApplicationDbContext : DbContext
 {
     public DbSet<Group> Groups { get; set; }
     public DbSet<Employee> Employees { get; set; }

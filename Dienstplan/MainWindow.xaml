@@ -36,7 +36,9 @@
 
         <local:GroupsView DataContext="{Binding GroupsViewModel}"
                           Visibility="{Binding Visibility}"/>
-        
+
+        <local:RosterView DataContext="{Binding RosterViewModel}"
+                          Visibility="{Binding Visibility}"/>
     </Grid>
 
 </Window>
