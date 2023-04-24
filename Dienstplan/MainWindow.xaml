@@ -20,6 +20,7 @@
                     Content="Dienstplan öffnen"/>
             <Button Height="40"
                     Width="150"
+                    Command="{Binding CreateRosterCommand}"
                     Content="Dienstplan erstellen"/>
             <Button Height="40"
                     Width="150"

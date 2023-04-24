@@ -23,10 +23,11 @@ internal class MainViewModel : VMBase
 
     public ICommand EditEmployeesCommand => new Command(EditEmployees);
     public ICommand EditGroupsCommand => new Command(EditGroups);
+    public ICommand CreateRosterCommand => new Command(CreateRoster);
 
     public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
     public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
-    
+    public RosterViewModel RosterViewModel { get; init; } = new RosterViewModel();
 
     public MainViewModel()
     {
@@ -68,5 +69,12 @@ internal class MainViewModel : VMBase
 
         StackPanelVisibility = Visibility.Collapsed;
         GroupsViewModel.Visibility = Visibility.Visible;
+    }
+    private void CreateRoster(object param)
+    {
+        RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+
+        StackPanelVisibility = Visibility.Collapsed;
+        RosterViewModel.Visibility = Visibility.Visible;
     }
 }
