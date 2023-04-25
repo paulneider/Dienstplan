@@ -39,7 +39,7 @@
                 
             <DataGrid Grid.Row="1"
                       Grid.Column="0"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
@@ -67,7 +67,7 @@
 
             <DataGrid Grid.Row="1"
                       Grid.Column="1"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
@@ -100,12 +100,12 @@
 
             <DataGrid Grid.Row="1"
                       Grid.Column="2"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
                       CanUserDeleteRows="False"
-                      ItemsSource="{Binding Monday}">
+                      ItemsSource="{Binding Tuesday}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
@@ -133,12 +133,12 @@
 
             <DataGrid Grid.Row="1"
                       Grid.Column="3"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
                       CanUserDeleteRows="False"
-                      ItemsSource="{Binding Monday}">
+                      ItemsSource="{Binding Wednesday}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
@@ -166,12 +166,12 @@
 
             <DataGrid Grid.Row="1"
                       Grid.Column="4"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
                       CanUserDeleteRows="False"
-                      ItemsSource="{Binding Monday}">
+                      ItemsSource="{Binding Thursday}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
@@ -199,12 +199,12 @@
 
             <DataGrid Grid.Row="1"
                       Grid.Column="5"
-                      HorizontalAlignment="Left"
+                      HorizontalAlignment="Stretch"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
                       CanUserDeleteRows="False"
-                      ItemsSource="{Binding Monday}">
+                      ItemsSource="{Binding Friday}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"

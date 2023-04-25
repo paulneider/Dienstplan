@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 
 namespace Dienstplan;
+
 internal class RosterViewModel : VMBase
 {
     public Visibility Visibility
@@ -24,6 +25,80 @@ internal class RosterViewModel : VMBase
     {
         
     }
+
+    public void Init(DateOnly start, DateOnly end)
+    {
+        // Testing
+        if (start.DayOfWeek != DayOfWeek.Monday)
+            throw new ArgumentException("start must be a monday", nameof(start));
+
+        if (end.DayOfWeek != DayOfWeek.Friday)
+            throw new ArgumentException("end must be a friday", nameof(end));
+
+        roster = new Roster();
+        roster.Start = start;
+        roster.End = end;
+
+        Day monday = new Day();
+        monday.Date = start;
+        roster.Days.Add(monday);
+
+        Day tuesday = new Day();
+        tuesday.Date = start.AddDays(1);
+        roster.Days.Add(tuesday);
+
+        Day wednesday = new Day();
+        wednesday.Date = start.AddDays(2);
+        roster.Days.Add(wednesday);
+
+        Day thursday = new Day();
+        thursday.Date = start.AddDays(3);
+        roster.Days.Add(thursday);
+
+        Day friday = new Day();
+        friday.Date = start.AddDays(4);
+        roster.Days.Add(friday);
+
+        foreach (Employee employee in Employees)
+        {
+            Shift mondayShift = new Shift();
+            mondayShift.Day = monday;
+            mondayShift.Employee = employee;
+
+            monday.Shifts.Add(mondayShift);
+            Monday.Add(new ShiftViewModel(mondayShift));
+
+            Shift tuesdayShift = new Shift();
+            tuesdayShift.Day = tuesday;
+            tuesdayShift.Employee = employee;
+
+            tuesday.Shifts.Add(tuesdayShift);
+            Tuesday.Add(new ShiftViewModel(tuesdayShift));
+
+            Shift wednesdayShift = new Shift();
+            wednesdayShift.Day = wednesday;
+            wednesdayShift.Employee = employee;
+
+            wednesday.Shifts.Add(wednesdayShift);
+            Wednesday.Add(new ShiftViewModel(wednesdayShift));
+
+            Shift thursdayShift = new Shift();
+            thursdayShift.Day = thursday;
+            thursdayShift.Employee = employee;
+
+            thursday.Shifts.Add(thursdayShift);
+            Thursday.Add(new ShiftViewModel(thursdayShift));
+
+            Shift fridayShift = new Shift();
+            fridayShift.Day = friday;
+            fridayShift.Employee = employee;
+
+            friday.Shifts.Add(fridayShift);
+            Friday.Add(new ShiftViewModel(fridayShift));
+        }
+
+    }
+
     public RosterViewModel(Roster roster)
     {
         this.roster = roster;

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Linq;
 
 namespace Dienstplan;
+
 internal class EmployeesViewModel : VMBase
 {
     public event EventHandler<IList<Employee>> SaveAndClose;

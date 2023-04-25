@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -6,6 +7,7 @@ using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dienstplan;
+
 internal class MainViewModel : VMBase
 {
     private readonly ApplicationDbContext context = new ApplicationDbContext();
@@ -27,7 +29,7 @@ internal class MainViewModel : VMBase
 
     public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
     public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
-    public RosterViewModel RosterViewModel { get; init; } = new RosterViewModel();
+    public RosterViewModel RosterViewModel { get; set; } = new RosterViewModel();
 
     public MainViewModel()
     {
@@ -72,7 +74,10 @@ internal class MainViewModel : VMBase
     }
     private void CreateRoster(object param)
     {
+        this.RosterViewModel = new RosterViewModel();
         RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+        RosterViewModel.Init(new DateOnly(2023, 4, 24), new DateOnly(2023, 4, 28));
+
 
         StackPanelVisibility = Visibility.Collapsed;
         RosterViewModel.Visibility = Visibility.Visible;

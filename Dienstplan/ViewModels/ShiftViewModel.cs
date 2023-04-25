@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace Dienstplan;
+
 internal class ShiftViewModel : VMBase
 {
     private readonly Shift shift;

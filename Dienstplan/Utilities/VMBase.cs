@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Dienstplan;
+
 abstract class VMBase : INotifyPropertyChanged
 {
     private Dictionary<string, object> propertyValues = new Dictionary<string, object>();

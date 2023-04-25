@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace Dienstplan;
+
 internal class ApplicationDbContext : DbContext
 {
     public DbSet<Group> Groups { get; set; }

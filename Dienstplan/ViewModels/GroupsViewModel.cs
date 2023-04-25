@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace Dienstplan;
+
 internal class GroupsViewModel : VMBase
 {
     public event EventHandler<IList<Group>> SaveAndClose;
