@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace Dienstplan;
 
@@ -21,12 +23,7 @@ internal class RosterViewModel : VMBase
 
     private Roster roster;
 
-    public RosterViewModel()
-    {
-        
-    }
-
-    public void Init(DateOnly start, DateOnly end)
+    public void InitCreate(DateOnly start, DateOnly end)
     {
         // Testing
         if (start.DayOfWeek != DayOfWeek.Monday)
@@ -96,10 +93,9 @@ internal class RosterViewModel : VMBase
             friday.Shifts.Add(fridayShift);
             Friday.Add(new ShiftViewModel(fridayShift));
         }
-
     }
 
-    public RosterViewModel(Roster roster)
+    public void InitUpdate(Roster roster)
     {
         this.roster = roster;
 

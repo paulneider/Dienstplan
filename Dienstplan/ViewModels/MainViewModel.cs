@@ -74,10 +74,8 @@ internal class MainViewModel : VMBase
     }
     private void CreateRoster(object param)
     {
-        this.RosterViewModel = new RosterViewModel();
         RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
-        RosterViewModel.Init(new DateOnly(2023, 4, 24), new DateOnly(2023, 4, 28));
-
+        RosterViewModel.InitCreate(new DateOnly(2023, 4, 24), new DateOnly(2023, 4, 28));
 
         StackPanelVisibility = Visibility.Collapsed;
         RosterViewModel.Visibility = Visibility.Visible;

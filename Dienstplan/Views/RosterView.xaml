@@ -75,21 +75,21 @@
                       ItemsSource="{Binding Monday}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding Start}"/>
+                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding End}"/>
+                                        Binding="{Binding End, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Break}"/>
+                                        Binding="{Binding Break, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Time}"/>
+                                        Binding="{Binding Time, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -110,19 +110,19 @@
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding Start}"/>
+                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding End}"/>
+                                        Binding="{Binding End, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Break}"/>
+                                        Binding="{Binding Break, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time}"/>
+                                        Binding="{Binding Time, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -143,19 +143,19 @@
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding Start}"/>
+                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding End}"/>
+                                        Binding="{Binding End, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Break}"/>
+                                        Binding="{Binding Break, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time}"/>
+                                        Binding="{Binding Time, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -176,19 +176,19 @@
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding Start}"/>
+                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding End}"/>
+                                        Binding="{Binding End, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Break}"/>
+                                        Binding="{Binding Break, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time}"/>
+                                        Binding="{Binding Time, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -209,19 +209,19 @@
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding Start}"/>
+                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
                                         IsReadOnly="True"
                                         Width="45"
-                                        Binding="{Binding End}"/>
+                                        Binding="{Binding End, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Break}"/>
+                                        Binding="{Binding Break, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time}"/>
+                                        Binding="{Binding Time, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
