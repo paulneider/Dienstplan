@@ -21,6 +21,12 @@ internal class RosterViewModel : VMBase
         set => SetValue(value);
     }
 
+    ObservableCollection<EmployerItemViewModel> employerItems = new ObservableCollection<EmployerItemViewModel>();
+    public ObservableCollection<EmployerItemViewModel> EmployerItems
+    {
+        get => employerItems;
+    }
+
     private Roster roster;
 
     public void InitCreate(DateOnly start, DateOnly end)
@@ -31,6 +37,9 @@ internal class RosterViewModel : VMBase
 
         if (end.DayOfWeek != DayOfWeek.Friday)
             throw new ArgumentException("end must be a friday", nameof(end));
+
+        if (start.AddDays(4) != end)
+            throw new ArgumentException("end must be 4 days after start");
 
         roster = new Roster();
         roster.Start = start;
@@ -58,40 +67,8 @@ internal class RosterViewModel : VMBase
 
         foreach (Employee employee in Employees)
         {
-            Shift mondayShift = new Shift();
-            mondayShift.Day = monday;
-            mondayShift.Employee = employee;
-
-            monday.Shifts.Add(mondayShift);
-            Monday.Add(new ShiftViewModel(mondayShift));
-
-            Shift tuesdayShift = new Shift();
-            tuesdayShift.Day = tuesday;
-            tuesdayShift.Employee = employee;
-
-            tuesday.Shifts.Add(tuesdayShift);
-            Tuesday.Add(new ShiftViewModel(tuesdayShift));
-
-            Shift wednesdayShift = new Shift();
-            wednesdayShift.Day = wednesday;
-            wednesdayShift.Employee = employee;
-
-            wednesday.Shifts.Add(wednesdayShift);
-            Wednesday.Add(new ShiftViewModel(wednesdayShift));
-
-            Shift thursdayShift = new Shift();
-            thursdayShift.Day = thursday;
-            thursdayShift.Employee = employee;
-
-            thursday.Shifts.Add(thursdayShift);
-            Thursday.Add(new ShiftViewModel(thursdayShift));
-
-            Shift fridayShift = new Shift();
-            fridayShift.Day = friday;
-            fridayShift.Employee = employee;
-
-            friday.Shifts.Add(fridayShift);
-            Friday.Add(new ShiftViewModel(fridayShift));
+            EmployerItemViewModel viewModel = new EmployerItemViewModel(employee, roster.Days.ToList());
+            EmployerItems.Add(viewModel);
         }
     }
 
@@ -99,31 +76,7 @@ internal class RosterViewModel : VMBase
     {
         this.roster = roster;
 
-        //docs = docs.OrderBy(d => docsIds.IndexOf(d.Id)).ToList(); --> join
-        Day monday = roster.Days.Single(x=> x.Date.DayOfWeek == DayOfWeek.Monday);
-        foreach (Shift shift in monday.Shifts)
-            Monday.Add(new ShiftViewModel(shift));
-
-        Day tuesday = roster.Days.Single(x => x.Date.DayOfWeek == DayOfWeek.Tuesday);
-        foreach (Shift shift in tuesday.Shifts)
-            Tuesday.Add(new ShiftViewModel(shift));
-
-        Day wednesday = roster.Days.Single(x => x.Date.DayOfWeek == DayOfWeek.Wednesday);
-        foreach (Shift shift in wednesday.Shifts)
-            Wednesday.Add(new ShiftViewModel(shift));
-
-        Day thursday = roster.Days.Single(x => x.Date.DayOfWeek == DayOfWeek.Thursday);
-        foreach (Shift shift in thursday.Shifts)
-            Thursday.Add(new ShiftViewModel(shift));
-
-        Day friday = roster.Days.Single(x => x.Date.DayOfWeek == DayOfWeek.Friday);
-        foreach (Shift shift in friday.Shifts)
-            Friday.Add(new ShiftViewModel(shift));
+        foreach (Employee employee in Employees)
+            EmployerItems.Add(new EmployerItemViewModel(employee, roster.Days.ToList()));
     }
-
-    public ObservableCollection<ShiftViewModel> Monday { get; } = new ObservableCollection<ShiftViewModel>();
-    public ObservableCollection<ShiftViewModel> Tuesday { get; } = new ObservableCollection<ShiftViewModel>();
-    public ObservableCollection<ShiftViewModel> Wednesday { get; } = new ObservableCollection<ShiftViewModel>();
-    public ObservableCollection<ShiftViewModel> Thursday { get; } = new ObservableCollection<ShiftViewModel>();
-    public ObservableCollection<ShiftViewModel> Friday { get; } = new ObservableCollection<ShiftViewModel>();
 }

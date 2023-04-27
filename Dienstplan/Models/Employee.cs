@@ -15,4 +15,5 @@ internal class Employee
     public double WrittingHours { get; set; }
     public bool IsOut { get; set; }
     public Group Group { get; set; }
+    public ICollection<Shift> Shifts { get; set; } = new List<Shift>();
 }

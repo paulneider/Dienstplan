@@ -16,6 +16,7 @@ internal class ShiftViewModel : VMBase
         {
             shift.Start = value;
             OnPropertChanged(nameof(Start));
+            OnPropertChanged(nameof(Time));
         }
     }
     public TimeOnly End 
@@ -25,6 +26,7 @@ internal class ShiftViewModel : VMBase
         {
             shift.End = value;
             OnPropertChanged(nameof(End));
+            OnPropertChanged(nameof(Time));
         }
     }
     public TimeSpan Break 
@@ -34,6 +36,7 @@ internal class ShiftViewModel : VMBase
         {
             shift.Break = value;
             OnPropertChanged(nameof(Break));
+            OnPropertChanged(nameof(Time));
         }
     }
 

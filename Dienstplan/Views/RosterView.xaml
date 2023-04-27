@@ -25,15 +25,10 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Mitarbeiter"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    Grid.Row="0"
                    Grid.Column="0"/>
                 
@@ -44,7 +39,7 @@
                       CanUserAddRows="False"
                       CanUserReorderColumns="False"
                       CanUserDeleteRows="False"
-                      ItemsSource="{Binding Employees}">
+                      ItemsSource="{Binding EmployerItems}">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True"
                                         Width="50"
@@ -57,173 +52,89 @@
                                         IsReadOnly="True"
                                         Width="45"
                                         Binding="{Binding WrittingHours}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Label Content="Montag"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="1"/>
-
-            <DataGrid Grid.Row="1"
-                      Grid.Column="1"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding Monday}">
-                <DataGrid.Columns>
                     <DataGridTextColumn Header="Start"
                                         IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
+                                        Binding="{Binding MondayStart, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
                                         IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding End, StringFormat=HH:mm}"/>
+                                        Binding="{Binding MondayEnd, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
                                         IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Break, StringFormat=g}"/>
+                                        Binding="{Binding MondayBreak, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
+                                        IsReadOnly="True"
+                                        Width="50"
+                                        Binding="{Binding MondayTime, StringFormat=g}"/>
+                    <DataGridTextColumn Header="Start"
+                                        IsReadOnly="False"
+                                        Width="45"
+                                        Binding="{Binding TuesdayStart, StringFormat=HH:mm}"/>
+                    <DataGridTextColumn Header="Ende"
+                                        IsReadOnly="False"
+                                        Width="45"
+                                        Binding="{Binding TuesdayEnd, StringFormat=HH:mm}"/>
+                    <DataGridTextColumn Header="Pause"
                                         IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Time, StringFormat=g}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Label Content="Dienstag"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="2"/>
-
-            <DataGrid Grid.Row="1"
-                      Grid.Column="2"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding Tuesday}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="True"
-                                        Width="45"
-                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="True"
-                                        Width="45"
-                                        Binding="{Binding End, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding Break, StringFormat=g}"/>
+                                        Binding="{Binding TuesdayBreak, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time, StringFormat=g}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Label Content="Mittwoch"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="3"/>
-
-            <DataGrid Grid.Row="1"
-                      Grid.Column="3"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding Wednesday}">
-                <DataGrid.Columns>
+                                        Binding="{Binding TuesdayTime, StringFormat=g}"/>
                     <DataGridTextColumn Header="Start"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
+                                        Binding="{Binding WednesdayStart, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding End, StringFormat=HH:mm}"/>
+                                        Binding="{Binding WednesdayEnd, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Break, StringFormat=g}"/>
+                                        Binding="{Binding WednesdayBreak, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time, StringFormat=g}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Label Content="Donnerstag"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="4"/>
-
-            <DataGrid Grid.Row="1"
-                      Grid.Column="4"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding Thursday}">
-                <DataGrid.Columns>
+                                        Binding="{Binding WednesdayTime, StringFormat=g}"/>
                     <DataGridTextColumn Header="Start"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
+                                        Binding="{Binding ThursdayStart, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding End, StringFormat=HH:mm}"/>
+                                        Binding="{Binding ThursdayEnd, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Break, StringFormat=g}"/>
+                                        Binding="{Binding ThursdayBreak, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time, StringFormat=g}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Label Content="Freitag"
-                   HorizontalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="5"/>
-
-            <DataGrid Grid.Row="1"
-                      Grid.Column="5"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding Friday}">
-                <DataGrid.Columns>
+                                        Binding="{Binding ThursdayTime, StringFormat=g}"/>
                     <DataGridTextColumn Header="Start"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding Start, StringFormat=HH:mm}"/>
+                                        Binding="{Binding FridayStart, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="45"
-                                        Binding="{Binding End, StringFormat=HH:mm}"/>
+                                        Binding="{Binding FridayEnd, StringFormat=HH:mm}"/>
                     <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="True"
+                                        IsReadOnly="False"
                                         Width="50"
-                                        Binding="{Binding Break, StringFormat=g}"/>
+                                        Binding="{Binding FridayBreak, StringFormat=g}"/>
                     <DataGridTextColumn Header="h"
                                         IsReadOnly="True"
                                         Width="50"
-                                        Binding="{Binding Time, StringFormat=g}"/>
+                                        Binding="{Binding FridayTime, StringFormat=g}"/>
                 </DataGrid.Columns>
             </DataGrid>
+
         </Grid>
     </Grid>
 </UserControl>
