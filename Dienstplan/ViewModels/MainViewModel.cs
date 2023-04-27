@@ -35,10 +35,19 @@ internal class MainViewModel : VMBase
     {
         GroupsViewModel.SaveAndClose += GroupsViewModel_SaveAndClose;
         EmployeesViewModel.SaveAndClose += EmployeesViewModel_SaveAndClose;
+        RosterViewModel.SaveAndClose += RosterViewModel_SaveAndClose; 
 
         context.Database.EnsureCreated();
         context.Groups.Load();
         context.Employees.Load();
+    }
+
+    private void RosterViewModel_SaveAndClose(object? sender, Roster e)
+    {
+        StackPanelVisibility = Visibility.Visible;
+        RosterViewModel.Visibility = Visibility.Collapsed;
+
+        // Save
     }
 
     private void EmployeesViewModel_SaveAndClose(object? sender, IList<Employee> newItems)

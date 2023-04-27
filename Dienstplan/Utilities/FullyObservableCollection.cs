@@ -6,6 +6,7 @@ using System.ComponentModel;
 
 namespace Dienstplan;
 
+// https://stackoverflow.com/a/32013610
 public class FullyObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
 {
     /// <summary>

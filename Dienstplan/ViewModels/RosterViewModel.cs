@@ -3,32 +3,42 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace Dienstplan;
 
 internal class RosterViewModel : VMBase
 {
+    public event EventHandler<Roster> SaveAndClose;
+    private bool isCreate = false;
+    private Roster roster;
     public Visibility Visibility
     {
         get => GetValue(Visibility.Collapsed);
         set => SetValue(value);
     }
-
     public ObservableCollection<Employee> Employees 
     {
         get => GetValue(new ObservableCollection<Employee>());
         set => SetValue(value);
     }
-
     ObservableCollection<EmployerItemViewModel> employerItems = new ObservableCollection<EmployerItemViewModel>();
     public ObservableCollection<EmployerItemViewModel> EmployerItems
     {
         get => employerItems;
     }
+    public ICommand SaveCommand => new Command(Save);
+    public ICommand ResetCommand => new Command(Reset);
+    public string TimeSpanString
+    {
+        get
+        {
+            if (roster is null)
+                return string.Empty;
 
-    private Roster roster;
-
+            return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
+        }
+    }
     public void InitCreate(DateOnly start, DateOnly end)
     {
         // Testing
@@ -44,6 +54,9 @@ internal class RosterViewModel : VMBase
         roster = new Roster();
         roster.Start = start;
         roster.End = end;
+
+        isCreate = true;
+        OnPropertChanged(nameof(TimeSpanString));
 
         Day monday = new Day();
         monday.Date = start;
@@ -71,12 +84,23 @@ internal class RosterViewModel : VMBase
             EmployerItems.Add(viewModel);
         }
     }
-
     public void InitUpdate(Roster roster)
     {
         this.roster = roster;
+        isCreate = false;
 
         foreach (Employee employee in Employees)
             EmployerItems.Add(new EmployerItemViewModel(employee, roster.Days.ToList()));
+    }
+
+    public void Save(object param)
+    {
+        SaveAndClose?.Invoke(this, isCreate ? roster : null);
+        roster = null;
+        EmployerItems.Clear();
+    }
+    public void Reset(object param)
+    {
+
     }
 }

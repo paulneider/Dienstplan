@@ -11,6 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -18,123 +20,314 @@
                Grid.Row="0"
                FontSize="16"/>
 
-        <Grid Grid.Row="1">
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1">
+            <Button Content="Speichern und zurück"
+                    Command="{Binding SaveCommand}"
+                    Width="150"
+                    Height="20"
+                    Margin="5 0"/>
+            <Button Content="Zurücksetzen"
+                    Command="{Binding ResetCommand}"
+                    Width="150"
+                    Height="20"
+                    Margin="5 0"/>
+        </StackPanel>
+        
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="195"/>
+                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="175"/>
+                <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Mitarbeiter"
-                   HorizontalAlignment="Left"
-                   Grid.Row="0"
-                   Grid.Column="0"/>
-                
-            <DataGrid Grid.Row="1"
-                      Grid.Column="0"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserDeleteRows="False"
-                      ItemsSource="{Binding EmployerItems}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding FirstName}"/>
-                    <DataGridTextColumn Header="h/Wo"
-                                        IsReadOnly="True"
-                                        Width="45"
-                                        Binding="{Binding Hours}"/>
-                    <DataGridTextColumn Header="SZ"
-                                        IsReadOnly="True"
-                                        Width="45"
-                                        Binding="{Binding WrittingHours}"/>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding MondayStart, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding MondayEnd, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="False"
-                                        Width="50"
-                                        Binding="{Binding MondayBreak, StringFormat=g}"/>
-                    <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding MondayTime, StringFormat=g}"/>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding TuesdayStart, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding TuesdayEnd, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="False"
-                                        Width="50"
-                                        Binding="{Binding TuesdayBreak, StringFormat=g}"/>
-                    <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding TuesdayTime, StringFormat=g}"/>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding WednesdayStart, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding WednesdayEnd, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="False"
-                                        Width="50"
-                                        Binding="{Binding WednesdayBreak, StringFormat=g}"/>
-                    <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding WednesdayTime, StringFormat=g}"/>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding ThursdayStart, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding ThursdayEnd, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="False"
-                                        Width="50"
-                                        Binding="{Binding ThursdayBreak, StringFormat=g}"/>
-                    <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding ThursdayTime, StringFormat=g}"/>
-                    <DataGridTextColumn Header="Start"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding FridayStart, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Ende"
-                                        IsReadOnly="False"
-                                        Width="45"
-                                        Binding="{Binding FridayEnd, StringFormat=HH:mm}"/>
-                    <DataGridTextColumn Header="Pause"
-                                        IsReadOnly="False"
-                                        Width="50"
-                                        Binding="{Binding FridayBreak, StringFormat=g}"/>
-                    <DataGridTextColumn Header="h"
-                                        IsReadOnly="True"
-                                        Width="50"
-                                        Binding="{Binding FridayTime, StringFormat=g}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="3 0 0 0"/>
+            <Label Content="Montag"
+                   Grid.Row="1"
+                   Grid.Column="1"/>
+            <Label Content="Dienstag"
+                   Grid.Row="1"
+                   Grid.Column="2"/>
+            <Label Content="Mittwoche"
+                   Grid.Row="1"
+                   Grid.Column="3"/>
+            <Label Content="Donnerstag"
+                   Grid.Row="1"
+                   Grid.Column="4"/>
+            <Label Content="Freitag"
+                   Grid.Row="1"
+                   Grid.Column="5"/>
+            <Label Content="Gesamt"
+                   Grid.Row="1"
+                   Grid.Column="6"/>
 
         </Grid>
+
+        <DataGrid Grid.Row="3"
+                  Padding="0"
+                  Margin="0"
+                  HorizontalAlignment="Stretch"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserDeleteRows="False"
+                  ItemsSource="{Binding EmployerItems}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    IsReadOnly="True"
+                                    Width="120"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="TS"
+                                    IsReadOnly="True"
+                                    Width="25"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding WrittingHours}"/>
+                <DataGridTextColumn Header="h/Soll"
+                                    IsReadOnly="True"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding Hours}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="Beginn"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding MondayStart, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Ende"
+                                    IsReadOnly="False"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding MondayEnd, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Pause"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding MondayBreak, StringFormat=mm}"/>
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="30"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding MondayTime}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Beginn"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TuesdayStart, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Ende"
+                                    IsReadOnly="False"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TuesdayEnd, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Pause"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TuesdayBreak, StringFormat=mm}"/>
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="30"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TuesdayTime}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Beginn"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding WednesdayStart, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Ende"
+                                    IsReadOnly="False"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding WednesdayEnd, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Pause"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding WednesdayBreak, StringFormat=mm}"/>
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="30"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding WednesdayTime}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Beginn"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding ThursdayStart, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Ende"
+                                    IsReadOnly="False"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding ThursdayEnd, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Pause"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding ThursdayBreak, StringFormat=mm}"/>
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="30"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding ThursdayTime}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Beginn"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding FridayStart, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Ende"
+                                    IsReadOnly="False"
+                                    Width="45"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding FridayEnd, StringFormat=HH:mm}"/>
+                <DataGridTextColumn Header="Pause"
+                                    IsReadOnly="False"
+                                    Width="50"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding FridayBreak, StringFormat=mm}"/>
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="30"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding FridayTime}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 2 0" />
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="BorderThickness" Value="0 0 3 0" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="h"
+                                    IsReadOnly="True"
+                                    Width="35"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TotalHours}"/>
+                <DataGridTextColumn Header="OT"
+                                    IsReadOnly="True"
+                                    Width="35"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding OverTime}"/>
+                <DataGridTextColumn Header="OT Ges"
+                                    IsReadOnly="True"
+                                    Width="40"
+                                    CanUserResize="False"
+                                    CanUserReorder="False"
+                                    Binding="{Binding TotalOverTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        
     </Grid>
 </UserControl>

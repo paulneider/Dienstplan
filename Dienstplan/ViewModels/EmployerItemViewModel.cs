@@ -46,6 +46,11 @@ class EmployerItemViewModel : VMBase
             fridayShift.Day = days[4];
         }
     }
+
+    public string Name => $"{employee.LastName}, {employee.FirstName}";
+    public string LastName => employee.LastName;
+    public double Hours => employee.Hours;
+    public double WrittingHours => employee.WrittingHours;
     public TimeOnly MondayStart
     {
         get => mondayShift.Start;
@@ -54,11 +59,11 @@ class EmployerItemViewModel : VMBase
             mondayShift.Start = value;
             OnPropertChanged(nameof(MondayStart));
             OnPropertChanged(nameof(MondayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-
-
-
     public TimeOnly MondayEnd
     {
         get => mondayShift.End;
@@ -67,6 +72,9 @@ class EmployerItemViewModel : VMBase
             mondayShift.End = value;
             OnPropertChanged(nameof(MondayEnd));
             OnPropertChanged(nameof(MondayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan MondayBreak
@@ -77,13 +85,16 @@ class EmployerItemViewModel : VMBase
             mondayShift.Break = value;
             OnPropertChanged(nameof(MondayBreak));
             OnPropertChanged(nameof(MondayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-    public TimeSpan MondayTime
+    public double MondayTime
     {
         get
         {
-            return MondayEnd - MondayStart - MondayBreak;
+            return (MondayEnd - MondayStart - MondayBreak).TotalMinutes / 60;
         }
     }
     public TimeOnly TuesdayStart
@@ -94,6 +105,9 @@ class EmployerItemViewModel : VMBase
             tuesdayShift.Start = value;
             OnPropertChanged(nameof(TuesdayStart));
             OnPropertChanged(nameof(TuesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly TuesdayEnd
@@ -104,6 +118,9 @@ class EmployerItemViewModel : VMBase
             tuesdayShift.End = value;
             OnPropertChanged(nameof(TuesdayEnd));
             OnPropertChanged(nameof(TuesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan TuesdayBreak
@@ -114,13 +131,16 @@ class EmployerItemViewModel : VMBase
             tuesdayShift.Break = value;
             OnPropertChanged(nameof(TuesdayBreak));
             OnPropertChanged(nameof(TuesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-    public TimeSpan TuesdayTime
+    public double TuesdayTime
     {
         get
         {
-            return TuesdayEnd - TuesdayStart - TuesdayBreak;
+            return (TuesdayEnd - TuesdayStart - TuesdayBreak).TotalMinutes / 60;
         }
     }
     public TimeOnly WednesdayStart
@@ -131,6 +151,9 @@ class EmployerItemViewModel : VMBase
             wednesdayShift.Start = value;
             OnPropertChanged(nameof(WednesdayStart));
             OnPropertChanged(nameof(WednesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly WednesdayEnd
@@ -141,6 +164,9 @@ class EmployerItemViewModel : VMBase
             wednesdayShift.End = value;
             OnPropertChanged(nameof(WednesdayEnd));
             OnPropertChanged(nameof(WednesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan WednesdayBreak
@@ -151,13 +177,16 @@ class EmployerItemViewModel : VMBase
             wednesdayShift.Break = value;
             OnPropertChanged(nameof(WednesdayBreak));
             OnPropertChanged(nameof(WednesdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-    public TimeSpan WednesdayTime
+    public double WednesdayTime
     {
         get
         {
-            return WednesdayEnd - WednesdayStart - WednesdayBreak;
+            return (WednesdayEnd - WednesdayStart - WednesdayBreak).TotalMinutes / 60; 
         }
     }
     public TimeOnly ThursdayStart
@@ -168,6 +197,9 @@ class EmployerItemViewModel : VMBase
             thursdayShift.Start = value;
             OnPropertChanged(nameof(ThursdayStart));
             OnPropertChanged(nameof(ThursdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly ThursdayEnd
@@ -178,6 +210,9 @@ class EmployerItemViewModel : VMBase
             thursdayShift.End = value;
             OnPropertChanged(nameof(ThursdayEnd));
             OnPropertChanged(nameof(ThursdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan ThursdayBreak
@@ -188,13 +223,16 @@ class EmployerItemViewModel : VMBase
             thursdayShift.Break = value;
             OnPropertChanged(nameof(ThursdayBreak));
             OnPropertChanged(nameof(ThursdayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-    public TimeSpan ThursdayTime
+    public double ThursdayTime
     {
         get
         {
-            return ThursdayEnd - ThursdayStart - ThursdayBreak;
+            return (ThursdayEnd - ThursdayStart - ThursdayBreak).TotalMinutes / 60;
         }
     }
     public TimeOnly FridayStart
@@ -205,6 +243,9 @@ class EmployerItemViewModel : VMBase
             fridayShift.Start = value;
             OnPropertChanged(nameof(FridayStart));
             OnPropertChanged(nameof(FridayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly FridayEnd
@@ -215,6 +256,9 @@ class EmployerItemViewModel : VMBase
             fridayShift.End = value;
             OnPropertChanged(nameof(FridayEnd));
             OnPropertChanged(nameof(FridayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan FridayBreak
@@ -225,13 +269,37 @@ class EmployerItemViewModel : VMBase
             fridayShift.Break = value;
             OnPropertChanged(nameof(FridayBreak));
             OnPropertChanged(nameof(FridayTime));
+            OnPropertChanged(nameof(TotalHours));
+            OnPropertChanged(nameof(OverTime));
+            OnPropertChanged(nameof(TotalOverTime));
         }
     }
-    public TimeSpan FridayTime
+    public double FridayTime
     {
         get
         {
-            return FridayEnd - FridayStart - FridayBreak;
+            return (FridayEnd - FridayStart - FridayBreak).TotalMinutes / 60;
+        }
+    }
+    public double TotalHours
+    {
+        get
+        {
+            return MondayTime + TuesdayTime + WednesdayTime + ThursdayTime + FridayTime;
+        }
+    }
+    public double OverTime
+    {
+        get
+        {
+            return TotalHours - Hours + WrittingHours;
+        }
+    }
+    public double TotalOverTime
+    {
+        get
+        {
+            return 0;
         }
     }
 }
