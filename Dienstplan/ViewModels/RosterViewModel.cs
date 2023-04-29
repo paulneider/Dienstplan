@@ -9,14 +9,9 @@ namespace Dienstplan;
 
 internal class RosterViewModel : VMBase
 {
-    public event EventHandler<Roster> SaveAndClose;
+    public event EventHandler<Roster> SaveRoster;
     private bool isCreate = false;
     private Roster roster;
-    public Visibility Visibility
-    {
-        get => GetValue(Visibility.Collapsed);
-        set => SetValue(value);
-    }
     public ObservableCollection<Employee> Employees 
     {
         get => GetValue(new ObservableCollection<Employee>());
@@ -95,7 +90,7 @@ internal class RosterViewModel : VMBase
 
     public void Save(object param)
     {
-        SaveAndClose?.Invoke(this, isCreate ? roster : null);
+        SaveRoster?.Invoke(this, isCreate ? roster : null);
         roster = null;
         EmployerItems.Clear();
     }

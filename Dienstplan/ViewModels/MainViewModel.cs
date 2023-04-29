@@ -12,81 +12,47 @@ internal class MainViewModel : VMBase
 {
     private readonly ApplicationDbContext context = new ApplicationDbContext();
 
-    private Visibility stackPanelVisibility = Visibility.Visible;
-    public Visibility StackPanelVisibility
-    {
-        get { return stackPanelVisibility; }
-        set 
-        {
-            stackPanelVisibility = value;
-            OnPropertChanged(nameof(StackPanelVisibility));
-        }
-    }
-
-    public ICommand EditEmployeesCommand => new Command(EditEmployees);
-    public ICommand EditGroupsCommand => new Command(EditGroups);
-    public ICommand CreateRosterCommand => new Command(CreateRoster);
-
     public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
     public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
     public RosterViewModel RosterViewModel { get; set; } = new RosterViewModel();
 
     public MainViewModel()
     {
-        GroupsViewModel.SaveAndClose += GroupsViewModel_SaveAndClose;
-        EmployeesViewModel.SaveAndClose += EmployeesViewModel_SaveAndClose;
-        RosterViewModel.SaveAndClose += RosterViewModel_SaveAndClose; 
-
         context.Database.EnsureCreated();
         context.Groups.Load();
         context.Employees.Load();
-    }
 
-    private void RosterViewModel_SaveAndClose(object? sender, Roster e)
-    {
-        StackPanelVisibility = Visibility.Visible;
-        RosterViewModel.Visibility = Visibility.Collapsed;
+        GroupsViewModel.SaveGroups += SaveGroups;
+        EmployeesViewModel.SaveEmployees += SaveEmployees;
+        RosterViewModel.SaveRoster += SaveRoster;
 
-        // Save
-    }
-
-    private void EmployeesViewModel_SaveAndClose(object? sender, IList<Employee> newItems)
-    {
-        StackPanelVisibility = Visibility.Visible;
-        EmployeesViewModel.Visibility = Visibility.Collapsed;
-        context.Employees.AddRange(newItems);
-        context.SaveChanges();
-    }
-
-    private void GroupsViewModel_SaveAndClose(object? sender, IList<Group> newItems)
-    {
-        StackPanelVisibility = Visibility.Visible;
-        GroupsViewModel.Visibility = Visibility.Collapsed;
-        context.Groups.AddRange(newItems);
-        context.SaveChanges();
-    }
-
-    private void EditEmployees(object param)
-    {
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
-
-        StackPanelVisibility = Visibility.Collapsed;
-        EmployeesViewModel.Visibility = Visibility.Visible;
-    }
-    private void EditGroups(object param)
-    {
         GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
-
-        StackPanelVisibility = Visibility.Collapsed;
-        GroupsViewModel.Visibility = Visibility.Visible;
-    }
-    private void CreateRoster(object param)
-    {
         RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         RosterViewModel.InitCreate(new DateOnly(2023, 4, 24), new DateOnly(2023, 4, 28));
+    }
 
-        StackPanelVisibility = Visibility.Collapsed;
-        RosterViewModel.Visibility = Visibility.Visible;
+    private void SaveRoster(object? sender, Roster e)
+    {
+        //Save
+    }
+
+    private void SaveEmployees(object? sender, IList<Employee> newItems)
+    {
+        context.Employees.AddRange(newItems);
+        context.SaveChanges();
+
+        RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+        EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+    }
+
+    private void SaveGroups(object? sender, IList<Group> newItems)
+    {
+        context.Groups.AddRange(newItems);
+        context.SaveChanges();
+
+        EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
     }
 }

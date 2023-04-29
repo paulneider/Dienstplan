@@ -21,13 +21,20 @@
                FontSize="16"/>
 
         <GroupBox Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Speichern und zurück"
-                        Command="{Binding SaveCommand}"
-                        Margin="3 0"/>
-                <Button Content="Zurücksetzen"
+            <Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left">
+                    <Button Content="Speichern"
+                            Command="{Binding SaveCommand}"
+                            Margin="3 0"/>
+                    <Button Content="Zurücksetzen"
+                            Command="{Binding ResetCommand}"/>
+                </StackPanel>
+                
+                <Button Content="Woche auswählen"
+                        HorizontalAlignment="Right"
                         Command="{Binding ResetCommand}"/>
-            </StackPanel>
+            </Grid>
         </GroupBox>
         
         <Grid Grid.Row="2">

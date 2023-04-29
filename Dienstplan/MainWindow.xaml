@@ -17,7 +17,7 @@
         <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <StackPanel VerticalAlignment="Center"
+        <!--<StackPanel VerticalAlignment="Center"
                     Visibility="{Binding StackPanelVisibility}">
             <Button Height="40"
                     Width="150"
@@ -34,16 +34,17 @@
                     Width="150"
                     Command="{Binding EditGroupsCommand}"
                     Content="Gruppen bearbeiten"/>
-        </StackPanel>
-        
-        <local:EmployeesView DataContext="{Binding EmployeesViewModel}"
-                             Visibility="{Binding Visibility}"/>
-
-        <local:GroupsView DataContext="{Binding GroupsViewModel}"
-                          Visibility="{Binding Visibility}"/>
-
-        <local:RosterView DataContext="{Binding RosterViewModel}"
-                          Visibility="{Binding Visibility}"/>
+        </StackPanel>-->
+        <TabControl>
+            <TabItem Header="Dienstplan">
+                <local:RosterView DataContext="{Binding RosterViewModel}"/>
+            </TabItem>
+            <TabItem Header="Mitarbeiter">
+                <local:EmployeesView DataContext="{Binding EmployeesViewModel}"/>
+            </TabItem>
+            <TabItem Header="Gruppen">
+                <local:GroupsView DataContext="{Binding GroupsViewModel}"/>
+            </TabItem>
+        </TabControl>
     </Grid>
-
 </Window>

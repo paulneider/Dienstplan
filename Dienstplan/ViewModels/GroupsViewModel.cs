@@ -8,12 +8,7 @@ namespace Dienstplan;
 
 internal class GroupsViewModel : VMBase
 {
-    public event EventHandler<IList<Group>> SaveAndClose;
-    public Visibility Visibility
-    {
-        get => GetValue(Visibility.Collapsed);
-        set => SetValue(value);
-    }
+    public event EventHandler<IList<Group>> SaveGroups;
     public Visibility EditGridVisibility
     {
         get => GetValue(Visibility.Collapsed);
@@ -85,7 +80,7 @@ internal class GroupsViewModel : VMBase
     }
     private void Save(object param)
     {
-        SaveAndClose?.Invoke(this, newGroups);
+        SaveGroups?.Invoke(this, newGroups);
         newGroups.Clear();
     }
     private void Okay(object param)

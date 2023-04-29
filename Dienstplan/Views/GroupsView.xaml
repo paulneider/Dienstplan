@@ -34,7 +34,7 @@
                         Command="{Binding DeleteGroupCommand}"/>
                 <Button Content="Gruppe bearbeiten"
                         Command="{Binding UpdateGroupCommand}"/>
-                <Button Content="Speichern und zurück"
+                <Button Content="Speichern"
                         Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>

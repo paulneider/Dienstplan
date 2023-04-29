@@ -24,7 +24,7 @@
                         Command="{Binding DeleteEmployeeCommand}"/>
                 <Button Content="Erzieher bearbeiten"
                         Command="{Binding UpdateEmployeeCommand}"/>
-                <Button Content="Speichern und zurück"
+                <Button Content="Speichern"
                         Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>

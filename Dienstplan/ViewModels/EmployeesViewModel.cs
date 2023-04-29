@@ -9,12 +9,7 @@ namespace Dienstplan;
 
 internal class EmployeesViewModel : VMBase
 {
-    public event EventHandler<IList<Employee>> SaveAndClose;
-    public Visibility Visibility
-    {
-        get => GetValue(Visibility.Collapsed);
-        set => SetValue(value);
-    }
+    public event EventHandler<IList<Employee>> SaveEmployees;
     public Visibility EditGridVisibility
     {
         get => GetValue(Visibility.Collapsed);
@@ -113,7 +108,7 @@ internal class EmployeesViewModel : VMBase
     }
     private void Save(object param)
     {
-        SaveAndClose?.Invoke(this, newEmployees);
+        SaveEmployees?.Invoke(this, newEmployees);
         newEmployees.Clear();
     }
     private void Okay(object param)
