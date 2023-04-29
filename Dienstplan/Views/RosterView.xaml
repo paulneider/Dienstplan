@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:RosterViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" 
-             d:DesignWidth="1000">
+             d:DesignHeight="{StaticResource WindowHeight}" 
+             d:DesignWidth="{StaticResource WindowWidth}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,19 +20,15 @@
                Grid.Row="0"
                FontSize="16"/>
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="1">
-            <Button Content="Speichern und zurück"
-                    Command="{Binding SaveCommand}"
-                    Width="150"
-                    Height="20"
-                    Margin="5 0"/>
-            <Button Content="Zurücksetzen"
-                    Command="{Binding ResetCommand}"
-                    Width="150"
-                    Height="20"
-                    Margin="5 0"/>
-        </StackPanel>
+        <GroupBox Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Speichern und zurück"
+                        Command="{Binding SaveCommand}"
+                        Margin="3 0"/>
+                <Button Content="Zurücksetzen"
+                        Command="{Binding ResetCommand}"/>
+            </StackPanel>
+        </GroupBox>
         
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
@@ -53,7 +49,7 @@
             <Label Content="Mitarbeiter"
                    Grid.Row="1"
                    Grid.Column="0"
-                   Margin="3 0 0 0"/>
+                   Margin="8 0 0 0"/>
             <Label Content="Montag"
                    Grid.Row="1"
                    Grid.Column="1"/>
@@ -319,7 +315,7 @@
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding OverTime}"/>
-                <DataGridTextColumn Header="OT Ges"
+                <DataGridTextColumn Header="∑ OT"
                                     IsReadOnly="True"
                                     Width="40"
                                     CanUserResize="False"

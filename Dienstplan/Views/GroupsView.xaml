@@ -7,8 +7,8 @@
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:GroupsViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" 
-             d:DesignWidth="800">
+             d:DesignHeight="{StaticResource WindowHeight}" 
+             d:DesignWidth="{StaticResource WindowWidth}">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="TypeNames"
                 MethodName="GetValues" 
@@ -25,26 +25,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    IsEnabled="{Binding GridIsEnabled}"
-                    Margin="2">
-            <Button Height="20"
-                    Width="150"
-                    Content="Gruppe hinzufügen"
-                    Command="{Binding AddGroupCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Gruppe löschen"
-                    Command="{Binding DeleteGroupCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Gruppe bearbeiten"
-                    Command="{Binding UpdateGroupCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Speichern und zurück"
-                    Command="{Binding SaveCommand}"/>
-        </StackPanel>
+        <GroupBox>
+            <StackPanel Orientation="Horizontal"
+                        IsEnabled="{Binding GridIsEnabled}">
+                <Button Content="Gruppe hinzufügen"
+                        Command="{Binding AddGroupCommand}"/>
+                <Button Content="Gruppe löschen"
+                        Command="{Binding DeleteGroupCommand}"/>
+                <Button Content="Gruppe bearbeiten"
+                        Command="{Binding UpdateGroupCommand}"/>
+                <Button Content="Speichern und zurück"
+                        Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </GroupBox>
 
         <Grid Grid.Row="1"
               Visibility="{Binding EditGridVisibility, UpdateSourceTrigger=PropertyChanged}">
@@ -90,7 +83,7 @@
         </Grid>
         
         <DataGrid ItemsSource="{Binding Groups}"
-                  Margin="2"
+                  Margin="0 5"
                   IsEnabled="{Binding GridIsEnabled}"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"

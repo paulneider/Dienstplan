@@ -9,10 +9,10 @@
         Title="Dienstplan" 
         WindowStartupLocation="CenterScreen"
         MinHeight="250"
-        Height="450" 
-        MinWidth="1200"
-        Width="1200"
-        MaxWidth="1200">
+        Height="{StaticResource WindowHeight}" 
+        MinWidth="{StaticResource WindowWidth}"
+        Width="{StaticResource WindowWidth}"
+        MaxWidth="{StaticResource WindowWidth}">
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>

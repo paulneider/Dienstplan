@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:EmployeesViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="450" 
-             d:DesignWidth="800">
+             d:DesignHeight="{StaticResource WindowHeight}" 
+             d:DesignWidth="{StaticResource WindowWidth}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,26 +15,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    IsEnabled="{Binding GridIsEnabled}"
-                    Margin="2">
-            <Button Height="20"
-                    Width="150"
-                    Content="Erzieher hinzufügen"
-                    Command="{Binding AddEmployeeCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Erzieher löschen"
-                    Command="{Binding DeleteEmployeeCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Erzieher bearbeiten"
-                    Command="{Binding UpdateEmployeeCommand}"/>
-            <Button Height="20"
-                    Width="150"
-                    Content="Speichern und zurück"
-                    Command="{Binding SaveCommand}"/>
-        </StackPanel>
+        <GroupBox>
+            <StackPanel Orientation="Horizontal"
+                        IsEnabled="{Binding GridIsEnabled}">
+                <Button Content="Erzieher hinzufügen"
+                        Command="{Binding AddEmployeeCommand}"/>
+                <Button Content="Erzieher löschen"
+                        Command="{Binding DeleteEmployeeCommand}"/>
+                <Button Content="Erzieher bearbeiten"
+                        Command="{Binding UpdateEmployeeCommand}"/>
+                <Button Content="Speichern und zurück"
+                        Command="{Binding SaveCommand}"/>
+            </StackPanel>
+        </GroupBox>
 
         <Grid Grid.Row="1"
               Visibility="{Binding EditGridVisibility, UpdateSourceTrigger=PropertyChanged}">
@@ -108,7 +101,7 @@
         </Grid>
 
         <DataGrid ItemsSource="{Binding Employees}"
-                  Margin="2"
+                  Margin="0 5"
                   IsEnabled="{Binding GridIsEnabled}"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
