@@ -17,24 +17,6 @@
         <local:MainViewModel/>
     </Window.DataContext>
     <Grid>
-        <!--<StackPanel VerticalAlignment="Center"
-                    Visibility="{Binding StackPanelVisibility}">
-            <Button Height="40"
-                    Width="150"
-                    Content="Dienstplan öffnen"/>
-            <Button Height="40"
-                    Width="150"
-                    Command="{Binding CreateRosterCommand}"
-                    Content="Dienstplan erstellen"/>
-            <Button Height="40"
-                    Width="150"
-                    Command="{Binding EditEmployeesCommand}"
-                    Content="Kollegen bearbeiten"/>
-            <Button Height="40"
-                    Width="150"
-                    Command="{Binding EditGroupsCommand}"
-                    Content="Gruppen bearbeiten"/>
-        </StackPanel>-->
         <TabControl>
             <TabItem Header="Dienstplan">
                 <local:RosterView DataContext="{Binding RosterViewModel}"/>

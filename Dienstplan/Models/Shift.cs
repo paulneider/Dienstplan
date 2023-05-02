@@ -4,7 +4,7 @@ namespace Dienstplan;
 
 internal class Shift
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public Day Day { get; set; }
     public Employee Employee { get; set; }
     public TimeOnly Start { get; set; } = new TimeOnly(7, 30);

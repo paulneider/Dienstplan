@@ -32,18 +32,33 @@ class EmployerItemViewModel : VMBase
         {
             mondayShift = new Shift();
             mondayShift.Day = days[0];
+            mondayShift.Employee = employee;
+            days[0].Shifts.Add(mondayShift);
+            employee.Shifts.Add(mondayShift);
 
             tuesdayShift = new Shift();
             tuesdayShift.Day = days[1];
+            tuesdayShift.Employee = employee;
+            days[1].Shifts.Add(tuesdayShift);
+            employee.Shifts.Add(tuesdayShift);
 
             wednesdayShift = new Shift();
             wednesdayShift.Day = days[2];
+            wednesdayShift.Employee = employee;
+            days[2].Shifts.Add(wednesdayShift);
+            employee.Shifts.Add(wednesdayShift);
 
             thursdayShift = new Shift();
             thursdayShift.Day = days[3];
+            thursdayShift.Employee = employee;
+            days[3].Shifts.Add(thursdayShift);
+            employee.Shifts.Add(thursdayShift);
 
             fridayShift = new Shift();
             fridayShift.Day = days[4];
+            fridayShift.Employee = employee;
+            days[4].Shifts.Add(fridayShift);
+            employee.Shifts.Add(fridayShift);
         }
     }
 

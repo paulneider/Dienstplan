@@ -5,8 +5,9 @@ namespace Dienstplan;
 
 internal class Day
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public bool IsFree { get; set; }
     public DateOnly Date { get; set; }
+    public Roster Roster { get; set; }
     public ICollection<Shift> Shifts { get; set;} = new List<Shift>();
 }

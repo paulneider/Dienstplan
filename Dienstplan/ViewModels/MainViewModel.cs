@@ -19,8 +19,12 @@ internal class MainViewModel : VMBase
     public MainViewModel()
     {
         context.Database.EnsureCreated();
+
         context.Groups.Load();
         context.Employees.Load();
+        context.Days.Load();
+        context.Rosters.Load();
+        context.Shifts.Load();
 
         GroupsViewModel.SaveGroups += SaveGroups;
         EmployeesViewModel.SaveEmployees += SaveEmployees;
@@ -30,26 +34,40 @@ internal class MainViewModel : VMBase
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
         GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
         RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
-        RosterViewModel.InitCreate(new DateOnly(2023, 4, 24), new DateOnly(2023, 4, 28));
+
+        Roster roster = context.Rosters.FirstOrDefault();
+        if (roster is null)
+        {
+            DateOnly start = DateOnly.FromDateTime(DateTime.Today.AddDays(1 - ((int)DateTime.Today.DayOfWeek)));
+            DateOnly end = start.AddDays(4);
+            RosterViewModel.InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
+        }
+        else
+        {
+            RosterViewModel.InitUpdate(roster);
+        }
     }
 
-    private void SaveRoster(object? sender, Roster e)
+    private void SaveRoster(object? sender, Roster newRoster)
     {
-        //Save
+        if (newRoster is not null)
+            context.Rosters.Add(newRoster);
+        
+        context.SaveChanges();
     }
 
-    private void SaveEmployees(object? sender, IList<Employee> newItems)
+    private void SaveEmployees(object? sender, IList<Employee> newEmployees)
     {
-        context.Employees.AddRange(newItems);
+        context.Employees.AddRange(newEmployees);
         context.SaveChanges();
 
         RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
     }
 
-    private void SaveGroups(object? sender, IList<Group> newItems)
+    private void SaveGroups(object? sender, IList<Group> newGroups)
     {
-        context.Groups.AddRange(newItems);
+        context.Groups.AddRange(newGroups);
         context.SaveChanges();
 
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));

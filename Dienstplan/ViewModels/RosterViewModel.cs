@@ -10,7 +10,6 @@ namespace Dienstplan;
 internal class RosterViewModel : VMBase
 {
     public event EventHandler<Roster> SaveRoster;
-    private bool isCreate = false;
     private Roster roster;
     public ObservableCollection<Employee> Employees 
     {
@@ -34,7 +33,7 @@ internal class RosterViewModel : VMBase
             return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
         }
     }
-    public void InitCreate(DateOnly start, DateOnly end)
+    public void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
     {
         // Testing
         if (start.DayOfWeek != DayOfWeek.Monday)
@@ -50,7 +49,6 @@ internal class RosterViewModel : VMBase
         roster.Start = start;
         roster.End = end;
 
-        isCreate = true;
         OnPropertChanged(nameof(TimeSpanString));
 
         Day monday = new Day();
@@ -82,7 +80,6 @@ internal class RosterViewModel : VMBase
     public void InitUpdate(Roster roster)
     {
         this.roster = roster;
-        isCreate = false;
 
         foreach (Employee employee in Employees)
             EmployerItems.Add(new EmployerItemViewModel(employee, roster.Days.ToList()));
@@ -90,9 +87,7 @@ internal class RosterViewModel : VMBase
 
     public void Save(object param)
     {
-        SaveRoster?.Invoke(this, isCreate ? roster : null);
-        roster = null;
-        EmployerItems.Clear();
+        SaveRoster?.Invoke(this, roster.Id is null ? roster : null);
     }
     public void Reset(object param)
     {
