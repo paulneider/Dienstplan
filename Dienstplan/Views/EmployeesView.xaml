@@ -75,7 +75,8 @@
 
             <TextBox Grid.Row="3"
                      Grid.Column="1"
-                     Text="{Binding NewWrittingHours}"/>
+                     IsReadOnly="True"
+                     Text="{Binding NewWrittingHours, Mode=OneWay}"/>
 
             <Label Grid.Row="4"
                    Grid.Column="0"

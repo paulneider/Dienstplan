@@ -29,7 +29,10 @@
                             Margin="3 0"/>
                     <Button Content="Zurücksetzen"
                             Command="{Binding ResetCommand}"/>
+                    <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
+                    </DatePicker>
                 </StackPanel>
+
                 
                 <Button Content="Woche auswählen"
                         HorizontalAlignment="Right"
@@ -87,6 +90,11 @@
                   CanUserReorderColumns="False"
                   CanUserDeleteRows="False"
                   ItemsSource="{Binding EmployerItems}">
+            <!--<DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="LightBlue"/>
+                </Style>
+            </DataGrid.RowStyle>-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name"
                                     IsReadOnly="True"
@@ -133,7 +141,7 @@
                                     CanUserReorder="False"
                                     Binding="{Binding MondayEnd, StringFormat=HH:mm}"/>
                 <DataGridTextColumn Header="Pause"
-                                    IsReadOnly="False"
+                                    IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
@@ -171,7 +179,7 @@
                                     CanUserReorder="False"
                                     Binding="{Binding TuesdayEnd, StringFormat=HH:mm}"/>
                 <DataGridTextColumn Header="Pause"
-                                    IsReadOnly="False"
+                                    IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
@@ -209,7 +217,7 @@
                                     CanUserReorder="False"
                                     Binding="{Binding WednesdayEnd, StringFormat=HH:mm}"/>
                 <DataGridTextColumn Header="Pause"
-                                    IsReadOnly="False"
+                                    IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
@@ -247,7 +255,7 @@
                                     CanUserReorder="False"
                                     Binding="{Binding ThursdayEnd, StringFormat=HH:mm}"/>
                 <DataGridTextColumn Header="Pause"
-                                    IsReadOnly="False"
+                                    IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
@@ -285,7 +293,7 @@
                                     CanUserReorder="False"
                                     Binding="{Binding FridayEnd, StringFormat=HH:mm}"/>
                 <DataGridTextColumn Header="Pause"
-                                    IsReadOnly="False"
+                                    IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"

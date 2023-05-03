@@ -73,6 +73,7 @@ class EmployerItemViewModel : VMBase
         {
             mondayShift.Start = value;
             OnPropertChanged(nameof(MondayStart));
+            OnPropertChanged(nameof(MondayBreak));
             OnPropertChanged(nameof(MondayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -86,6 +87,7 @@ class EmployerItemViewModel : VMBase
         {
             mondayShift.End = value;
             OnPropertChanged(nameof(MondayEnd));
+            OnPropertChanged(nameof(MondayBreak));
             OnPropertChanged(nameof(MondayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -94,15 +96,9 @@ class EmployerItemViewModel : VMBase
     }
     public TimeSpan MondayBreak
     {
-        get => mondayShift.Break;
-        set
+        get
         {
-            mondayShift.Break = value;
-            OnPropertChanged(nameof(MondayBreak));
-            OnPropertChanged(nameof(MondayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            return (MondayEnd - MondayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
     public double MondayTime
@@ -119,6 +115,7 @@ class EmployerItemViewModel : VMBase
         {
             tuesdayShift.Start = value;
             OnPropertChanged(nameof(TuesdayStart));
+            OnPropertChanged(nameof(TuesdayBreak));
             OnPropertChanged(nameof(TuesdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -132,6 +129,7 @@ class EmployerItemViewModel : VMBase
         {
             tuesdayShift.End = value;
             OnPropertChanged(nameof(TuesdayEnd));
+            OnPropertChanged(nameof(TuesdayBreak));
             OnPropertChanged(nameof(TuesdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -140,15 +138,9 @@ class EmployerItemViewModel : VMBase
     }
     public TimeSpan TuesdayBreak
     {
-        get => tuesdayShift.Break;
-        set
+        get
         {
-            tuesdayShift.Break = value;
-            OnPropertChanged(nameof(TuesdayBreak));
-            OnPropertChanged(nameof(TuesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            return (TuesdayEnd - TuesdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
     public double TuesdayTime
@@ -165,6 +157,7 @@ class EmployerItemViewModel : VMBase
         {
             wednesdayShift.Start = value;
             OnPropertChanged(nameof(WednesdayStart));
+            OnPropertChanged(nameof(WednesdayBreak));
             OnPropertChanged(nameof(WednesdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -178,6 +171,7 @@ class EmployerItemViewModel : VMBase
         {
             wednesdayShift.End = value;
             OnPropertChanged(nameof(WednesdayEnd));
+            OnPropertChanged(nameof(WednesdayBreak));
             OnPropertChanged(nameof(WednesdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -186,15 +180,9 @@ class EmployerItemViewModel : VMBase
     }
     public TimeSpan WednesdayBreak
     {
-        get => wednesdayShift.Break;
-        set
+        get
         {
-            wednesdayShift.Break = value;
-            OnPropertChanged(nameof(WednesdayBreak));
-            OnPropertChanged(nameof(WednesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            return (WednesdayEnd - WednesdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
     public double WednesdayTime
@@ -211,6 +199,7 @@ class EmployerItemViewModel : VMBase
         {
             thursdayShift.Start = value;
             OnPropertChanged(nameof(ThursdayStart));
+            OnPropertChanged(nameof(ThursdayBreak));
             OnPropertChanged(nameof(ThursdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -224,6 +213,7 @@ class EmployerItemViewModel : VMBase
         {
             thursdayShift.End = value;
             OnPropertChanged(nameof(ThursdayEnd));
+            OnPropertChanged(nameof(ThursdayBreak));
             OnPropertChanged(nameof(ThursdayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -232,15 +222,9 @@ class EmployerItemViewModel : VMBase
     }
     public TimeSpan ThursdayBreak
     {
-        get => thursdayShift.Break;
-        set
+        get
         {
-            thursdayShift.Break = value;
-            OnPropertChanged(nameof(ThursdayBreak));
-            OnPropertChanged(nameof(ThursdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            return (ThursdayEnd - ThursdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
     public double ThursdayTime
@@ -257,6 +241,7 @@ class EmployerItemViewModel : VMBase
         {
             fridayShift.Start = value;
             OnPropertChanged(nameof(FridayStart));
+            OnPropertChanged(nameof(FridayBreak));
             OnPropertChanged(nameof(FridayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -270,6 +255,7 @@ class EmployerItemViewModel : VMBase
         {
             fridayShift.End = value;
             OnPropertChanged(nameof(FridayEnd));
+            OnPropertChanged(nameof(FridayBreak));
             OnPropertChanged(nameof(FridayTime));
             OnPropertChanged(nameof(TotalHours));
             OnPropertChanged(nameof(OverTime));
@@ -278,15 +264,9 @@ class EmployerItemViewModel : VMBase
     }
     public TimeSpan FridayBreak
     {
-        get => fridayShift.Break;
-        set
+        get
         {
-            fridayShift.Break = value;
-            OnPropertChanged(nameof(FridayBreak));
-            OnPropertChanged(nameof(FridayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            return (FridayEnd - FridayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
     public double FridayTime

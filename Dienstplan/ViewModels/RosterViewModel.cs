@@ -9,7 +9,7 @@ namespace Dienstplan;
 
 internal class RosterViewModel : VMBase
 {
-    public event EventHandler<Roster> SaveRoster;
+    public event EventHandler<Roster?>? SaveRoster;
     private Roster roster;
     public ObservableCollection<Employee> Employees 
     {
@@ -33,6 +33,12 @@ internal class RosterViewModel : VMBase
             return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
         }
     }
+
+    public DateOnly SelectedDate
+    {
+        get => GetValue<DateOnly>();
+        set => SetValue(value);
+    }
     public void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
     {
         // Testing
@@ -48,6 +54,7 @@ internal class RosterViewModel : VMBase
         roster = new Roster();
         roster.Start = start;
         roster.End = end;
+        roster.Employees = employees;
 
         OnPropertChanged(nameof(TimeSpanString));
 
@@ -71,7 +78,7 @@ internal class RosterViewModel : VMBase
         friday.Date = start.AddDays(4);
         roster.Days.Add(friday);
 
-        foreach (Employee employee in Employees)
+        foreach (Employee employee in employees)
         {
             EmployerItemViewModel viewModel = new EmployerItemViewModel(employee, roster.Days.ToList());
             EmployerItems.Add(viewModel);
@@ -81,10 +88,12 @@ internal class RosterViewModel : VMBase
     {
         this.roster = roster;
 
-        foreach (Employee employee in Employees)
-            EmployerItems.Add(new EmployerItemViewModel(employee, roster.Days.ToList()));
+        foreach (Employee employee in roster.Employees)
+        {
+            EmployerItemViewModel viewModel = new EmployerItemViewModel(employee, roster.Days.ToList());
+            EmployerItems.Add(viewModel);
+        }
     }
-
     public void Save(object param)
     {
         SaveRoster?.Invoke(this, roster.Id is null ? roster : null);

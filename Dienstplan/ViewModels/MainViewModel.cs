@@ -33,9 +33,8 @@ internal class MainViewModel : VMBase
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
         GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
-        RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
 
-        Roster roster = context.Rosters.FirstOrDefault();
+        Roster roster = context.Rosters.AsEnumerable().MaxBy(x => x.Start.DayNumber);
         if (roster is null)
         {
             DateOnly start = DateOnly.FromDateTime(DateTime.Today.AddDays(1 - ((int)DateTime.Today.DayOfWeek)));
@@ -48,7 +47,7 @@ internal class MainViewModel : VMBase
         }
     }
 
-    private void SaveRoster(object? sender, Roster newRoster)
+    private void SaveRoster(object? sender, Roster? newRoster)
     {
         if (newRoster is not null)
             context.Rosters.Add(newRoster);
@@ -61,7 +60,6 @@ internal class MainViewModel : VMBase
         context.Employees.AddRange(newEmployees);
         context.SaveChanges();
 
-        RosterViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
     }
 

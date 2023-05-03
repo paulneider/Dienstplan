@@ -47,13 +47,16 @@ internal class EmployeesViewModel : VMBase
     }
     public double NewHours
     {
-        get => GetValue<double>();
-        set => SetValue(value);
+        get => GetValue<double>(38);
+        set
+        {
+            SetValue(value);
+            OnPropertChanged(nameof(NewWrittingHours));
+        }
     }
     public double NewWrittingHours
     {
-        get => GetValue<double>();
-        set => SetValue(value);
+        get => NewHours <= 32 ? 1 : 2;
     }
     public Group SelectedGroup
     {
@@ -75,8 +78,7 @@ internal class EmployeesViewModel : VMBase
     {
         NewFirstName = "";
         NewLastName = "";
-        NewHours = 0;
-        NewWrittingHours = 0;
+        NewHours = 38;
         SelectedGroup = Groups.FirstOrDefault();
 
         EditGridVisibility = Visibility.Visible;
@@ -99,7 +101,6 @@ internal class EmployeesViewModel : VMBase
         NewFirstName = SelectedItem.FirstName;
         NewLastName = SelectedItem.LastName;
         NewHours = SelectedItem.Hours;
-        NewWrittingHours = SelectedItem.WrittingHours;
         SelectedGroup = SelectedItem.Group;
 
         EditGridVisibility = Visibility.Visible;
