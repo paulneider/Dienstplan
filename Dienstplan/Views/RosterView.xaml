@@ -16,6 +16,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <local:WeekSelectorView Grid.RowSpan="4"
+                                Panel.ZIndex="10"/>
+
         <Label Content="{Binding TimeSpanString}"
                Grid.Row="0"
                FontSize="16"/>

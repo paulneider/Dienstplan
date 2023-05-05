@@ -18,6 +18,9 @@
     <Compile Update="Views\RosterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\WeekSelectorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -30,6 +33,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RosterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\WeekSelectorView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
