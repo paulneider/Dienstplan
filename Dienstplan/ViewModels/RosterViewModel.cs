@@ -11,11 +11,8 @@ internal class RosterViewModel : VMBase
 {
     public event EventHandler<Roster?>? SaveRoster;
     private Roster roster;
-    public ObservableCollection<Employee> Employees 
-    {
-        get => GetValue(new ObservableCollection<Employee>());
-        set => SetValue(value);
-    }
+    public WeekSelectorViewModel WeekSelectorViewModel { get; init; } = new WeekSelectorViewModel();
+
     ObservableCollection<EmployerItemViewModel> employerItems = new ObservableCollection<EmployerItemViewModel>();
     public ObservableCollection<EmployerItemViewModel> EmployerItems
     {
@@ -23,6 +20,7 @@ internal class RosterViewModel : VMBase
     }
     public ICommand SaveCommand => new Command(Save);
     public ICommand ResetCommand => new Command(Reset);
+    public ICommand SelectWeekCommand => new Command(SelectWeek);
     public string TimeSpanString
     {
         get
@@ -32,12 +30,6 @@ internal class RosterViewModel : VMBase
 
             return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
         }
-    }
-
-    public DateOnly SelectedDate
-    {
-        get => GetValue<DateOnly>();
-        set => SetValue(value);
     }
     public void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
     {
@@ -57,6 +49,7 @@ internal class RosterViewModel : VMBase
         roster.Employees = employees;
 
         OnPropertChanged(nameof(TimeSpanString));
+        EmployerItems.Clear();
 
         Day monday = new Day();
         monday.Date = start;
@@ -87,6 +80,7 @@ internal class RosterViewModel : VMBase
     public void InitUpdate(Roster roster)
     {
         this.roster = roster;
+        EmployerItems.Clear();
 
         foreach (Employee employee in roster.Employees)
         {
@@ -101,5 +95,10 @@ internal class RosterViewModel : VMBase
     public void Reset(object param)
     {
 
+    }
+    public void SelectWeek(object param)
+    {
+        WeekSelectorViewModel.Visibility = Visibility.Visible;
+        WeekSelectorViewModel.SelectedDate = roster.Start.ToDateTime(default);
     }
 }

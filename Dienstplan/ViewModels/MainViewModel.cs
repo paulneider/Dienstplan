@@ -29,6 +29,7 @@ internal class MainViewModel : VMBase
         GroupsViewModel.SaveGroups += SaveGroups;
         EmployeesViewModel.SaveEmployees += SaveEmployees;
         RosterViewModel.SaveRoster += SaveRoster;
+        RosterViewModel.WeekSelectorViewModel.NewWeekSelected += NewWeekSelected;
 
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
@@ -38,6 +39,23 @@ internal class MainViewModel : VMBase
         if (roster is null)
         {
             DateOnly start = DateOnly.FromDateTime(DateTime.Today.AddDays(1 - ((int)DateTime.Today.DayOfWeek)));
+            DateOnly end = start.AddDays(4);
+            RosterViewModel.InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
+        }
+        else
+        {
+            RosterViewModel.InitUpdate(roster);
+        }
+    }
+
+    private void NewWeekSelected(object? sender, DateTime newDate)
+    {
+        int dayIndex = 1 - ((int)newDate.DayOfWeek);
+        DateOnly start = DateOnly.FromDateTime(newDate.AddDays(dayIndex == 1 ? -6 : dayIndex));
+
+        Roster roster = context.Rosters.AsEnumerable().FirstOrDefault(x => x.Start == start);
+        if (roster is null)
+        {
             DateOnly end = start.AddDays(4);
             RosterViewModel.InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
         }

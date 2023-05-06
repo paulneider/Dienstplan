@@ -12,11 +12,11 @@ public partial class WeekSelectorView : UserControl
     }
     private void Calendar_SelectedDatesChanged(object? sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        calendar.SelectedDatesChanged -= Calendar_SelectedDatesChanged;
-
         DateTime date = e.AddedItems.OfType<DateTime>().FirstOrDefault();
         if (date == default)
             return;
+
+        calendar.SelectedDatesChanged -= Calendar_SelectedDatesChanged;
 
         int daysAfterMonday = ((int)date.DayOfWeek) - 1;
 

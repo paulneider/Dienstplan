@@ -8,7 +8,7 @@
              d:DataContext="{d:DesignInstance Type=local:RosterViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="{StaticResource WindowHeight}" 
              d:DesignWidth="{StaticResource WindowWidth}">
-    <Grid>
+    <Grid VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,7 +16,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:WeekSelectorView Grid.RowSpan="4"
+        <local:WeekSelectorView DataContext="{Binding WeekSelectorViewModel}"
+                                Visibility="{Binding Visibility}"
+                                Grid.RowSpan="4"
                                 Panel.ZIndex="10"/>
 
         <Label Content="{Binding TimeSpanString}"
@@ -28,18 +30,19 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left">
                     <Button Content="Speichern"
+                            Style="{StaticResource ActionButton}"
                             Command="{Binding SaveCommand}"
                             Margin="3 0"/>
                     <Button Content="Zurücksetzen"
+                            Style="{StaticResource ActionButton}"
                             Command="{Binding ResetCommand}"/>
-                    <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
-                    </DatePicker>
                 </StackPanel>
 
                 
                 <Button Content="Woche auswählen"
                         HorizontalAlignment="Right"
-                        Command="{Binding ResetCommand}"/>
+                        Style="{StaticResource ActionButton}"
+                        Command="{Binding SelectWeekCommand}"/>
             </Grid>
         </GroupBox>
         

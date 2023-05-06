@@ -29,12 +29,16 @@
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
                 <Button Content="Gruppe hinzufügen"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding AddGroupCommand}"/>
                 <Button Content="Gruppe löschen"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding DeleteGroupCommand}"/>
                 <Button Content="Gruppe bearbeiten"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateGroupCommand}"/>
                 <Button Content="Speichern"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>
@@ -73,12 +77,14 @@
                     Grid.Column="0"
                     Width="100"
                     Content="Okay"
+                    Style="{StaticResource ActionButton}"
                     Command="{Binding OkayCommand}"/>
             
             <Button Grid.Row="2"
                     Grid.Column="1"
                     Width="100"
                     Content="Abbrechen"
+                    Style="{StaticResource ActionButton}"
                     Command="{Binding CancleCommand}"/>
         </Grid>
         

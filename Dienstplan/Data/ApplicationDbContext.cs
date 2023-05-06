@@ -14,4 +14,11 @@ internal class ApplicationDbContext : DbContext
     {
         optionsBuilder.UseSqlite("Data Source=Dienstplan.db");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Roster>()
+            .HasMany(e => e.Employees)
+            .WithMany();
+    }
 }

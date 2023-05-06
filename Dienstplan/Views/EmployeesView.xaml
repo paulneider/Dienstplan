@@ -19,12 +19,16 @@
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
                 <Button Content="Erzieher hinzufügen"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding AddEmployeeCommand}"/>
                 <Button Content="Erzieher löschen"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding DeleteEmployeeCommand}"/>
                 <Button Content="Erzieher bearbeiten"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateEmployeeCommand}"/>
                 <Button Content="Speichern"
+                        Style="{StaticResource ActionButton}"
                         Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>
@@ -92,12 +96,14 @@
                     Grid.Column="0"
                     Width="100"
                     Content="Okay"
+                    Style="{StaticResource ActionButton}"
                     Command="{Binding OkayCommand}"/>
 
             <Button Grid.Row="5"
                     Grid.Column="1"
                     Width="100"
                     Content="Abbrechen"
+                    Style="{StaticResource ActionButton}"
                     Command="{Binding CancleCommand}"/>
         </Grid>
 

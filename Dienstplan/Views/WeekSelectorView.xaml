@@ -4,33 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
-             
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local:WeekSelectorViewModel, IsDesignTimeCreatable=True}"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
              d:DesignHeight="400" d:DesignWidth="400">
-    <Grid Width="600"
-          Height="600">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <UserControl.Background>
+        <SolidColorBrush Opacity="0.5" Color="White"/>
+    </UserControl.Background>
 
-        <Label HorizontalAlignment="Center"
+    <Border Width="320"
+            Height="270"
+            BorderThickness="1"
+            BorderBrush="DarkGray"
+            Background="White">
+        
+        <Grid HorizontalAlignment="Stretch" 
+              VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label HorizontalAlignment="Left"
+                   Content="Dienstplanwoche auswählen:"
+                   FontSize="16"/>
+
+            <Label HorizontalAlignment="Center"
+                   Height="30"
+                   Grid.Row="1"
                    VerticalAlignment="Center"
                    Content="{Binding LabelContent}"/>
 
-        <Calendar x:Name="calendar"
-                  SelectionMode="SingleRange"
-                  SelectedDate="{Binding SelectedDate}"
-                  Grid.Row="1"/>
+            <Calendar x:Name="calendar"
+                      SelectionMode="SingleRange"
+                      SelectedDate="{Binding SelectedDate}"
+                      Grid.Row="2"/>
 
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Grid.Row="2">
-            <Button Content="Okay"
-                    Command="{Binding OkayCommand}"/>
-            <Button Content="Abbrechen"
-                    Command="{Binding CancleCommand}"/>
-        </StackPanel>
-    </Grid>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Height="40"
+                        Grid.Row="3">
+                <Button Content="Okay"
+                        Style="{StaticResource ActionButton}"
+                        Command="{Binding OkayCommand}"/>
+                <Button Content="Abbrechen"
+                        Style="{StaticResource ActionButton}"
+                        Command="{Binding CancleCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
