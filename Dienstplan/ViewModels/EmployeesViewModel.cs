@@ -78,7 +78,7 @@ internal partial class EmployeesViewModel : ObservableObject
 
     private bool isAdd = true;
     private readonly List<Employee> newEmployees = new List<Employee>();
-    public ICommand AddEmployCommand => new RelayCommand(AddEmployee);
+    public ICommand AddEmployeeCommand => new RelayCommand(AddEmployee);
     public ICommand DeleteEmployeeCommand => new RelayCommand(DeleteEmployee);
     public ICommand UpdateEmployeeCommand => new RelayCommand(UpdateEmployee);
     public ICommand SaveCommand => new RelayCommand(Save);

@@ -12,18 +12,8 @@ internal partial class GroupsViewModel : ObservableObject
 {
     public event EventHandler<IList<Group>> SaveGroups;
 
-    private Visibility editGridVisibility = Visibility.Collapsed;
-    public Visibility EditGridVisibility
-    {
-        get => editGridVisibility;
-        set => SetProperty(ref editGridVisibility, value);
-    }
-    private bool gridIsEnabled = true;
-    public bool GridIsEnabled
-    {
-        get => gridIsEnabled;
-        set => SetProperty(ref gridIsEnabled, value);
-    }
+    public EditGroupViewModel EditGroupViewModel { get; init; } = new EditGroupViewModel();
+
     private ObservableCollection<Group> groups;
     public ObservableCollection<Group> Groups
     {
@@ -36,18 +26,6 @@ internal partial class GroupsViewModel : ObservableObject
         get => selectedItem;
         set => SetProperty(ref selectedItem, value);
     }
-    private string newName;
-    public string NewName
-    {
-        get => newName; 
-        set => SetProperty(ref newName, value);
-    }
-    private GroupType newType;
-    public GroupType NewType
-    {
-        get => newType;
-        set => SetProperty(ref newType, value);
-    }
 
     private bool isAdd = true;
     private readonly List<Group> newGroups = new List<Group>();
@@ -55,17 +33,14 @@ internal partial class GroupsViewModel : ObservableObject
     public ICommand DeleteGroupCommand => new RelayCommand(DeleteGroup);
     public ICommand UpdateGroupCommand => new RelayCommand(UpdateGroup);
     public ICommand SaveCommand => new RelayCommand(Save);
-    public ICommand OkayCommand => new RelayCommand(Okay);
-    public ICommand CancleCommand => new RelayCommand(Cancle);
 
     private void AddGroup()
     {
-        NewName = "";
-        NewType = GroupType.Small;
+        EditGroupViewModel.NewName = "";
+        EditGroupViewModel.NewType = GroupType.Small;
 
-        EditGridVisibility = Visibility.Visible;
-        GridIsEnabled = false;
-        isAdd = true;
+        EditGroupViewModel.Visibility = Visibility.Visible;
+        EditGroupViewModel.isAdd = true;
     }
     private void DeleteGroup()
     {
@@ -80,45 +55,15 @@ internal partial class GroupsViewModel : ObservableObject
         if (SelectedItem is null)
             return;
 
-        NewName = SelectedItem.Name;
-        NewType = SelectedItem.Type;
+        EditGroupViewModel.NewName = SelectedItem.Name;
+        EditGroupViewModel.NewType = SelectedItem.Type;
         
-        EditGridVisibility = Visibility.Visible;
-        GridIsEnabled = false;
-        isAdd = false;
+        EditGroupViewModel.Visibility = Visibility.Visible;
+        EditGroupViewModel.isAdd = false;
     }
     private void Save()
     {
         SaveGroups?.Invoke(this, newGroups);
         newGroups.Clear();
-    }
-    private void Okay()
-    {
-        if (string.IsNullOrWhiteSpace(NewName))
-            return;
-
-        if (isAdd)
-        {
-            Group newGroup = new Group();
-            newGroup.Name = NewName;
-            newGroup.Type = NewType;
-            Groups.Add(newGroup);
-            newGroups.Add(newGroup);
-        }
-        else 
-        {
-            SelectedItem.Name = NewName;
-            SelectedItem.Type = NewType;
-
-            Groups = new ObservableCollection<Group>(Groups);
-        }
-
-        GridIsEnabled = true;
-        EditGridVisibility = Visibility.Collapsed;
-    }
-    private void Cancle()
-    {
-        GridIsEnabled = true;
-        EditGridVisibility = Visibility.Collapsed;
     }
 }

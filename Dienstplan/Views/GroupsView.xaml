@@ -25,6 +25,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <local:EditGroupView DataContext="{Binding EditGroupViewModel}"
+                             Visibility="{Binding Visibility}"
+                             Grid.RowSpan="4"
+                             Panel.ZIndex="10"/>
         <GroupBox>
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
@@ -43,54 +47,8 @@
             </StackPanel>
         </GroupBox>
 
-        <Grid Grid.Row="1"
-              Visibility="{Binding EditGridVisibility, UpdateSourceTrigger=PropertyChanged}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Content="Name:"/>
-
-            <TextBox Grid.Row="0"
-                     Grid.Column="1"
-                     Text="{Binding NewName}"/>
-
-            <Label Grid.Row="1"
-                   Grid.Column="0"
-                   Content="Type:"/>
-
-            <ComboBox ItemsSource="{Binding Source={StaticResource TypeNames}, Mode=OneWay}"
-                      SelectedValue="{Binding NewType}"
-                      Grid.Row="1"
-                      Grid.Column="1"/>
-
-            <Button Grid.Row="2"
-                    Grid.Column="0"
-                    Width="100"
-                    Content="Okay"
-                    Style="{StaticResource ActionButton}"
-                    Command="{Binding OkayCommand}"/>
-            
-            <Button Grid.Row="2"
-                    Grid.Column="1"
-                    Width="100"
-                    Content="Abbrechen"
-                    Style="{StaticResource ActionButton}"
-                    Command="{Binding CancleCommand}"/>
-        </Grid>
-        
         <DataGrid ItemsSource="{Binding Groups}"
                   Margin="0 5"
-                  IsEnabled="{Binding GridIsEnabled}"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   AutoGenerateColumns="False"
