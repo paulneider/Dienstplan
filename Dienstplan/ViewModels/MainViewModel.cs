@@ -44,6 +44,7 @@ internal class MainViewModel : VMBase
         }
         else
         {
+            context.Entry(roster).Collection(b => b.Employees).Load();
             RosterViewModel.InitUpdate(roster);
         }
     }
@@ -61,6 +62,7 @@ internal class MainViewModel : VMBase
         }
         else
         {
+            context.Entry(roster).Collection(b => b.Employees).Load();
             RosterViewModel.InitUpdate(roster);
         }
     }
