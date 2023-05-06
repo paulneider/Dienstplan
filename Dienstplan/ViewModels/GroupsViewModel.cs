@@ -12,24 +12,53 @@ internal partial class GroupsViewModel : ObservableObject
 {
     public event EventHandler<IList<Group>> SaveGroups;
 
-    [ObservableProperty]
     private Visibility editGridVisibility = Visibility.Collapsed;
-    [ObservableProperty]
+    public Visibility EditGridVisibility
+    {
+        get => editGridVisibility;
+        set => SetProperty(ref editGridVisibility, value);
+    }
     private bool gridIsEnabled = true;
-    [ObservableProperty]
+    public bool GridIsEnabled
+    {
+        get => gridIsEnabled;
+        set => SetProperty(ref gridIsEnabled, value);
+    }
     private ObservableCollection<Group> groups;
-    [ObservableProperty]
+    public ObservableCollection<Group> Groups
+    {
+        get => groups;
+        set => SetProperty(ref groups, value);
+    }
     private Group selectedItem;
-    [ObservableProperty]
+    public Group SelectedItem
+    {
+        get => selectedItem;
+        set => SetProperty(ref selectedItem, value);
+    }
     private string newName;
-    [ObservableProperty]
+    public string NewName
+    {
+        get => newName; 
+        set => SetProperty(ref newName, value);
+    }
     private GroupType newType;
-   
+    public GroupType NewType
+    {
+        get => newType;
+        set => SetProperty(ref newType, value);
+    }
+
     private bool isAdd = true;
     private readonly List<Group> newGroups = new List<Group>();
+    public ICommand AddGroupCommand => new RelayCommand(AddGroup);
+    public ICommand DeleteGroupCommand => new RelayCommand(DeleteGroup);
+    public ICommand UpdateGroupCommand => new RelayCommand(UpdateGroup);
+    public ICommand SaveCommand => new RelayCommand(Save);
+    public ICommand OkayCommand => new RelayCommand(Okay);
+    public ICommand CancleCommand => new RelayCommand(Cancle);
 
-    [RelayCommand]
-    private void AddGroup(object param)
+    private void AddGroup()
     {
         NewName = "";
         NewType = GroupType.Small;
@@ -38,63 +67,58 @@ internal partial class GroupsViewModel : ObservableObject
         GridIsEnabled = false;
         isAdd = true;
     }
-    [RelayCommand]
-    private void DeleteGroup(object param)
+    private void DeleteGroup()
     {
-        if (selectedItem is null)
+        if (SelectedItem is null)
             return;
 
-        selectedItem.IsOut = true;
-        groups.Remove(selectedItem);
+        SelectedItem.IsOut = true;
+        Groups.Remove(SelectedItem);
     }
-    [RelayCommand]
-    private void UpdateGroup(object param)
+    private void UpdateGroup()
     {
-        if (selectedItem is null)
+        if (SelectedItem is null)
             return;
 
-        newName = selectedItem.Name;
-        newType = selectedItem.Type;
+        NewName = SelectedItem.Name;
+        NewType = SelectedItem.Type;
         
-        editGridVisibility = Visibility.Visible;
-        gridIsEnabled = false;
+        EditGridVisibility = Visibility.Visible;
+        GridIsEnabled = false;
         isAdd = false;
     }
-    [RelayCommand]
-    private void Save(object param)
+    private void Save()
     {
         SaveGroups?.Invoke(this, newGroups);
         newGroups.Clear();
     }
-    [RelayCommand]
-    private void Okay(object param)
+    private void Okay()
     {
-        if (string.IsNullOrWhiteSpace(newName))
+        if (string.IsNullOrWhiteSpace(NewName))
             return;
 
         if (isAdd)
         {
             Group newGroup = new Group();
-            newGroup.Name = newName;
-            newGroup.Type = newType;
-            groups.Add(newGroup);
+            newGroup.Name = NewName;
+            newGroup.Type = NewType;
+            Groups.Add(newGroup);
             newGroups.Add(newGroup);
         }
         else 
         {
-            selectedItem.Name = newName;
-            selectedItem.Type = newType;
+            SelectedItem.Name = NewName;
+            SelectedItem.Type = NewType;
 
-            groups = new ObservableCollection<Group>(groups);
+            Groups = new ObservableCollection<Group>(Groups);
         }
 
-        gridIsEnabled = true;
-        editGridVisibility = Visibility.Collapsed;
+        GridIsEnabled = true;
+        EditGridVisibility = Visibility.Collapsed;
     }
-    [RelayCommand]
-    private void Cancle(object param)
+    private void Cancle()
     {
-        gridIsEnabled = true;
-        editGridVisibility = Visibility.Collapsed;
+        GridIsEnabled = true;
+        EditGridVisibility = Visibility.Collapsed;
     }
 }

@@ -1,15 +1,18 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal partial class RosterViewModel : VMBase
+internal class RosterViewModel : ObservableObject
 {
     public event EventHandler<Roster?>? SaveRoster;
+
     private Roster roster;
     public WeekSelectorViewModel WeekSelectorViewModel { get; init; } = new WeekSelectorViewModel();
 
@@ -28,6 +31,9 @@ internal partial class RosterViewModel : VMBase
             return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
         }
     }
+    public ICommand SaveCommand => new RelayCommand(Save);
+    public ICommand ResetCommand => new RelayCommand(Reset);
+    public ICommand SelectWeekCommand => new RelayCommand(SelectWeek);
     public void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
     {
         // Testing
@@ -77,6 +83,8 @@ internal partial class RosterViewModel : VMBase
     public void InitUpdate(Roster roster)
     {
         this.roster = roster;
+
+        OnPropertyChanged(nameof(TimeSpanString));
         EmployerItems.Clear();
 
         foreach (Employee employee in roster.Employees)
@@ -85,18 +93,15 @@ internal partial class RosterViewModel : VMBase
             EmployerItems.Add(viewModel);
         }
     }
-    [RelayCommand]
-    public void Save(object param)
+    public void Save()
     {
         SaveRoster?.Invoke(this, roster.Id is null ? roster : null);
     }
-    [RelayCommand]
-    public void Reset(object param)
+    public void Reset()
     {
 
     }
-    [RelayCommand]
-    public void SelectWeek(object param)
+    public void SelectWeek()
     {
         WeekSelectorViewModel.Visibility = Visibility.Visible;
         WeekSelectorViewModel.SelectedDate = roster.Start.ToDateTime(default);

@@ -5,53 +5,63 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Dienstplan;
 
-internal partial class EmployeesViewModel : VMBase
+internal partial class EmployeesViewModel : ObservableObject
 {
     public event EventHandler<IList<Employee>> SaveEmployees;
+
+    private Visibility editGridVisibility = Visibility.Collapsed;
     public Visibility EditGridVisibility
     {
-        get => GetValue(Visibility.Collapsed);
-        set => SetValue(value);
+        get => editGridVisibility;
+        set => SetProperty(ref editGridVisibility, value);
     }
+    private bool gridIsEnabled = true;
     public bool GridIsEnabled
     {
-        get => GetValue(true);
-        set => SetValue(value);
+        get => gridIsEnabled;
+        set => SetProperty(ref gridIsEnabled, value);
     }
+    private ObservableCollection<Group> groups;
     public ObservableCollection<Group> Groups
     {
-        get => GetValue<ObservableCollection<Group>>();
-        set => SetValue(value);
+        get => groups;
+        set => SetProperty(ref groups, value);
     }
+    private ObservableCollection<Employee> employees;
     public ObservableCollection<Employee> Employees
     {
-        get => GetValue<ObservableCollection<Employee>>();
-        set => SetValue(value);
+        get => employees;
+        set => SetProperty(ref employees, value);
     }
+    private Employee selectedItem;
     public Employee SelectedItem
     {
-        get => GetValue<Employee>();
-        set => SetValue(value);
+        get => selectedItem;
+        set => SetProperty(ref selectedItem, value);
     }
+    private string newFirstName;
     public string NewFirstName
     {
-        get => GetValue<string>();
-        set => SetValue(value);
+        get => newFirstName;
+        set => SetProperty(ref newFirstName, value);
     }
+    private string newLastName;
     public string NewLastName
     {
-        get => GetValue<string>();
-        set => SetValue(value);
+        get => newLastName;
+        set => SetProperty(ref newLastName, value);
     }
+    private double newHours = 38;
     public double NewHours
     {
-        get => GetValue<double>(38);
+        get => newHours;
         set
         {
-            SetValue(value);
+            SetProperty(ref newHours, value);
             OnPropertyChanged(nameof(NewWrittingHours));
         }
     }
@@ -59,17 +69,23 @@ internal partial class EmployeesViewModel : VMBase
     {
         get => NewHours <= 32 ? 1 : 2;
     }
+    private Group selectedGroup;
     public Group SelectedGroup
     {
-        get => GetValue<Group>();
-        set => SetValue(value);
+        get => selectedGroup;
+        set => SetProperty(ref selectedGroup, value);
     }
 
     private bool isAdd = true;
     private readonly List<Employee> newEmployees = new List<Employee>();
+    public ICommand AddEmployCommand => new RelayCommand(AddEmployee);
+    public ICommand DeleteEmployeeCommand => new RelayCommand(DeleteEmployee);
+    public ICommand UpdateEmployeeCommand => new RelayCommand(UpdateEmployee);
+    public ICommand SaveCommand => new RelayCommand(Save);
+    public ICommand OkayCommand => new RelayCommand(Okay);
+    public ICommand CancleCommand => new RelayCommand(Cancle);
 
-    [RelayCommand]
-    private void AddEmployee(object param)
+    private void AddEmployee()
     {
         NewFirstName = "";
         NewLastName = "";
@@ -80,8 +96,7 @@ internal partial class EmployeesViewModel : VMBase
         GridIsEnabled = false;
         isAdd = true;
     }
-    [RelayCommand]
-    private void DeleteEmployee(object param)
+    private void DeleteEmployee()
     {
         if (SelectedItem is null)
             return;
@@ -89,8 +104,7 @@ internal partial class EmployeesViewModel : VMBase
         SelectedItem.IsOut = true;
         Employees.Remove(SelectedItem);
     }
-    [RelayCommand]
-    private void UpdateEmployee(object param)
+    private void UpdateEmployee()
     {
         if (SelectedItem is null)
             return;
@@ -104,15 +118,12 @@ internal partial class EmployeesViewModel : VMBase
         GridIsEnabled = false;
         isAdd = false;
     }
-    [RelayCommand]
-    private void Save(object param)
+    private void Save()
     {
         SaveEmployees?.Invoke(this, newEmployees);
         newEmployees.Clear();
     }
-
-    [RelayCommand]
-    private void Okay(object param)
+    private void Okay()
     {
         if (string.IsNullOrWhiteSpace(NewFirstName))
             return;
@@ -145,8 +156,7 @@ internal partial class EmployeesViewModel : VMBase
         GridIsEnabled = true;
         EditGridVisibility = Visibility.Collapsed;
     }
-    [RelayCommand]
-    private void Cancle(object param)
+    private void Cancle()
     {
         GridIsEnabled = true;
         EditGridVisibility = Visibility.Collapsed;

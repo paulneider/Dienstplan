@@ -2,20 +2,30 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Dienstplan;
 
-[INotifyPropertyChanged]
-internal partial class WeekSelectorViewModel
+internal class WeekSelectorViewModel : ObservableObject
 {
     public event EventHandler<DateTime> NewWeekSelected;
 
-    [ObservableProperty]
     private Visibility visibility = Visibility.Collapsed;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(LabelContent))]
+    public Visibility Visibility
+    {
+        get => visibility;
+        set => SetProperty(ref visibility, value);
+    }
     private DateTime selectedDate;
+    public DateTime SelectedDate
+    {
+        get => selectedDate;
+        set
+        {
+            SetProperty(ref selectedDate, value);
+            OnPropertyChanged(nameof(LabelContent));
+        }
+    }
     public string LabelContent
     {
         get
@@ -27,14 +37,14 @@ internal partial class WeekSelectorViewModel
         }
     }
 
-    [RelayCommand]
-    private void Okay(object param)
+    public ICommand OkayCommand => new RelayCommand(Okay);
+    private void Okay()
     {
         NewWeekSelected?.Invoke(this, selectedDate);
         Visibility = Visibility.Collapsed;
     }
-    [RelayCommand]
-    private void Cancle(object param)
+    public ICommand CancleCommand => new RelayCommand(Cancle);
+    private void Cancle()
     {
         Visibility = Visibility.Collapsed;
     }
