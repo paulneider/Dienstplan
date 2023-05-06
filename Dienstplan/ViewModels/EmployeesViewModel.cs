@@ -4,10 +4,11 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Dienstplan;
 
-internal class EmployeesViewModel : VMBase
+internal partial class EmployeesViewModel : VMBase
 {
     public event EventHandler<IList<Employee>> SaveEmployees;
     public Visibility EditGridVisibility
@@ -51,7 +52,7 @@ internal class EmployeesViewModel : VMBase
         set
         {
             SetValue(value);
-            OnPropertChanged(nameof(NewWrittingHours));
+            OnPropertyChanged(nameof(NewWrittingHours));
         }
     }
     public double NewWrittingHours
@@ -64,16 +65,10 @@ internal class EmployeesViewModel : VMBase
         set => SetValue(value);
     }
 
-    public ICommand AddEmployeeCommand => new Command(AddEmployee);
-    public ICommand DeleteEmployeeCommand => new Command(DeleteEmployee);
-    public ICommand UpdateEmployeeCommand => new Command(UpdateEmployee);
-    public ICommand SaveCommand => new Command(Save);
-    public ICommand OkayCommand => new Command(Okay);
-    public ICommand CancleCommand => new Command(Cancle);
-
     private bool isAdd = true;
     private readonly List<Employee> newEmployees = new List<Employee>();
 
+    [RelayCommand]
     private void AddEmployee(object param)
     {
         NewFirstName = "";
@@ -85,6 +80,7 @@ internal class EmployeesViewModel : VMBase
         GridIsEnabled = false;
         isAdd = true;
     }
+    [RelayCommand]
     private void DeleteEmployee(object param)
     {
         if (SelectedItem is null)
@@ -93,6 +89,7 @@ internal class EmployeesViewModel : VMBase
         SelectedItem.IsOut = true;
         Employees.Remove(SelectedItem);
     }
+    [RelayCommand]
     private void UpdateEmployee(object param)
     {
         if (SelectedItem is null)
@@ -107,11 +104,14 @@ internal class EmployeesViewModel : VMBase
         GridIsEnabled = false;
         isAdd = false;
     }
+    [RelayCommand]
     private void Save(object param)
     {
         SaveEmployees?.Invoke(this, newEmployees);
         newEmployees.Clear();
     }
+
+    [RelayCommand]
     private void Okay(object param)
     {
         if (string.IsNullOrWhiteSpace(NewFirstName))
@@ -145,6 +145,7 @@ internal class EmployeesViewModel : VMBase
         GridIsEnabled = true;
         EditGridVisibility = Visibility.Collapsed;
     }
+    [RelayCommand]
     private void Cancle(object param)
     {
         GridIsEnabled = true;

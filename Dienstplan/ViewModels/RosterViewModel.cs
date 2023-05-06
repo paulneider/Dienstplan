@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal class RosterViewModel : VMBase
+internal partial class RosterViewModel : VMBase
 {
     public event EventHandler<Roster?>? SaveRoster;
     private Roster roster;
@@ -18,9 +18,6 @@ internal class RosterViewModel : VMBase
     {
         get => employerItems;
     }
-    public ICommand SaveCommand => new Command(Save);
-    public ICommand ResetCommand => new Command(Reset);
-    public ICommand SelectWeekCommand => new Command(SelectWeek);
     public string TimeSpanString
     {
         get
@@ -48,7 +45,7 @@ internal class RosterViewModel : VMBase
         roster.End = end;
         roster.Employees = employees;
 
-        OnPropertChanged(nameof(TimeSpanString));
+        OnPropertyChanged(nameof(TimeSpanString));
         EmployerItems.Clear();
 
         Day monday = new Day();
@@ -88,14 +85,17 @@ internal class RosterViewModel : VMBase
             EmployerItems.Add(viewModel);
         }
     }
+    [RelayCommand]
     public void Save(object param)
     {
         SaveRoster?.Invoke(this, roster.Id is null ? roster : null);
     }
+    [RelayCommand]
     public void Reset(object param)
     {
 
     }
+    [RelayCommand]
     public void SelectWeek(object param)
     {
         WeekSelectorViewModel.Visibility = Visibility.Visible;

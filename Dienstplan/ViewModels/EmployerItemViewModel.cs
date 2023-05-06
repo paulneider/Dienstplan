@@ -72,12 +72,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             mondayShift.Start = value;
-            OnPropertChanged(nameof(MondayStart));
-            OnPropertChanged(nameof(MondayBreak));
-            OnPropertChanged(nameof(MondayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(MondayStart));
+            OnPropertyChanged(nameof(MondayBreak));
+            OnPropertyChanged(nameof(MondayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly MondayEnd
@@ -86,12 +86,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             mondayShift.End = value;
-            OnPropertChanged(nameof(MondayEnd));
-            OnPropertChanged(nameof(MondayBreak));
-            OnPropertChanged(nameof(MondayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(MondayEnd));
+            OnPropertyChanged(nameof(MondayBreak));
+            OnPropertyChanged(nameof(MondayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan MondayBreak
@@ -114,12 +114,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             tuesdayShift.Start = value;
-            OnPropertChanged(nameof(TuesdayStart));
-            OnPropertChanged(nameof(TuesdayBreak));
-            OnPropertChanged(nameof(TuesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(TuesdayStart));
+            OnPropertyChanged(nameof(TuesdayBreak));
+            OnPropertyChanged(nameof(TuesdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly TuesdayEnd
@@ -128,12 +128,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             tuesdayShift.End = value;
-            OnPropertChanged(nameof(TuesdayEnd));
-            OnPropertChanged(nameof(TuesdayBreak));
-            OnPropertChanged(nameof(TuesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(TuesdayEnd));
+            OnPropertyChanged(nameof(TuesdayBreak));
+            OnPropertyChanged(nameof(TuesdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan TuesdayBreak
@@ -156,12 +156,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             wednesdayShift.Start = value;
-            OnPropertChanged(nameof(WednesdayStart));
-            OnPropertChanged(nameof(WednesdayBreak));
-            OnPropertChanged(nameof(WednesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(WednesdayStart));
+            OnPropertyChanged(nameof(WednesdayBreak));
+            OnPropertyChanged(nameof(WednesdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly WednesdayEnd
@@ -170,12 +170,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             wednesdayShift.End = value;
-            OnPropertChanged(nameof(WednesdayEnd));
-            OnPropertChanged(nameof(WednesdayBreak));
-            OnPropertChanged(nameof(WednesdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(WednesdayEnd));
+            OnPropertyChanged(nameof(WednesdayBreak));
+            OnPropertyChanged(nameof(WednesdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan WednesdayBreak
@@ -198,12 +198,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             thursdayShift.Start = value;
-            OnPropertChanged(nameof(ThursdayStart));
-            OnPropertChanged(nameof(ThursdayBreak));
-            OnPropertChanged(nameof(ThursdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(ThursdayStart));
+            OnPropertyChanged(nameof(ThursdayBreak));
+            OnPropertyChanged(nameof(ThursdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly ThursdayEnd
@@ -212,12 +212,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             thursdayShift.End = value;
-            OnPropertChanged(nameof(ThursdayEnd));
-            OnPropertChanged(nameof(ThursdayBreak));
-            OnPropertChanged(nameof(ThursdayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(ThursdayEnd));
+            OnPropertyChanged(nameof(ThursdayBreak));
+            OnPropertyChanged(nameof(ThursdayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan ThursdayBreak
@@ -240,12 +240,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             fridayShift.Start = value;
-            OnPropertChanged(nameof(FridayStart));
-            OnPropertChanged(nameof(FridayBreak));
-            OnPropertChanged(nameof(FridayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(FridayStart));
+            OnPropertyChanged(nameof(FridayBreak));
+            OnPropertyChanged(nameof(FridayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeOnly FridayEnd
@@ -254,12 +254,12 @@ class EmployerItemViewModel : VMBase
         set
         {
             fridayShift.End = value;
-            OnPropertChanged(nameof(FridayEnd));
-            OnPropertChanged(nameof(FridayBreak));
-            OnPropertChanged(nameof(FridayTime));
-            OnPropertChanged(nameof(TotalHours));
-            OnPropertChanged(nameof(OverTime));
-            OnPropertChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(FridayEnd));
+            OnPropertyChanged(nameof(FridayBreak));
+            OnPropertyChanged(nameof(FridayTime));
+            OnPropertyChanged(nameof(TotalHours));
+            OnPropertyChanged(nameof(OverTime));
+            OnPropertyChanged(nameof(TotalOverTime));
         }
     }
     public TimeSpan FridayBreak
