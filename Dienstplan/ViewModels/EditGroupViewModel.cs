@@ -1,9 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -11,9 +8,15 @@ namespace Dienstplan;
 
 internal class EditGroupViewModel : ObservableObject
 {
+    public event EventHandler<Group> GroupAdded;
 
-    public List<Group> NewGroups { get; init; } = new List<Group>();
+    private GroupItemViewModel updateGroup;
+    private bool isAdd = false;
 
+    public string Caption
+    {
+        get => isAdd ? "Neue Gruppe:" : "Gruppe bearbeiten:";
+    }
     private Visibility visibility = Visibility.Collapsed;
     public Visibility Visibility
     {
@@ -32,8 +35,6 @@ internal class EditGroupViewModel : ObservableObject
         get => newType;
         set => SetProperty(ref newType, value);
     }
-
-    public bool isAdd = true;
     public ICommand OkayCommand => new RelayCommand(Okay);
     public ICommand CancleCommand => new RelayCommand(Cancle);
     private void Okay()
@@ -44,17 +45,16 @@ internal class EditGroupViewModel : ObservableObject
         if (isAdd)
         {
             Group newGroup = new Group();
+
             newGroup.Name = NewName;
             newGroup.Type = NewType;
-            //Groups.Add(newGroup);
-            NewGroups.Add(newGroup);
+
+            GroupAdded?.Invoke(this, newGroup);
         }
         else
         {
-            //SelectedItem.Name = NewName;
-            //SelectedItem.Type = NewType;
-
-            //Groups = new ObservableCollection<Group>(Groups);
+            updateGroup.Name = NewName;
+            updateGroup.Type = NewType;
         }
 
         Visibility = Visibility.Collapsed;
@@ -62,5 +62,25 @@ internal class EditGroupViewModel : ObservableObject
     private void Cancle()
     {
         Visibility = Visibility.Collapsed;
+    }
+    public void Add()
+    {
+        NewName = "";
+        NewType = GroupType.Small;
+
+        Visibility = Visibility.Visible;
+        isAdd = true;
+        OnPropertyChanged(nameof(Caption));
+    }
+    public void Update(GroupItemViewModel group)
+    {
+        NewName = group.Name;
+        NewType = group.Type;
+
+        updateGroup = group;
+
+        Visibility = Visibility.Visible;
+        isAdd = false;
+        OnPropertyChanged(nameof(Caption));
     }
 }

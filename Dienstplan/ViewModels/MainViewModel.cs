@@ -31,7 +31,10 @@ internal class MainViewModel
 
         EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
-        GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+
+        GroupsViewModel.Groups.Clear();
+        foreach (Group group in context.Groups.Where(x => !x.IsOut))
+            GroupsViewModel.Groups.Add(new GroupItemViewModel(group));
 
         Roster roster = context.Rosters.AsEnumerable().MaxBy(x => x.Start.DayNumber);
         if (roster is null)
@@ -87,6 +90,9 @@ internal class MainViewModel
         context.SaveChanges();
 
         EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
-        GroupsViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+
+        GroupsViewModel.Groups.Clear();
+        foreach (Group group in context.Groups.Where(x => !x.IsOut))
+            GroupsViewModel.Groups.Add(new GroupItemViewModel(group));
     }
 }

@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Dienstplan;
@@ -13,34 +12,37 @@ internal partial class GroupsViewModel : ObservableObject
     public event EventHandler<IList<Group>> SaveGroups;
 
     public EditGroupViewModel EditGroupViewModel { get; init; } = new EditGroupViewModel();
-
-    private ObservableCollection<Group> groups;
-    public ObservableCollection<Group> Groups
+    private ObservableCollection<GroupItemViewModel> groups = new ObservableCollection<GroupItemViewModel>();
+    public ObservableCollection<GroupItemViewModel> Groups
     {
         get => groups;
         set => SetProperty(ref groups, value);
     }
-    private Group selectedItem;
-    public Group SelectedItem
+    private GroupItemViewModel selectedItem;
+    public GroupItemViewModel SelectedItem
     {
         get => selectedItem;
         set => SetProperty(ref selectedItem, value);
     }
-
-    private bool isAdd = true;
     private readonly List<Group> newGroups = new List<Group>();
     public ICommand AddGroupCommand => new RelayCommand(AddGroup);
     public ICommand DeleteGroupCommand => new RelayCommand(DeleteGroup);
     public ICommand UpdateGroupCommand => new RelayCommand(UpdateGroup);
     public ICommand SaveCommand => new RelayCommand(Save);
 
+    public GroupsViewModel()
+    {
+        EditGroupViewModel.GroupAdded += GroupAdded;
+    }
+
+    private void GroupAdded(object sender, Group newGroup)
+    {
+        newGroups.Add(newGroup);
+        Groups.Add(new GroupItemViewModel(newGroup));
+    }
     private void AddGroup()
     {
-        EditGroupViewModel.NewName = "";
-        EditGroupViewModel.NewType = GroupType.Small;
-
-        EditGroupViewModel.Visibility = Visibility.Visible;
-        EditGroupViewModel.isAdd = true;
+        EditGroupViewModel.Add();
     }
     private void DeleteGroup()
     {
@@ -55,11 +57,7 @@ internal partial class GroupsViewModel : ObservableObject
         if (SelectedItem is null)
             return;
 
-        EditGroupViewModel.NewName = SelectedItem.Name;
-        EditGroupViewModel.NewType = SelectedItem.Type;
-        
-        EditGroupViewModel.Visibility = Visibility.Visible;
-        EditGroupViewModel.isAdd = false;
+        EditGroupViewModel.Update(SelectedItem);
     }
     private void Save()
     {

@@ -5,11 +5,6 @@ namespace Dienstplan;
 internal class GroupItemViewModel : ObservableObject
 {
     private readonly Group group;
-    public GroupItemViewModel(Group group)
-    {
-        this.group = group;
-    }
-
     public string Name
     {
         get => group.Name;
@@ -27,5 +22,18 @@ internal class GroupItemViewModel : ObservableObject
             group.Type = value;
             OnPropertyChanged();
         }
+    }
+    public bool IsOut
+    {
+        get => group.IsOut;
+        set
+        {
+            group.IsOut = value;
+            OnPropertyChanged();
+        }
+    }
+    public GroupItemViewModel(Group group)
+    {
+        this.group = group;
     }
 }
