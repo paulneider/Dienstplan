@@ -6,3 +6,5 @@
 /Dienstplan/bin/Debug/net7.0-windows
 /Dienstplan/obj
 /Dienstplan/bin/Release/net7.0-windows
+/Dienstplan.db-shm
+*.db-wal

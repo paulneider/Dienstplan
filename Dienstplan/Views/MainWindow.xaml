@@ -9,13 +9,11 @@
         Title="Dienstplan" 
         WindowStartupLocation="CenterScreen"
         MinHeight="250"
+        DataContext="{local:ViewModelProvider Type=local:MainViewModel}"
         Height="{StaticResource WindowHeight}" 
         MinWidth="{StaticResource WindowWidth}"
         Width="{StaticResource WindowWidth}"
         MaxWidth="{StaticResource WindowWidth}">
-    <Window.DataContext>
-        <local:MainViewModel/>
-    </Window.DataContext>
     <Grid>
         <TabControl>
             <TabItem Header="Dienstplan">

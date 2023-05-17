@@ -16,9 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:WeekSelectorView DataContext="{Binding WeekSelectorViewModel}"
-                                Visibility="{Binding Visibility}"
-                                Grid.RowSpan="4"
+        <local:WeekSelectorView Grid.RowSpan="4"
                                 Panel.ZIndex="10"/>
 
         <Label Content="{Binding TimeSpanString}"

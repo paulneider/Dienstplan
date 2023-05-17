@@ -1,15 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using System;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal class WeekSelectorViewModel : ObservableObject
+internal class WeekSelectorViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<DateTime>>
 {
-    public event EventHandler<DateTime> NewWeekSelected;
-
+    private readonly IMessenger messenger;
     private Visibility visibility = Visibility.Collapsed;
     public Visibility Visibility
     {
@@ -36,16 +37,28 @@ internal class WeekSelectorViewModel : ObservableObject
             return start.ToString("dd.MM") + " - " + start.AddDays(4).ToShortDateString();
         }
     }
-
     public ICommand OkayCommand => new RelayCommand(Okay);
+    public ICommand CancleCommand => new RelayCommand(Cancle);
+
+    public WeekSelectorViewModel() { }
+    public WeekSelectorViewModel(IMessenger messenger)
+    {
+        this.messenger = messenger;
+        messenger.Register(this);
+    }
+
     private void Okay()
     {
-        NewWeekSelected?.Invoke(this, selectedDate);
+        messenger.Send(new ValueChangedMessage<DateTime>(selectedDate));
         Visibility = Visibility.Collapsed;
     }
-    public ICommand CancleCommand => new RelayCommand(Cancle);
     private void Cancle()
     {
         Visibility = Visibility.Collapsed;
+    }
+    public void Receive(ValueChangedMessage<DateTime> message)
+    {
+        Visibility = Visibility.Visible;
+        SelectedDate = message.Value;
     }
 }

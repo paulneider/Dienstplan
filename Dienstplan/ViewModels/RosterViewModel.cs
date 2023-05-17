@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +16,6 @@ internal class RosterViewModel : ObservableObject
     public event EventHandler<Roster?>? SaveRoster;
 
     private Roster roster;
-    public WeekSelectorViewModel WeekSelectorViewModel { get; init; } = new WeekSelectorViewModel();
 
     ObservableCollection<RosterEmployeeItemViewModel> employerItems = new ObservableCollection<RosterEmployeeItemViewModel>();
     public ObservableCollection<RosterEmployeeItemViewModel> EmployerItems
@@ -103,7 +104,6 @@ internal class RosterViewModel : ObservableObject
     }
     public void SelectWeek()
     {
-        WeekSelectorViewModel.Visibility = Visibility.Visible;
-        WeekSelectorViewModel.SelectedDate = roster.Start.ToDateTime(default);
+        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<DateTime>(roster.Start.ToDateTime(default)));
     }
 }

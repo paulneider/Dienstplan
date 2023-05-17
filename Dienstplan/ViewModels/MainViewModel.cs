@@ -2,32 +2,29 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dienstplan;
 
-internal class MainViewModel
+internal class MainViewModel : ObservableRecipient, IRecipient<ValueChangedMessage<DateTime>>
 {
-    private readonly ApplicationDbContext context = new ApplicationDbContext();
+    private readonly ApplicationDbContext context;
 
     public EmployeesViewModel EmployeesViewModel { get; init; } = new EmployeesViewModel();
     public GroupsViewModel GroupsViewModel { get; init; } = new GroupsViewModel();
     public RosterViewModel RosterViewModel { get; set; } = new RosterViewModel();
 
-    public MainViewModel()
+    public MainViewModel(ApplicationDbContext context, IMessenger messenger)
     {
-        context.Database.EnsureCreated();
-
-        context.Groups.Load();
-        context.Employees.Load();
-        context.Days.Load();
-        context.Rosters.Load();
-        context.Shifts.Load();
+        messenger.Register(this);
+        this.context = context;
 
         GroupsViewModel.SaveGroups += SaveGroups;
         EmployeesViewModel.SaveEmployees += SaveEmployees;
         RosterViewModel.SaveRoster += SaveRoster;
-        RosterViewModel.WeekSelectorViewModel.NewWeekSelected += NewWeekSelected;
 
         foreach (Employee employee in context.Employees.Where(x => !x.IsOut))
             EmployeesViewModel.Employees.Add(new EmployeeItemViewModel(employee));
@@ -52,23 +49,6 @@ internal class MainViewModel
         }
     }
 
-    private void NewWeekSelected(object? sender, DateTime newDate)
-    {
-        int dayIndex = 1 - ((int)newDate.DayOfWeek);
-        DateOnly start = DateOnly.FromDateTime(newDate.AddDays(dayIndex == 1 ? -6 : dayIndex));
-
-        Roster roster = context.Rosters.AsEnumerable().FirstOrDefault(x => x.Start == start);
-        if (roster is null)
-        {
-            DateOnly end = start.AddDays(4);
-            RosterViewModel.InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
-        }
-        else
-        {
-            context.Entry(roster).Collection(b => b.Employees).Load();
-            RosterViewModel.InitUpdate(roster);
-        }
-    }
     private void SaveRoster(object? sender, Roster? newRoster)
     {
         if (newRoster is not null)
@@ -96,5 +76,23 @@ internal class MainViewModel
         GroupsViewModel.Groups.Clear();
         foreach (Group group in context.Groups.Where(x => !x.IsOut))
             GroupsViewModel.Groups.Add(new GroupItemViewModel(group));
+    }
+
+    public void Receive(ValueChangedMessage<DateTime> message)
+    {
+        int dayIndex = 1 - ((int)message.Value.DayOfWeek);
+        DateOnly start = DateOnly.FromDateTime(message.Value.AddDays(dayIndex == 1 ? -6 : dayIndex));
+
+        Roster roster = context.Rosters.AsEnumerable().FirstOrDefault(x => x.Start == start);
+        if (roster is null)
+        {
+            DateOnly end = start.AddDays(4);
+            RosterViewModel.InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
+        }
+        else
+        {
+            context.Entry(roster).Collection(b => b.Employees).Load();
+            RosterViewModel.InitUpdate(roster);
+        }
     }
 }

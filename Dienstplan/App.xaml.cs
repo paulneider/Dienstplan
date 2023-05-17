@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Windows;
 
@@ -6,31 +8,32 @@ namespace Dienstplan
 {
     public partial class App : Application
     {
-        //public App()
-        //{
-        //    Services = ConfigureServices();
+        public App()
+        {
+            Services = ConfigureServices();
 
-        //    this.InitializeComponent();
-        //}
-        //public new static App Current => (App)Application.Current;
+            InitializeComponent();
+        }
+        public new static App Current => (App)Application.Current;
 
-        //public IServiceProvider Services { get; }
+        public IServiceProvider Services { get; }
 
-        //private static IServiceProvider ConfigureServices()
-        //{
-        //    ServiceCollection services = new ServiceCollection();
+        private static IServiceProvider ConfigureServices()
+        {
+            ServiceCollection services = new ServiceCollection();
 
-        //    services.AddDbContext<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Singleton);
+            services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
+            
+            services.AddScoped<MainViewModel>();
+            services.AddScoped<EditEmployeeViewModel>();
+            services.AddScoped<EditGroupViewModel>();
+            services.AddScoped<EmployeesViewModel>();
+            services.AddScoped<GroupsViewModel>();
+            services.AddScoped<RosterViewModel>();
+            services.AddScoped<WeekSelectorViewModel>();
 
-        //    var ser = services.BuildServiceProvider();
-
-        //    ApplicationDbContext context = ser.GetRequiredService<ApplicationDbContext>();
-        //    context.Database.EnsureCreated();
-
-
-        //    return services.BuildServiceProvider();
-        //}
-
-
+            return services.BuildServiceProvider();
+        }
     }
 }
