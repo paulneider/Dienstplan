@@ -13,8 +13,8 @@
         <SolidColorBrush Opacity="0.5" Color="White"/>
     </UserControl.Background>
 
-    <Border Width="320"
-            Height="270"
+    <Border Width="350"
+            Height="290"
             BorderThickness="1"
             BorderBrush="DarkGray"
             Background="White">
@@ -29,6 +29,7 @@
             </Grid.RowDefinitions>
 
             <Label HorizontalAlignment="Left"
+                   Margin="10 5 0 5"
                    Content="Dienstplanwoche auswählen:"
                    FontSize="16"/>
 

@@ -29,10 +29,12 @@ internal class MainViewModel
         RosterViewModel.SaveRoster += SaveRoster;
         RosterViewModel.WeekSelectorViewModel.NewWeekSelected += NewWeekSelected;
 
-        EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
-        EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        foreach (Employee employee in context.Employees.Where(x => !x.IsOut))
+            EmployeesViewModel.Employees.Add(new EmployeeItemViewModel(employee));
 
-        GroupsViewModel.Groups.Clear();
+        EmployeesViewModel.EditEmployeeViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        EmployeesViewModel.EditEmployeeViewModel.SelectedGroup = EmployeesViewModel.EditEmployeeViewModel.Groups.FirstOrDefault();
+
         foreach (Group group in context.Groups.Where(x => !x.IsOut))
             GroupsViewModel.Groups.Add(new GroupItemViewModel(group));
 
@@ -67,7 +69,6 @@ internal class MainViewModel
             RosterViewModel.InitUpdate(roster);
         }
     }
-
     private void SaveRoster(object? sender, Roster? newRoster)
     {
         if (newRoster is not null)
@@ -75,21 +76,22 @@ internal class MainViewModel
         
         context.SaveChanges();
     }
-
     private void SaveEmployees(object? sender, IList<Employee> newEmployees)
     {
         context.Employees.AddRange(newEmployees);
         context.SaveChanges();
 
-        EmployeesViewModel.Employees = new ObservableCollection<Employee>(context.Employees.Where(x => !x.IsOut));
+        EmployeesViewModel.Employees.Clear();
+        foreach (Employee employee in context.Employees.Where(x => !x.IsOut))
+            EmployeesViewModel.Employees.Add(new EmployeeItemViewModel(employee));
     }
-
     private void SaveGroups(object? sender, IList<Group> newGroups)
     {
         context.Groups.AddRange(newGroups);
         context.SaveChanges();
 
-        EmployeesViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        EmployeesViewModel.EditEmployeeViewModel.Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        EmployeesViewModel.EditEmployeeViewModel.SelectedGroup = EmployeesViewModel.EditEmployeeViewModel.Groups.FirstOrDefault();
 
         GroupsViewModel.Groups.Clear();
         foreach (Group group in context.Groups.Where(x => !x.IsOut))

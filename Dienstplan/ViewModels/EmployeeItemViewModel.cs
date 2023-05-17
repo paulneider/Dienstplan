@@ -51,6 +51,15 @@ internal class EmployeeItemViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+    public bool IsOut
+    {
+        get => employee.IsOut;
+        set
+        {
+            employee.IsOut = value;
+            OnPropertyChanged();
+        }
+    }
     public EmployeeItemViewModel(Employee employee)
     {
         this.employee = employee;

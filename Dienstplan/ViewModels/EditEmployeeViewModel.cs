@@ -10,16 +10,21 @@ namespace Dienstplan;
 
 internal class EditEmployeeViewModel : ObservableObject
 {
-    public event EventHandler<Employee> EmployeeAdded;
+    public event EventHandler<Employee>? EmployeeAdded;
 
     private bool isAdd = true;
-    private EmployeeItemViewModel updateEmployee;
+    private EmployeeItemViewModel? updateEmployee;
     public string Caption
     {
         get => isAdd ? "Neuer Mitarbeiter:" : "Mitarbeiter bearbeiten:";
     }
-
-    private Group selectedGroup;
+    private ObservableCollection<Group> groups;
+    public ObservableCollection<Group> Groups
+    {
+        get => groups;
+        set => SetProperty(ref groups, value);
+    }
+    private Group? selectedGroup;
     public Group SelectedGroup
     {
         get => selectedGroup;
@@ -31,13 +36,13 @@ internal class EditEmployeeViewModel : ObservableObject
         get => visibility;
         set => SetProperty(ref visibility, value);
     }
-    private string newFirstName;
+    private string? newFirstName;
     public string NewFirstName
     {
         get => newFirstName;
         set => SetProperty(ref newFirstName, value);
     }
-    private string newLastName;
+    private string? newLastName;
     public string NewLastName
     {
         get => newLastName;
@@ -86,7 +91,6 @@ internal class EditEmployeeViewModel : ObservableObject
             updateEmployee.Hours = NewHours;
             updateEmployee.WrittingHours = NewWrittingHours;
             updateEmployee.Group = SelectedGroup;
-
         }
 
         Visibility = Visibility.Collapsed;

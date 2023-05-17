@@ -5,9 +5,108 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=local:EditEmployeeViewModel, IsDesignTimeCreatable=True}"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
              d:DesignHeight="450" 
              d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Background>
+        <SolidColorBrush Opacity="0.5" Color="White"/>
+    </UserControl.Background>
+    <Border Width="350"
+            Height="280"
+            BorderThickness="1"
+            BorderBrush="DarkGray"
+            Background="White">
+        <Grid HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="5"
+                   FontSize="16"
+                   Content="{Binding Caption}"/>
+
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="5"
+                   Content="Vorname:"/>
+
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding NewFirstName}"/>
+
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Margin="5"
+                   Content="Nachname:"/>
+
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding NewLastName}"/>
+
+            <Label Grid.Row="3"
+                   Grid.Column="0"
+                   Margin="5"
+                   Content="Stunden pro Woche:"/>
+
+            <TextBox Grid.Row="3"
+                     Grid.Column="1"
+                     Margin="5"
+                     Text="{Binding NewHours}"/>
+
+            <Label Grid.Row="4"
+                   Grid.Column="0"
+                   Margin="5"
+                   Content="Schreibzeit:"/>
+
+            <TextBox Grid.Row="4"
+                     Grid.Column="1"
+                     Margin="5"
+                     IsReadOnly="True"
+                     Text="{Binding NewWrittingHours, Mode=OneWay}"/>
+
+            <Label Grid.Row="5"
+                   Grid.Column="0"
+                   Margin="5"
+                   Content="Gruppe:"/>
+
+            <ComboBox ItemsSource="{Binding Groups}"
+                      SelectedValue="{Binding SelectedGroup}"
+                      DisplayMemberPath="Name"
+                      Margin="5"
+                      Grid.Row="5"
+                      Grid.Column="1"/>
+
+            <Button Grid.Row="6"
+                    Grid.Column="0"
+                    Margin="5"
+                    Content="Okay"
+                    Style="{StaticResource ActionButton}"
+                    Command="{Binding OkayCommand}"/>
+
+            <Button Grid.Row="6"
+                    Grid.Column="1"
+                    Content="Abbrechen"
+                    Style="{StaticResource ActionButton}"
+                    Command="{Binding CancleCommand}"/>
+        </Grid>
+    </Border>
 </UserControl>

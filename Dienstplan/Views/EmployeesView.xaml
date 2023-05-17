@@ -15,6 +15,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <local:EditEmployeeView DataContext="{Binding EditEmployeeViewModel}"
+                                Visibility="{Binding Visibility}"
+                                Grid.RowSpan="4"
+                                Panel.ZIndex="10"/>
+
         <GroupBox>
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
@@ -32,80 +37,6 @@
                         Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>
-
-        <Grid Grid.Row="1"
-              Visibility="{Binding EditGridVisibility, UpdateSourceTrigger=PropertyChanged}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Content="Vorname:"/>
-
-            <TextBox Grid.Row="0"
-                     Grid.Column="1"
-                     Text="{Binding NewFirstName}"/>
-
-            <Label Grid.Row="1"
-                   Grid.Column="0"
-                   Content="Nachname:"/>
-
-            <TextBox Grid.Row="1"
-                     Grid.Column="1"
-                     Text="{Binding NewLastName}"/>
-
-            <Label Grid.Row="2"
-                   Grid.Column="0"
-                   Content="Stunden pro Woche:"/>
-
-            <TextBox Grid.Row="2"
-                     Grid.Column="1"
-                     Text="{Binding NewHours}"/>
-
-            <Label Grid.Row="3"
-                   Grid.Column="0"
-                   Content="Schreibzeit:"/>
-
-            <TextBox Grid.Row="3"
-                     Grid.Column="1"
-                     IsReadOnly="True"
-                     Text="{Binding NewWrittingHours, Mode=OneWay}"/>
-
-            <Label Grid.Row="4"
-                   Grid.Column="0"
-                   Content="Gruppe:"/>
-
-            <ComboBox ItemsSource="{Binding Groups}"
-                      SelectedValue="{Binding SelectedGroup}"
-                      DisplayMemberPath="Name"
-                      Grid.Row="4"
-                      Grid.Column="1"/>
-
-            <Button Grid.Row="5"
-                    Grid.Column="0"
-                    Width="100"
-                    Content="Okay"
-                    Style="{StaticResource ActionButton}"
-                    Command="{Binding OkayCommand}"/>
-
-            <Button Grid.Row="5"
-                    Grid.Column="1"
-                    Width="100"
-                    Content="Abbrechen"
-                    Style="{StaticResource ActionButton}"
-                    Command="{Binding CancleCommand}"/>
-        </Grid>
 
         <DataGrid ItemsSource="{Binding Employees}"
                   Margin="0 5"
