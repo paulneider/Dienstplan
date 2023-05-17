@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dienstplan;
 
-class EmployerItemViewModel : ObservableObject
+class RosterEmployeeItemViewModel : ObservableObject
 {
     private Employee employee;
 
@@ -17,7 +17,7 @@ class EmployerItemViewModel : ObservableObject
     private Shift thursdayShift;
     private Shift fridayShift;
 
-    public EmployerItemViewModel(Employee employee, List<Day> days)
+    public RosterEmployeeItemViewModel(Employee employee, List<Day> days)
     {
         this.employee = employee;
 

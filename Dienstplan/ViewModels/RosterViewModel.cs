@@ -16,8 +16,8 @@ internal class RosterViewModel : ObservableObject
     private Roster roster;
     public WeekSelectorViewModel WeekSelectorViewModel { get; init; } = new WeekSelectorViewModel();
 
-    ObservableCollection<EmployerItemViewModel> employerItems = new ObservableCollection<EmployerItemViewModel>();
-    public ObservableCollection<EmployerItemViewModel> EmployerItems
+    ObservableCollection<RosterEmployeeItemViewModel> employerItems = new ObservableCollection<RosterEmployeeItemViewModel>();
+    public ObservableCollection<RosterEmployeeItemViewModel> EmployerItems
     {
         get => employerItems;
     }
@@ -76,7 +76,7 @@ internal class RosterViewModel : ObservableObject
 
         foreach (Employee employee in employees)
         {
-            EmployerItemViewModel viewModel = new EmployerItemViewModel(employee, roster.Days.ToList());
+            RosterEmployeeItemViewModel viewModel = new RosterEmployeeItemViewModel(employee, roster.Days.ToList());
             EmployerItems.Add(viewModel);
         }
     }
@@ -89,7 +89,7 @@ internal class RosterViewModel : ObservableObject
 
         foreach (Employee employee in roster.Employees)
         {
-            EmployerItemViewModel viewModel = new EmployerItemViewModel(employee, roster.Days.ToList());
+            RosterEmployeeItemViewModel viewModel = new RosterEmployeeItemViewModel(employee, roster.Days.ToList());
             EmployerItems.Add(viewModel);
         }
     }
