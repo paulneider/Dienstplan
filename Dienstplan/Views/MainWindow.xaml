@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:Dienstplan.Properties"
         xmlns:local="clr-namespace:Dienstplan"
         mc:Ignorable="d"
         ResizeMode="CanResize"
-        Title="Dienstplan" 
+        Title="{x:Static resx:Resources.Roster}" 
         WindowStartupLocation="CenterScreen"
         MinHeight="250"
         DataContext="{local:ViewModelProvider Type=local:MainViewModel}"
@@ -17,13 +18,13 @@
         MaxWidth="{StaticResource WindowWidth}">
     <Grid>
         <TabControl>
-            <TabItem Header="Dienstplan">
+            <TabItem Header="{x:Static resx:Resources.Roster}">
                 <local:RosterView/>
             </TabItem>
-            <TabItem Header="Mitarbeiter">
+            <TabItem Header="{x:Static resx:Resources.Employees}">
                 <local:EmployeesView/>
             </TabItem>
-            <TabItem Header="Gruppen">
+            <TabItem Header="{x:Static resx:Resources.Groups}">
                 <local:GroupsView/>
             </TabItem>
         </TabControl>

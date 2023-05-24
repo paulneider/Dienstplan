@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
              DataContext="{local:ViewModelProvider Type=local:EditEmployeeViewModel}"
@@ -48,7 +49,7 @@
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Vorname:"/>
+                   Content="{x:Static resx:Resources.FirstName_}"/>
 
             <TextBox Grid.Row="1"
                      Grid.Column="1"
@@ -58,7 +59,7 @@
             <Label Grid.Row="2"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Nachname:"/>
+                   Content="{x:Static resx:Resources.LastName_}"/>
 
             <TextBox Grid.Row="2"
                      Grid.Column="1"
@@ -68,7 +69,7 @@
             <Label Grid.Row="3"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Stunden pro Woche:"/>
+                   Content="{x:Static resx:Resources.Hours_}"/>
 
             <TextBox Grid.Row="3"
                      Grid.Column="1"
@@ -78,7 +79,7 @@
             <Label Grid.Row="4"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Schreibzeit:"/>
+                   Content="{x:Static resx:Resources.WrittingHours_}"/>
 
             <TextBox Grid.Row="4"
                      Grid.Column="1"
@@ -89,7 +90,7 @@
             <Label Grid.Row="5"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Gruppe:"/>
+                   Content="{x:Static resx:Resources.Group_}"/>
 
             <ComboBox ItemsSource="{Binding Groups}"
                       SelectedValue="{Binding SelectedGroup}"
@@ -101,13 +102,13 @@
             <Button Grid.Row="6"
                     Grid.Column="0"
                     Margin="5"
-                    Content="Okay"
+                    Content="{x:Static resx:Resources.Okey}"
                     Style="{StaticResource ActionButton}"
                     Command="{Binding OkayCommand}"/>
 
             <Button Grid.Row="6"
                     Grid.Column="1"
-                    Content="Abbrechen"
+                    Content="{x:Static resx:Resources.Cancle}"
                     Style="{StaticResource ActionButton}"
                     Command="{Binding CancleCommand}"/>
         </Grid>

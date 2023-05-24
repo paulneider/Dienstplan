@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              mc:Ignorable="d" 
              DataContext="{local:ViewModelProvider Type=local:GroupsViewModel}"
              Visibility="{Binding Visibility}"
@@ -33,15 +34,15 @@
         <GroupBox>
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
-                <Button Content="Gruppe hinzufügen"
+                <Button Content="{x:Static resx:Resources.AddGroup}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding AddGroupCommand}"/>
-                <Button Content="Gruppe löschen"
-                        Style="{StaticResource ActionButton}"
-                        Command="{Binding DeleteGroupCommand}"/>
-                <Button Content="Gruppe bearbeiten"
+                <Button Content="{x:Static resx:Resources.EditGroup}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateGroupCommand}"/>
+                <Button Content="{x:Static resx:Resources.DeleteGroup}"
+                        Style="{StaticResource ActionButton}"
+                        Command="{Binding DeleteGroupCommand}"/>
             </StackPanel>
         </GroupBox>
 
@@ -56,12 +57,12 @@
                   SelectedItem="{Binding SelectedItem}"
                   Grid.Row="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Name}"
                                     IsReadOnly="True"
                                     Width="200"
                                     Binding="{Binding Name}"/>
                 <!-- TODO: EnumValues to labels -->
-                <DataGridComboBoxColumn Header="Type"
+                <DataGridComboBoxColumn Header="{x:Static resx:Resources.Type}"
                                         IsReadOnly="True"
                                         Width="100"
                                         SelectedValueBinding="{Binding Type}"

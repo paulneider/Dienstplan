@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Dienstplan.Properties;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +16,7 @@ internal class EditGroupViewModel : ObservableObject, IRecipient<AddGroupMessage
     private bool isAdd = false;
     public string Caption
     {
-        get => isAdd ? "Neue Gruppe:" : "Gruppe bearbeiten:";
+        get => isAdd ? Resources.NewGroup_ : Resources.EditGroup_;
     }
     private Visibility visibility = Visibility.Collapsed;
     public Visibility Visibility

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              mc:Ignorable="d" 
              DataContext="{local:ViewModelProvider Type=local:WeekSelectorViewModel}"
              Visibility="{Binding Visibility}"
@@ -34,7 +35,7 @@
 
             <Label HorizontalAlignment="Left"
                    Margin="10 5 0 5"
-                   Content="Dienstplanwoche auswählen:"
+                   Content="{x:Static resx:Resources.SelectRosterWeek}"
                    FontSize="16"/>
 
             <Label HorizontalAlignment="Center"
@@ -52,10 +53,10 @@
                         HorizontalAlignment="Center"
                         Height="40"
                         Grid.Row="3">
-                <Button Content="Okay"
+                <Button Content="{x:Static resx:Resources.Okey}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding OkayCommand}"/>
-                <Button Content="Abbrechen"
+                <Button Content="{x:Static resx:Resources.Cancle}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding CancleCommand}"/>
             </StackPanel>

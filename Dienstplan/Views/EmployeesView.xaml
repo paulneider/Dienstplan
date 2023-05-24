@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              DataContext="{local:ViewModelProvider Type=local:EmployeesViewModel}"
              Visibility="{Binding Visibility}"
              mc:Ignorable="d" 
@@ -24,15 +25,15 @@
         <GroupBox>
             <StackPanel Orientation="Horizontal"
                         IsEnabled="{Binding GridIsEnabled}">
-                <Button Content="Erzieher hinzufügen"
+                <Button Content="{x:Static resx:Resources.AddEmployee}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding AddEmployeeCommand}"/>
-                <Button Content="Erzieher löschen"
-                        Style="{StaticResource ActionButton}"
-                        Command="{Binding DeleteEmployeeCommand}"/>
-                <Button Content="Erzieher bearbeiten"
+                <Button Content="{x:Static resx:Resources.EditEmployee}"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateEmployeeCommand}"/>
+                <Button Content="{x:Static resx:Resources.DeleteEmployee}"
+                        Style="{StaticResource ActionButton}"
+                        Command="{Binding DeleteEmployeeCommand}"/>
             </StackPanel>
         </GroupBox>
 
@@ -48,23 +49,23 @@
                   SelectedItem="{Binding SelectedItem}"
                   Grid.Row="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vorname"
+                <DataGridTextColumn Header="{x:Static resx:Resources.FirstName}"
                                     IsReadOnly="True"
                                     Width="150"
                                     Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="Nachname"
+                <DataGridTextColumn Header="{x:Static resx:Resources.LastName}"
                                     IsReadOnly="True"
                                     Width="150"
                                     Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Stunden pro Woche"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Hours}"
                                     IsReadOnly="True"
                                     Width="150"
                                     Binding="{Binding Hours}"/>
-                <DataGridTextColumn Header="Schreibzeit pro Woche"
+                <DataGridTextColumn Header="{x:Static resx:Resources.WrittingHours}"
                                     IsReadOnly="True"
                                     Width="150"
                                     Binding="{Binding WrittingHours}"/>
-                <DataGridTextColumn Header="Gruppe"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Group}"
                                     IsReadOnly="True"
                                     Width="100"
                                     Binding="{Binding Group.Name}"/>

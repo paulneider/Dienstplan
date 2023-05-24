@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Dienstplan.Properties;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -17,7 +18,7 @@ internal class EditEmployeeViewModel : ObservableObject, IRecipient<UpdateEmploy
     private EmployeeItemViewModel? updateEmployee;
     public string Caption
     {
-        get => isAdd ? "Neuer Mitarbeiter:" : "Mitarbeiter bearbeiten:";
+        get => isAdd ? Resources.NewEmployee_ : Resources.EditEmployee_;
     }
     private ObservableCollection<Group> groups;
     public ObservableCollection<Group> Groups

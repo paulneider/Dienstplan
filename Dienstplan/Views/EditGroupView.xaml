@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              mc:Ignorable="d" 
              DataContext="{local:ViewModelProvider Type=local:EditGroupViewModel}"
              Visibility="{Binding Visibility}"
@@ -56,7 +57,7 @@
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Margin="5"
-                   Content="Name:"/>
+                   Content="{x:Static resx:Resources.Name_}"/>
 
             <TextBox Grid.Row="1"
                      Grid.Column="1"
@@ -66,7 +67,7 @@
             <Label Grid.Row="2"
                    Margin="5"
                    Grid.Column="0"
-                   Content="Type:"/>
+                   Content="{x:Static resx:Resources.Type_}"/>
 
             <ComboBox ItemsSource="{Binding Source={StaticResource TypeNames}, Mode=OneWay}"
                       SelectedValue="{Binding NewType}"
@@ -77,13 +78,13 @@
             <Button Grid.Row="3"
                     Grid.Column="0"
                     Margin="5"
-                    Content="Okay"
+                    Content="{x:Static resx:Resources.Okey}"
                     Style="{StaticResource ActionButton}"
                     Command="{Binding OkayCommand}"/>
 
             <Button Grid.Row="3"
                     Grid.Column="1"
-                    Content="Abbrechen"
+                    Content="{x:Static resx:Resources.Cancle}"
                     Style="{StaticResource ActionButton}"
                     Command="{Binding CancleCommand}"/>
         </Grid>
