@@ -40,7 +40,6 @@ internal partial class GroupsViewModel : ObservableObject, IRecipient<NewGroupMe
         foreach (Group group in context.Groups.Where(x => !x.IsOut))
             Groups.Add(new GroupItemViewModel(group));
     }
-
     private void AddGroup()
     {
         messenger.Send(new AddGroupMessage());
