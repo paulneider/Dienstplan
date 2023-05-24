@@ -6,6 +6,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib" 
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
+             DataContext="{local:ViewModelProvider Type=local:GroupsViewModel}"
+             Visibility="{Binding Visibility}"
              d:DataContext="{d:DesignInstance Type=local:GroupsViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="{StaticResource WindowHeight}" 
              d:DesignWidth="{StaticResource WindowWidth}">
@@ -25,8 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:EditGroupView DataContext="{Binding EditGroupViewModel}"
-                             Visibility="{Binding Visibility}"
+        <local:EditGroupView d:Visibility="Collapsed"
                              Grid.RowSpan="4"
                              Panel.ZIndex="10"/>
         <GroupBox>
@@ -41,9 +42,6 @@
                 <Button Content="Gruppe bearbeiten"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateGroupCommand}"/>
-                <Button Content="Speichern"
-                        Style="{StaticResource ActionButton}"
-                        Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>
 

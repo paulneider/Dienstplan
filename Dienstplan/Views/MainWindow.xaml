@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         MinHeight="250"
         DataContext="{local:ViewModelProvider Type=local:MainViewModel}"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}"
         Height="{StaticResource WindowHeight}" 
         MinWidth="{StaticResource WindowWidth}"
         Width="{StaticResource WindowWidth}"
@@ -17,13 +18,13 @@
     <Grid>
         <TabControl>
             <TabItem Header="Dienstplan">
-                <local:RosterView DataContext="{Binding RosterViewModel}"/>
+                <local:RosterView/>
             </TabItem>
             <TabItem Header="Mitarbeiter">
-                <local:EmployeesView DataContext="{Binding EmployeesViewModel}"/>
+                <local:EmployeesView/>
             </TabItem>
             <TabItem Header="Gruppen">
-                <local:GroupsView DataContext="{Binding GroupsViewModel}"/>
+                <local:GroupsView/>
             </TabItem>
         </TabControl>
     </Grid>

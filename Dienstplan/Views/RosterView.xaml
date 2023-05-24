@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
              mc:Ignorable="d" 
+             DataContext="{local:ViewModelProvider Type=local:RosterViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RosterViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="{StaticResource WindowHeight}" 
              d:DesignWidth="{StaticResource WindowWidth}">
@@ -17,6 +18,7 @@
         </Grid.RowDefinitions>
 
         <local:WeekSelectorView Grid.RowSpan="4"
+                                d:Visibility="Collapsed"
                                 Panel.ZIndex="10"/>
 
         <Label Content="{Binding TimeSpanString}"

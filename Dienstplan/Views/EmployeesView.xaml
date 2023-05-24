@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
+             DataContext="{local:ViewModelProvider Type=local:EmployeesViewModel}"
+             Visibility="{Binding Visibility}"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=local:EmployeesViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="{StaticResource WindowHeight}" 
@@ -15,8 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <local:EditEmployeeView DataContext="{Binding EditEmployeeViewModel}"
-                                Visibility="{Binding Visibility}"
+        <local:EditEmployeeView d:Visibility="Collapsed"
                                 Grid.RowSpan="4"
                                 Panel.ZIndex="10"/>
 
@@ -32,9 +33,6 @@
                 <Button Content="Erzieher bearbeiten"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding UpdateEmployeeCommand}"/>
-                <Button Content="Speichern"
-                        Style="{StaticResource ActionButton}"
-                        Command="{Binding SaveCommand}"/>
             </StackPanel>
         </GroupBox>
 

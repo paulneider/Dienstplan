@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Windows;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Linq;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Dienstplan;
 
-internal partial class EmployeesViewModel : ObservableObject
+internal partial class EmployeesViewModel : ObservableObject, IRecipient<NewEmployeeMessage>
 {
-    public event EventHandler<IList<Employee>> SaveEmployees;
-
-    private readonly List<Employee> newEmployees = new List<Employee>();
-    public EditEmployeeViewModel EditEmployeeViewModel { get; init; } = new EditEmployeeViewModel();
+    private readonly ApplicationDbContext context;
+    private readonly IMessenger messenger;
 
     private ObservableCollection<EmployeeItemViewModel> employees = new ObservableCollection<EmployeeItemViewModel>();
     public ObservableCollection<EmployeeItemViewModel> Employees
@@ -28,24 +24,23 @@ internal partial class EmployeesViewModel : ObservableObject
         get => selectedItem;
         set => SetProperty(ref selectedItem, value);
     }
-
     public ICommand AddEmployeeCommand => new RelayCommand(AddEmployee);
     public ICommand DeleteEmployeeCommand => new RelayCommand(DeleteEmployee);
     public ICommand UpdateEmployeeCommand => new RelayCommand(UpdateEmployee);
-    public ICommand SaveCommand => new RelayCommand(Save);
-    public EmployeesViewModel()
+    public EmployeesViewModel() { }
+    public EmployeesViewModel(ApplicationDbContext context, IMessenger messenger)
     {
-        EditEmployeeViewModel.EmployeeAdded += EmployeeAdded;
-    }
+        this.context = context;
+        this.messenger = messenger;
 
-    private void EmployeeAdded(object? sender, Employee newEmployee)
-    {
-        newEmployees.Add(newEmployee);
-        Employees.Add(new EmployeeItemViewModel(newEmployee));
+        messenger.Register(this);
+
+        foreach (Employee employee in context.Employees.Where(x => !x.IsOut))
+            Employees.Add(new EmployeeItemViewModel(employee));
     }
     private void AddEmployee()
     {
-        EditEmployeeViewModel.Add();
+        messenger.Send(new AddEmployeeMessage());
     }
     private void DeleteEmployee()
     {
@@ -54,17 +49,17 @@ internal partial class EmployeesViewModel : ObservableObject
 
         SelectedItem.IsOut = true;
         Employees.Remove(SelectedItem);
+        context.SaveChanges();
     }
     private void UpdateEmployee()
     {
         if (SelectedItem is null)
             return;
 
-        EditEmployeeViewModel.Update(SelectedItem);
+        messenger.Send(new UpdateEmployeeMessage(SelectedItem));
     }
-    private void Save()
+    public void Receive(NewEmployeeMessage message)
     {
-        SaveEmployees?.Invoke(this, newEmployees);
-        newEmployees.Clear();
+        Employees.Add(new EmployeeItemViewModel(message.Employee));
     }
 }

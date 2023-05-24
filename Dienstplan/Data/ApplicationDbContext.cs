@@ -14,11 +14,11 @@ internal class ApplicationDbContext : DbContext
     {
         Database.EnsureCreated();
 
-        Groups.Load();
-        Employees.Load();
-        Days.Load();
-        Rosters.Load();
-        Shifts.Load();
+        Groups?.Load();
+        Employees?.Load();
+        Days?.Load();
+        Rosters?.Load();
+        Shifts?.Load();
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

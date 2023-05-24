@@ -11,12 +11,11 @@ using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal class RosterViewModel : ObservableObject
+internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessage<DateTime>>
 {
-    public event EventHandler<Roster?>? SaveRoster;
-
+    private readonly ApplicationDbContext context;
+    private readonly IMessenger messenger;
     private Roster roster;
-
     ObservableCollection<RosterEmployeeItemViewModel> employerItems = new ObservableCollection<RosterEmployeeItemViewModel>();
     public ObservableCollection<RosterEmployeeItemViewModel> EmployerItems
     {
@@ -35,7 +34,28 @@ internal class RosterViewModel : ObservableObject
     public ICommand SaveCommand => new RelayCommand(Save);
     public ICommand ResetCommand => new RelayCommand(Reset);
     public ICommand SelectWeekCommand => new RelayCommand(SelectWeek);
-    public void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
+    public RosterViewModel() { }
+    public RosterViewModel(ApplicationDbContext context, IMessenger messenger)
+    {
+        this.context = context;
+        this.messenger = messenger;
+
+        messenger.Register(this);
+
+        Roster roster = context.Rosters.AsEnumerable().MaxBy(x => x.Start.DayNumber);
+        if (roster is null)
+        {
+            DateOnly start = DateOnly.FromDateTime(DateTime.Today.AddDays(1 - ((int)DateTime.Today.DayOfWeek)));
+            DateOnly end = start.AddDays(4);
+            InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
+        }
+        else
+        {
+            context.Entry(roster).Collection(b => b.Employees).Load();
+            InitUpdate(roster);
+        }
+    }
+    private void InitCreate(DateOnly start, DateOnly end, List<Employee> employees)
     {
         // Testing
         if (start.DayOfWeek != DayOfWeek.Monday)
@@ -81,7 +101,7 @@ internal class RosterViewModel : ObservableObject
             EmployerItems.Add(viewModel);
         }
     }
-    public void InitUpdate(Roster roster)
+    private void InitUpdate(Roster roster)
     {
         this.roster = roster;
 
@@ -96,7 +116,10 @@ internal class RosterViewModel : ObservableObject
     }
     public void Save()
     {
-        SaveRoster?.Invoke(this, roster.Id is null ? roster : null);
+        if (roster.Id is null)
+            context.Rosters.Add(roster);
+            
+        context.SaveChanges();
     }
     public void Reset()
     {
@@ -104,6 +127,23 @@ internal class RosterViewModel : ObservableObject
     }
     public void SelectWeek()
     {
-        WeakReferenceMessenger.Default.Send(new ValueChangedMessage<DateTime>(roster.Start.ToDateTime(default)));
+        messenger.Send(new ValueChangedMessage<DateTime>(roster.Start.ToDateTime(default)));
+    }
+    public void Receive(ValueChangedMessage<DateTime> message)
+    {
+        int dayIndex = 1 - ((int)message.Value.DayOfWeek);
+        DateOnly start = DateOnly.FromDateTime(message.Value.AddDays(dayIndex == 1 ? -6 : dayIndex));
+
+        Roster roster = context.Rosters.AsEnumerable().FirstOrDefault(x => x.Start == start);
+        if (roster is null)
+        {
+            DateOnly end = start.AddDays(4);
+            InitCreate(start, end, context.Employees.Where(x => !x.IsOut).ToList());
+        }
+        else
+        {
+            context.Entry(roster).Collection(b => b.Employees).Load();
+            InitUpdate(roster);
+        }
     }
 }

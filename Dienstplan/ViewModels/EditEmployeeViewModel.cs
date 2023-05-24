@@ -1,16 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal class EditEmployeeViewModel : ObservableObject
+internal class EditEmployeeViewModel : ObservableObject, IRecipient<UpdateEmployeeMessage>, IRecipient<AddEmployeeMessage>, IRecipient<GroupsUpdateMessage>
 {
-    public event EventHandler<Employee>? EmployeeAdded;
+    private readonly ApplicationDbContext context;
+    private readonly IMessenger messenger;
 
     private bool isAdd = true;
     private EmployeeItemViewModel? updateEmployee;
@@ -64,6 +65,17 @@ internal class EditEmployeeViewModel : ObservableObject
     }
     public ICommand OkayCommand => new RelayCommand(Okay);
     public ICommand CancleCommand => new RelayCommand(Cancle);
+    public EditEmployeeViewModel() { }
+    public EditEmployeeViewModel(ApplicationDbContext context, IMessenger messenger)
+    {
+        this.context = context;
+        this.messenger = messenger;
+
+        messenger.RegisterAll(this);
+
+        Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        SelectedGroup = Groups.FirstOrDefault();
+    }
     private void Okay()
     {
         if (string.IsNullOrWhiteSpace(NewFirstName))
@@ -82,7 +94,8 @@ internal class EditEmployeeViewModel : ObservableObject
             newEmployee.WrittingHours = NewWrittingHours;
             newEmployee.Group = SelectedGroup;
 
-            EmployeeAdded?.Invoke(this, newEmployee);
+            context.Employees.Add(newEmployee);
+            messenger.Send(new NewEmployeeMessage(newEmployee));
         }
         else
         {
@@ -93,13 +106,26 @@ internal class EditEmployeeViewModel : ObservableObject
             updateEmployee.Group = SelectedGroup;
         }
 
+        context.SaveChanges();
         Visibility = Visibility.Collapsed;
     }
     private void Cancle()
     {
         Visibility = Visibility.Collapsed;
     }
-    public void Add()
+    public void Receive(UpdateEmployeeMessage message)
+    {
+        NewFirstName = message.EmployeeItem.FirstName;
+        NewLastName = message.EmployeeItem.LastName;
+        NewHours = message.EmployeeItem.Hours;
+
+        updateEmployee = message.EmployeeItem;
+
+        Visibility = Visibility.Visible;
+        isAdd = false;
+        OnPropertyChanged(nameof(Caption));
+    }
+    public void Receive(AddEmployeeMessage message)
     {
         NewFirstName = "";
         NewLastName = "";
@@ -109,16 +135,9 @@ internal class EditEmployeeViewModel : ObservableObject
         isAdd = true;
         OnPropertyChanged(nameof(Caption));
     }
-    public void Update(EmployeeItemViewModel employee)
+    public void Receive(GroupsUpdateMessage message)
     {
-        NewFirstName = employee.FirstName;
-        NewLastName = employee.LastName;
-        NewHours = employee.Hours;
-
-        updateEmployee = employee;
-
-        Visibility = Visibility.Visible;
-        isAdd = false;
-        OnPropertyChanged(nameof(Caption));
-    }
+        Groups = new ObservableCollection<Group>(context.Groups.Where(x => !x.IsOut));
+        SelectedGroup = Groups.FirstOrDefault();
+    }   
 }

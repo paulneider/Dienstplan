@@ -1,18 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal class EditGroupViewModel : ObservableObject
+internal class EditGroupViewModel : ObservableObject, IRecipient<AddGroupMessage>, IRecipient<UpdateGroupMessage>
 {
-    public event EventHandler<Group> GroupAdded;
+    private readonly ApplicationDbContext context;
+    private readonly IMessenger messenger;
 
     private GroupItemViewModel updateGroup;
     private bool isAdd = false;
-
     public string Caption
     {
         get => isAdd ? "Neue Gruppe:" : "Gruppe bearbeiten:";
@@ -37,6 +38,14 @@ internal class EditGroupViewModel : ObservableObject
     }
     public ICommand OkayCommand => new RelayCommand(Okay);
     public ICommand CancleCommand => new RelayCommand(Cancle);
+    public EditGroupViewModel() { }
+    public EditGroupViewModel(ApplicationDbContext context, IMessenger messenger)
+    {
+        this.context = context;
+        this.messenger = messenger;
+
+        messenger.RegisterAll(this);
+    }
     private void Okay()
     {
         if (string.IsNullOrWhiteSpace(NewName))
@@ -49,7 +58,8 @@ internal class EditGroupViewModel : ObservableObject
             newGroup.Name = NewName;
             newGroup.Type = NewType;
 
-            GroupAdded?.Invoke(this, newGroup);
+            context.Groups.Add(newGroup);
+            messenger.Send(new NewGroupMessage(newGroup));
         }
         else
         {
@@ -57,13 +67,17 @@ internal class EditGroupViewModel : ObservableObject
             updateGroup.Type = NewType;
         }
 
+        context.SaveChanges();
+
+        messenger.Send(new GroupsUpdateMessage());
+        
         Visibility = Visibility.Collapsed;
     }
     private void Cancle()
     {
         Visibility = Visibility.Collapsed;
     }
-    public void Add()
+    public void Receive(AddGroupMessage message)
     {
         NewName = "";
         NewType = GroupType.Small;
@@ -72,12 +86,12 @@ internal class EditGroupViewModel : ObservableObject
         isAdd = true;
         OnPropertyChanged(nameof(Caption));
     }
-    public void Update(GroupItemViewModel group)
+    public void Receive(UpdateGroupMessage message)
     {
-        NewName = group.Name;
-        NewType = group.Type;
+        NewName = message.GroupItem.Name;
+        NewType = message.GroupItem.Type;
 
-        updateGroup = group;
+        updateGroup = message.GroupItem;
 
         Visibility = Visibility.Visible;
         isAdd = false;

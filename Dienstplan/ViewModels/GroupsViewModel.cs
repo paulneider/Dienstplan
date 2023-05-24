@@ -1,17 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Dienstplan;
 
-internal partial class GroupsViewModel : ObservableObject
+internal partial class GroupsViewModel : ObservableObject, IRecipient<NewGroupMessage>
 {
-    public event EventHandler<IList<Group>> SaveGroups;
+    private readonly ApplicationDbContext context;
+    private readonly IMessenger messenger;
 
-    public EditGroupViewModel EditGroupViewModel { get; init; } = new EditGroupViewModel();
     private ObservableCollection<GroupItemViewModel> groups = new ObservableCollection<GroupItemViewModel>();
     public ObservableCollection<GroupItemViewModel> Groups
     {
@@ -24,25 +26,24 @@ internal partial class GroupsViewModel : ObservableObject
         get => selectedItem;
         set => SetProperty(ref selectedItem, value);
     }
-    private readonly List<Group> newGroups = new List<Group>();
     public ICommand AddGroupCommand => new RelayCommand(AddGroup);
     public ICommand DeleteGroupCommand => new RelayCommand(DeleteGroup);
     public ICommand UpdateGroupCommand => new RelayCommand(UpdateGroup);
-    public ICommand SaveCommand => new RelayCommand(Save);
-
-    public GroupsViewModel()
+    public GroupsViewModel() { }
+    public GroupsViewModel(ApplicationDbContext context, IMessenger messenger)
     {
-        EditGroupViewModel.GroupAdded += GroupAdded;
+        this.context = context;
+        this.messenger = messenger;
+
+        messenger.RegisterAll(this);
+
+        foreach (Group group in context.Groups.Where(x => !x.IsOut))
+            Groups.Add(new GroupItemViewModel(group));
     }
 
-    private void GroupAdded(object sender, Group newGroup)
-    {
-        newGroups.Add(newGroup);
-        Groups.Add(new GroupItemViewModel(newGroup));
-    }
     private void AddGroup()
     {
-        EditGroupViewModel.Add();
+        messenger.Send(new AddGroupMessage());
     }
     private void DeleteGroup()
     {
@@ -51,17 +52,19 @@ internal partial class GroupsViewModel : ObservableObject
 
         SelectedItem.IsOut = true;
         Groups.Remove(SelectedItem);
+        context.SaveChanges();
+
+        messenger.Send(new GroupsUpdateMessage());
     }
     private void UpdateGroup()
     {
         if (SelectedItem is null)
             return;
 
-        EditGroupViewModel.Update(SelectedItem);
+        messenger.Send(new UpdateGroupMessage(SelectedItem));
     }
-    private void Save()
+    public void Receive(NewGroupMessage message)
     {
-        SaveGroups?.Invoke(this, newGroups);
-        newGroups.Clear();
+        Groups.Add(new GroupItemViewModel(message.Group));
     }
 }
