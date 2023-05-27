@@ -14,8 +14,8 @@ namespace Dienstplan
         {
             var vCulture = new CultureInfo("en");
 
-            Thread.CurrentThread.CurrentCulture = vCulture;
-            Thread.CurrentThread.CurrentUICulture = vCulture;
+            //Thread.CurrentThread.CurrentCulture = vCulture;
+            //Thread.CurrentThread.CurrentUICulture = vCulture;
 
             Services = ConfigureServices();
 

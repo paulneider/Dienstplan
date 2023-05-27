@@ -88,6 +88,15 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Break.
+        /// </summary>
+        public static string Break {
+            get {
+                return ResourceManager.GetString("Break", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancle.
         /// </summary>
         public static string Cancle {
@@ -151,11 +160,29 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee.
+        /// </summary>
+        public static string Employee {
+            get {
+                return ResourceManager.GetString("Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Employees.
         /// </summary>
         public static string Employees {
             get {
                 return ResourceManager.GetString("Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        public static string End {
+            get {
+                return ResourceManager.GetString("End", resourceCulture);
             }
         }
         
@@ -174,6 +201,15 @@ namespace Dienstplan.Properties {
         public static string FirstName_ {
             get {
                 return ResourceManager.GetString("FirstName:", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friday.
+        /// </summary>
+        public static string Friday {
+            get {
+                return ResourceManager.GetString("Friday", resourceCulture);
             }
         }
         
@@ -205,6 +241,15 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to h.
+        /// </summary>
+        public static string h {
+            get {
+                return ResourceManager.GetString("h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hourse per week.
         /// </summary>
         public static string Hours {
@@ -223,6 +268,15 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plan\h.
+        /// </summary>
+        public static string hPlanned {
+            get {
+                return ResourceManager.GetString("hPlanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {
@@ -237,6 +291,15 @@ namespace Dienstplan.Properties {
         public static string LastName_ {
             get {
                 return ResourceManager.GetString("LastName:", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monday.
+        /// </summary>
+        public static string Monday {
+            get {
+                return ResourceManager.GetString("Monday", resourceCulture);
             }
         }
         
@@ -286,6 +349,24 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OT.
+        /// </summary>
+        public static string OT {
+            get {
+                return ResourceManager.GetString("OT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Roster.
         /// </summary>
         public static string Roster {
@@ -295,11 +376,83 @@ namespace Dienstplan.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select roster week:.
         /// </summary>
         public static string SelectRosterWeek {
             get {
                 return ResourceManager.GetString("SelectRosterWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select week.
+        /// </summary>
+        public static string SelectWeek {
+            get {
+                return ResourceManager.GetString("SelectWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ∑ OT.
+        /// </summary>
+        public static string SOT {
+            get {
+                return ResourceManager.GetString("SOT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thursday.
+        /// </summary>
+        public static string Thursday {
+            get {
+                return ResourceManager.GetString("Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TS.
+        /// </summary>
+        public static string TS {
+            get {
+                return ResourceManager.GetString("TS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuesday.
+        /// </summary>
+        public static string Tuesday {
+            get {
+                return ResourceManager.GetString("Tuesday", resourceCulture);
             }
         }
         
@@ -318,6 +471,24 @@ namespace Dienstplan.Properties {
         public static string Type_ {
             get {
                 return ResourceManager.GetString("Type:", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wednesday.
+        /// </summary>
+        public static string Wednesday {
+            get {
+                return ResourceManager.GetString("Wednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week from {0} to {1}.
+        /// </summary>
+        public static string WeekOf {
+            get {
+                return ResourceManager.GetString("WeekOf", resourceCulture);
             }
         }
         

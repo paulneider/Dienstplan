@@ -126,6 +126,9 @@
   <data name="AddGroup" xml:space="preserve">
     <value>Add group</value>
   </data>
+  <data name="Break" xml:space="preserve">
+    <value>Break</value>
+  </data>
   <data name="Cancle" xml:space="preserve">
     <value>Cancle</value>
   </data>
@@ -147,14 +150,23 @@
   <data name="EditGroup:" xml:space="preserve">
     <value>Edit group:</value>
   </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
   <data name="Employees" xml:space="preserve">
     <value>Employees</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
   </data>
   <data name="FirstName:" xml:space="preserve">
     <value>First name:</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
   </data>
   <data name="Group" xml:space="preserve">
     <value>Group</value>
@@ -165,17 +177,26 @@
   <data name="Groups" xml:space="preserve">
     <value>Groups</value>
   </data>
+  <data name="h" xml:space="preserve">
+    <value>h</value>
+  </data>
   <data name="Hours" xml:space="preserve">
     <value>Hourse per week</value>
   </data>
   <data name="Hours:" xml:space="preserve">
     <value>Hourse per week:</value>
   </data>
+  <data name="hPlanned" xml:space="preserve">
+    <value>Plan\h</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
   <data name="LastName:" xml:space="preserve">
     <value>Last name:</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -192,17 +213,53 @@
   <data name="Okey" xml:space="preserve">
     <value>Okey</value>
   </data>
+  <data name="OT" xml:space="preserve">
+    <value>OT</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="Roster" xml:space="preserve">
     <value>Roster</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="SelectRosterWeek" xml:space="preserve">
     <value>Select roster week:</value>
+  </data>
+  <data name="SelectWeek" xml:space="preserve">
+    <value>Select week</value>
+  </data>
+  <data name="SOT" xml:space="preserve">
+    <value>∑ OT</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TS" xml:space="preserve">
+    <value>TS</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="Type:" xml:space="preserve">
     <value>Type:</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="WeekOf" xml:space="preserve">
+    <value>Week from {0} to {1}</value>
   </data>
   <data name="WrittingHours" xml:space="preserve">
     <value>Writting hours</value>

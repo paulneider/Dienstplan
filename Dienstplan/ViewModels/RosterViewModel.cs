@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using Dienstplan.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +28,7 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
             if (roster is null)
                 return string.Empty;
 
-            return "Woche vom " + roster.Start.ToString("dd.MM") + " bis " + roster.End.ToShortDateString();
+            return string.Format(Resources.WeekOf, roster.Start.ToString("dd.MM."), roster.End.ToString("dd.MM.yyyy"));
         }
     }
     public ICommand SaveCommand => new RelayCommand(Save);

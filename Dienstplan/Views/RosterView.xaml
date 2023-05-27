@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dienstplan"
+             xmlns:resx="clr-namespace:Dienstplan.Properties"
              mc:Ignorable="d" 
              DataContext="{local:ViewModelProvider Type=local:RosterViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RosterViewModel, IsDesignTimeCreatable=True}"
@@ -29,17 +30,17 @@
             <Grid>
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Left">
-                    <Button Content="Speichern"
+                    <Button Content="{x:Static resx:Resources.Save}"
                             Style="{StaticResource ActionButton}"
                             Command="{Binding SaveCommand}"
                             Margin="3 0"/>
-                    <Button Content="Zurücksetzen"
+                    <Button Content="{x:Static resx:Resources.Reset}"
                             Style="{StaticResource ActionButton}"
                             Command="{Binding ResetCommand}"/>
                 </StackPanel>
 
-                
-                <Button Content="Woche auswählen"
+
+                <Button Content="{x:Static resx:Resources.SelectWeek}"
                         HorizontalAlignment="Right"
                         Style="{StaticResource ActionButton}"
                         Command="{Binding SelectWeekCommand}"/>
@@ -62,26 +63,26 @@
                 <ColumnDefinition Width="110"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Mitarbeiter"
+            <Label Content="{x:Static resx:Resources.Employee}"
                    Grid.Row="1"
                    Grid.Column="0"
                    Margin="8 0 0 0"/>
-            <Label Content="Montag"
+            <Label Content="{x:Static resx:Resources.Monday}"
                    Grid.Row="1"
                    Grid.Column="1"/>
-            <Label Content="Dienstag"
+            <Label Content="{x:Static resx:Resources.Tuesday}"
                    Grid.Row="1"
                    Grid.Column="2"/>
-            <Label Content="Mittwoche"
+            <Label Content="{x:Static resx:Resources.Wednesday}"
                    Grid.Row="1"
                    Grid.Column="3"/>
-            <Label Content="Donnerstag"
+            <Label Content="{x:Static resx:Resources.Thursday}"
                    Grid.Row="1"
                    Grid.Column="4"/>
-            <Label Content="Freitag"
+            <Label Content="{x:Static resx:Resources.Friday}"
                    Grid.Row="1"
                    Grid.Column="5"/>
-            <Label Content="Gesamt"
+            <Label Content="{x:Static resx:Resources.Total}"
                    Grid.Row="1"
                    Grid.Column="6"/>
 
@@ -102,19 +103,19 @@
                 </Style>
             </DataGrid.RowStyle>-->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Name}"
                                     IsReadOnly="True"
                                     Width="120"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="TS"
+                <DataGridTextColumn Header="{x:Static resx:Resources.TS}"
                                     IsReadOnly="True"
                                     Width="25"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding WrittingHours}"/>
-                <DataGridTextColumn Header="h/Soll"
+                <DataGridTextColumn Header="{x:Static resx:Resources.hPlanned}"
                                     IsReadOnly="True"
                                     Width="45"
                                     CanUserResize="False"
@@ -133,26 +134,26 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                
-                <DataGridTextColumn Header="Beginn"
+
+                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                     IsReadOnly="False"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding MondayStart, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Ende"
+                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
                                     IsReadOnly="False"
                                     Width="45"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding MondayEnd, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Pause"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
                                     IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding MondayBreak, StringFormat=mm}"/>
-                <DataGridTextColumn Header="h"
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="30"
                                     CanUserResize="False"
@@ -172,25 +173,25 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Beginn"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                     IsReadOnly="False"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding TuesdayStart, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Ende"
+                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
                                     IsReadOnly="False"
                                     Width="45"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding TuesdayEnd, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Pause"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
                                     IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding TuesdayBreak, StringFormat=mm}"/>
-                <DataGridTextColumn Header="h"
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="30"
                                     CanUserResize="False"
@@ -210,25 +211,25 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Beginn"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                     IsReadOnly="False"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding WednesdayStart, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Ende"
+                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
                                     IsReadOnly="False"
                                     Width="45"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding WednesdayEnd, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Pause"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
                                     IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding WednesdayBreak, StringFormat=mm}"/>
-                <DataGridTextColumn Header="h"
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="30"
                                     CanUserResize="False"
@@ -248,25 +249,25 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Beginn"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                     IsReadOnly="False"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding ThursdayStart, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Ende"
+                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
                                     IsReadOnly="False"
                                     Width="45"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding ThursdayEnd, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Pause"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
                                     IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding ThursdayBreak, StringFormat=mm}"/>
-                <DataGridTextColumn Header="h"
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="30"
                                     CanUserResize="False"
@@ -286,25 +287,25 @@
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Beginn"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                     IsReadOnly="False"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding FridayStart, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Ende"
+                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
                                     IsReadOnly="False"
                                     Width="45"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding FridayEnd, StringFormat=HH:mm}"/>
-                <DataGridTextColumn Header="Pause"
+                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
                                     IsReadOnly="True"
                                     Width="50"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding FridayBreak, StringFormat=mm}"/>
-                <DataGridTextColumn Header="h"
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="30"
                                     CanUserResize="False"
@@ -323,20 +324,20 @@
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                
-                <DataGridTextColumn Header="h"
+
+                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
                                     IsReadOnly="True"
                                     Width="35"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding TotalHours}"/>
-                <DataGridTextColumn Header="OT"
+                <DataGridTextColumn Header="{x:Static resx:Resources.OT}"
                                     IsReadOnly="True"
                                     Width="35"
                                     CanUserResize="False"
                                     CanUserReorder="False"
                                     Binding="{Binding OverTime}"/>
-                <DataGridTextColumn Header="∑ OT"
+                <DataGridTextColumn Header="{x:Static resx:Resources.SOT}"
                                     IsReadOnly="True"
                                     Width="40"
                                     CanUserResize="False"
