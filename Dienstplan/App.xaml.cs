@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using System.Configuration;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -12,10 +13,11 @@ namespace Dienstplan
     {
         public App()
         {
-            var vCulture = new CultureInfo("en");
+            string name = ConfigurationManager.AppSettings.Get("Language") ?? "de";
+            CultureInfo culture = new CultureInfo(name);
 
-            //Thread.CurrentThread.CurrentCulture = vCulture;
-            //Thread.CurrentThread.CurrentUICulture = vCulture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
 
             Services = ConfigureServices();
 
