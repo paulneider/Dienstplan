@@ -6,6 +6,7 @@ using Dienstplan.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Input;
 
@@ -15,8 +16,10 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
 {
     private readonly ApplicationDbContext context;
     private readonly IMessenger messenger;
+    private readonly TimeOnly defaultStart;
+    private readonly TimeOnly defaultEnd;
     private Roster roster;
-    ObservableCollection<RosterEmployeeItemViewModel> employerItems = new ObservableCollection<RosterEmployeeItemViewModel>();
+    private ObservableCollection<RosterEmployeeItemViewModel> employerItems = new ObservableCollection<RosterEmployeeItemViewModel>();
     public ObservableCollection<RosterEmployeeItemViewModel> EmployerItems
     {
         get => employerItems;
@@ -31,6 +34,160 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
             return string.Format(Resources.WeekOf, roster.Start.ToString("dd.MM."), roster.End.ToString("dd.MM.yyyy"));
         }
     }
+
+    public string MondayLabel
+    {
+        get
+        {
+            string label = Resources.Monday;
+            if (roster is not null)
+                label += " - " + roster.Days.ElementAt(0).Date.ToString("dd.MM.");
+
+            return label;
+        }
+    }
+    public string TuesdayLabel
+    {
+        get
+        {
+            string label = Resources.Tuesday;
+            if (roster is not null)
+                label += " - " + roster.Days.ElementAt(1).Date.ToString("dd.MM.");
+
+            return label;
+        }
+    }
+    public string WednesdayLabel
+    {
+        get
+        {
+            string label = Resources.Wednesday;
+            if (roster is not null)
+                label += " - " + roster.Days.ElementAt(2).Date.ToString("dd.MM.");
+
+            return label;
+        }
+    }
+    public string ThursdayLabel
+    {
+        get
+        {
+            string label = Resources.Thursday;
+            if (roster is not null)
+                label += " - " + roster.Days.ElementAt(3).Date.ToString("dd.MM.");
+
+            return label;
+        }
+    }
+    public string FridayLabel
+    {
+        get
+        {
+            string label = Resources.Friday;
+            if (roster is not null)
+                label += " - " + roster.Days.ElementAt(4).Date.ToString("dd.MM.");
+
+            return label;
+        }
+    }
+    private TimeOnly? mondayStart;
+    public TimeOnly? MondayStart
+    {
+        get => mondayStart;
+        set => SetProperty(ref mondayStart, value);
+    }
+    private TimeOnly? mondayEnd;
+    public TimeOnly? MondayEnd
+    {
+        get => mondayEnd;
+        set => SetProperty(ref mondayEnd, value);
+    }
+    private bool isMondayFree;
+    public bool IsMondayFree
+    {
+        get => isMondayFree;
+        set
+        {
+            MondayStart = value ? null : defaultStart;
+            MondayEnd = value ? null : defaultEnd;
+
+            roster.Days.ElementAt(0).IsFree = value;
+            SetProperty(ref isMondayFree, value);
+        }
+    }
+    private TimeOnly tuesdayStart;
+    public TimeOnly TuesdayStart
+    {
+        get => tuesdayStart;
+        set => SetProperty(ref tuesdayStart, value);
+    }
+    private TimeOnly tuesdayEnd;
+    public TimeOnly TuesdayEnd
+    {
+        get => tuesdayEnd;
+        set => SetProperty(ref tuesdayEnd, value);
+    }
+    private bool isTuesdayFree;
+    public bool IsTuesdayFree
+    {
+        get => isTuesdayFree;
+        set => SetProperty(ref isTuesdayFree, value);
+    }
+    private TimeOnly wednesdayStart;
+    public TimeOnly WednesdayStart
+    {
+        get => wednesdayStart;
+        set => SetProperty(ref wednesdayStart, value);
+    }
+    private TimeOnly wednesdayEnd;
+    public TimeOnly WednesdayEnd
+    {
+        get => wednesdayEnd;
+        set => SetProperty(ref wednesdayEnd, value);
+    }
+    private bool isWednesdayFree;
+    public bool IsWednesdayFree
+    {
+        get => isWednesdayFree;
+        set => SetProperty(ref isWednesdayFree, value);
+    }
+    private TimeOnly thursdayStart;
+    public TimeOnly ThursdayStart
+    {
+        get => thursdayStart;
+        set => SetProperty(ref thursdayStart, value);
+    }
+    private TimeOnly thursdayEnd;
+    public TimeOnly ThursdayEnd
+    {
+        get => thursdayEnd;
+        set => SetProperty(ref thursdayEnd, value);
+    }
+    private bool isThursdayFree;
+    public bool IsThursdayFree
+    {
+        get => isThursdayFree;
+        set => SetProperty(ref isThursdayFree, value);
+    }
+    private TimeOnly fridayStart;
+    public TimeOnly FridayStart
+    {
+        get => fridayStart;
+        set => SetProperty(ref fridayStart, value);
+    }
+    private TimeOnly fridayEnd;
+    public TimeOnly FridayEnd
+    {
+        get => fridayEnd;
+        set => SetProperty(ref fridayEnd, value);
+    }
+    private bool isFridayFree;
+    public bool IsFridayFree
+    {
+        get => isFridayFree;
+        set => SetProperty(ref isFridayFree, value);
+    }
+
     public ICommand SaveCommand => new RelayCommand(Save);
     public ICommand ResetCommand => new RelayCommand(Reset);
     public ICommand SelectWeekCommand => new RelayCommand(SelectWeek);
@@ -39,6 +196,22 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
     {
         this.context = context;
         this.messenger = messenger;
+
+        string strStart = ConfigurationManager.AppSettings.Get("DefaultStartTime") ?? "06:00";
+        defaultStart = TimeOnly.TryParse(strStart, out defaultStart) ? defaultStart : new TimeOnly(6,0);
+        mondayStart = defaultStart;
+        tuesdayStart = defaultStart;
+        wednesdayStart = defaultStart;
+        thursdayStart = defaultStart;
+        fridayStart = defaultStart;
+
+        string strEnd = ConfigurationManager.AppSettings.Get("DefaultEndTime") ?? "18:00";
+        defaultEnd = TimeOnly.TryParse(strEnd, out defaultEnd) ? defaultEnd : new TimeOnly(18,0);
+        mondayEnd = defaultEnd;
+        tuesdayEnd = defaultEnd;
+        wednesdayEnd = defaultEnd;
+        thursdayEnd = defaultEnd;
+        fridayEnd = defaultEnd;
 
         messenger.Register(this);
 

@@ -11,6 +11,7 @@ internal class Shift
     public TimeOnly End { get; set; } = new TimeOnly(16, 0);
     public TimeSpan Break { get; set; } = new TimeSpan(0, 30, 0);
 
+    //public bool IsFree { get; set; }
     // SubShifts
 }
 internal class SubShift

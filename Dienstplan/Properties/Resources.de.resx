@@ -165,6 +165,9 @@
   <data name="FirstName:" xml:space="preserve">
     <value>Vorname:</value>
   </data>
+  <data name="Free" xml:space="preserve">
+    <value>Frei</value>
+  </data>
   <data name="Friday" xml:space="preserve">
     <value>Freitag</value>
   </data>
@@ -213,6 +216,9 @@
   <data name="Okey" xml:space="preserve">
     <value>Okay</value>
   </data>
+  <data name="OpeningHours" xml:space="preserve">
+    <value>Öffnungszeiten:</value>
+  </data>
   <data name="OT" xml:space="preserve">
     <value>OT</value>
   </data>
@@ -239,6 +245,9 @@
   </data>
   <data name="Thursday" xml:space="preserve">
     <value>Donnerstag</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Uhr</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Gesamt</value>
