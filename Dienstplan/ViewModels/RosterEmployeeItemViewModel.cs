@@ -65,223 +65,290 @@ class RosterEmployeeItemViewModel : ObservableObject
 
     public string Name => $"{employee.LastName}, {employee.FirstName}";
     public string LastName => employee.LastName;
-    public double Hours => employee.Hours;
-    public double WrittingHours => employee.WrittingHours;
-    public TimeOnly MondayStart
+    public double Hours
     {
-        get => mondayShift.Start;
+        get
+        {
+            int days = 0;
+            if (MondayTime is not null)
+                days++;
+
+            if (TuesdayTime is not null)
+                days++;
+
+            if (WednesdayTime is not null)
+                days++;
+
+            if (ThursdayTime is not null)
+                days++;
+
+            if (FridayTime is not null)
+                days++;
+
+            return employee.Hours * days / 5;
+        }
+    }
+    public double WrittingHours => employee.WrittingHours;
+    public TimeOnly? MondayStart
+    {
+        get => mondayShift.Start == TimeOnly.MinValue ? null : mondayShift.Start;
         set
         {
-            mondayShift.Start = value;
+            mondayShift.Start = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(MondayStart));
             OnPropertyChanged(nameof(MondayBreak));
             OnPropertyChanged(nameof(MondayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeOnly MondayEnd
+    public TimeOnly? MondayEnd
     {
-        get => mondayShift.End;
+        get => mondayShift.End == TimeOnly.MinValue ? null : mondayShift.End;
         set
         {
-            mondayShift.End = value;
+            mondayShift.End = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(MondayEnd));
             OnPropertyChanged(nameof(MondayBreak));
             OnPropertyChanged(nameof(MondayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeSpan MondayBreak
+    public TimeSpan? MondayBreak
     {
         get
         {
-            return (MondayEnd - MondayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
+            if (!MondayStart.HasValue || !MondayEnd.HasValue)
+                return null;
+
+            return (MondayEnd.Value - MondayStart.Value).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
-    public double MondayTime
+    public double? MondayTime
     {
         get
         {
-            return (MondayEnd - MondayStart - MondayBreak).TotalMinutes / 60;
+            TimeSpan? mondayTime = MondayEnd - MondayStart - MondayBreak;
+            if (!mondayTime.HasValue)
+                return null;
+
+            return mondayTime.Value.TotalMinutes / 60;
         }
     }
-    public TimeOnly TuesdayStart
+    public TimeOnly? TuesdayStart
     {
-        get => tuesdayShift.Start;
+        get => tuesdayShift.Start == TimeOnly.MinValue ? null : tuesdayShift.Start;
         set
         {
-            tuesdayShift.Start = value;
+            tuesdayShift.Start = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(TuesdayStart));
             OnPropertyChanged(nameof(TuesdayBreak));
             OnPropertyChanged(nameof(TuesdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeOnly TuesdayEnd
+    public TimeOnly? TuesdayEnd
     {
-        get => tuesdayShift.End;
+        get => tuesdayShift.End == TimeOnly.MinValue ? null : tuesdayShift.End;
         set
         {
-            tuesdayShift.End = value;
+            tuesdayShift.End = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(TuesdayEnd));
             OnPropertyChanged(nameof(TuesdayBreak));
             OnPropertyChanged(nameof(TuesdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeSpan TuesdayBreak
+    public TimeSpan? TuesdayBreak
     {
         get
         {
-            return (TuesdayEnd - TuesdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
+            if (!TuesdayStart.HasValue || !TuesdayEnd.HasValue)
+                return null;
+
+            return (TuesdayEnd.Value - TuesdayStart.Value).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
-    public double TuesdayTime
+    public double? TuesdayTime
     {
         get
         {
-            return (TuesdayEnd - TuesdayStart - TuesdayBreak).TotalMinutes / 60;
+            TimeSpan? tuesdayTime = TuesdayEnd - TuesdayStart - TuesdayBreak;
+            if (!tuesdayTime.HasValue)
+                return null;
+
+            return tuesdayTime.Value.TotalMinutes / 60;
         }
     }
-    public TimeOnly WednesdayStart
+    public TimeOnly? WednesdayStart
     {
-        get => wednesdayShift.Start;
+        get => wednesdayShift.Start == TimeOnly.MinValue ? null : wednesdayShift.Start;
         set
         {
-            wednesdayShift.Start = value;
+            wednesdayShift.Start = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(WednesdayStart));
             OnPropertyChanged(nameof(WednesdayBreak));
             OnPropertyChanged(nameof(WednesdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeOnly WednesdayEnd
+    public TimeOnly? WednesdayEnd
     {
-        get => wednesdayShift.End;
+        get => wednesdayShift.End == TimeOnly.MinValue ? null : wednesdayShift.End;
         set
         {
-            wednesdayShift.End = value;
+            wednesdayShift.End = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(WednesdayEnd));
             OnPropertyChanged(nameof(WednesdayBreak));
             OnPropertyChanged(nameof(WednesdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeSpan WednesdayBreak
+    public TimeSpan? WednesdayBreak
     {
         get
         {
-            return (WednesdayEnd - WednesdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
+            if (!WednesdayStart.HasValue || !WednesdayEnd.HasValue)
+                return null;
+
+            return (WednesdayEnd.Value - WednesdayStart.Value).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
-    public double WednesdayTime
+    public double? WednesdayTime
     {
         get
         {
-            return (WednesdayEnd - WednesdayStart - WednesdayBreak).TotalMinutes / 60; 
+            TimeSpan? wednesdayTime = WednesdayEnd - WednesdayStart - WednesdayBreak;
+            if (!wednesdayTime.HasValue)
+                return null;
+
+            return wednesdayTime.Value.TotalMinutes / 60; 
         }
     }
-    public TimeOnly ThursdayStart
+    public TimeOnly? ThursdayStart
     {
-        get => thursdayShift.Start;
+        get => thursdayShift.Start == TimeOnly.MinValue ? null : thursdayShift.Start;
         set
         {
-            thursdayShift.Start = value;
+            thursdayShift.Start = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(ThursdayStart));
             OnPropertyChanged(nameof(ThursdayBreak));
             OnPropertyChanged(nameof(ThursdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeOnly ThursdayEnd
+    public TimeOnly? ThursdayEnd
     {
-        get => thursdayShift.End;
+        get => thursdayShift.End == TimeOnly.MinValue ? null : thursdayShift.End;
         set
         {
-            thursdayShift.End = value;
+            thursdayShift.End = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(ThursdayEnd));
             OnPropertyChanged(nameof(ThursdayBreak));
             OnPropertyChanged(nameof(ThursdayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeSpan ThursdayBreak
+    public TimeSpan? ThursdayBreak
     {
         get
         {
-            return (ThursdayEnd - ThursdayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
+            if (!ThursdayStart.HasValue || !ThursdayEnd.HasValue)
+                return null;
+
+            return (ThursdayEnd.Value - ThursdayStart.Value).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
-    public double ThursdayTime
+    public double? ThursdayTime
     {
         get
         {
-            return (ThursdayEnd - ThursdayStart - ThursdayBreak).TotalMinutes / 60;
+            TimeSpan? thursdayTime = ThursdayEnd - ThursdayStart - ThursdayBreak;
+            if (!thursdayTime.HasValue)
+                return null;
+
+            return thursdayTime.Value.TotalMinutes / 60;
         }
     }
-    public TimeOnly FridayStart
+    public TimeOnly? FridayStart
     {
-        get => fridayShift.Start;
+        get => fridayShift.Start == TimeOnly.MinValue ? null : fridayShift.Start;
         set
         {
-            fridayShift.Start = value;
+            fridayShift.Start = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(FridayStart));
             OnPropertyChanged(nameof(FridayBreak));
             OnPropertyChanged(nameof(FridayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeOnly FridayEnd
+    public TimeOnly? FridayEnd
     {
-        get => fridayShift.End;
+        get => fridayShift.End == TimeOnly.MinValue ? null : fridayShift.End;
         set
         {
-            fridayShift.End = value;
+            fridayShift.End = value ?? TimeOnly.MinValue;
             OnPropertyChanged(nameof(FridayEnd));
             OnPropertyChanged(nameof(FridayBreak));
             OnPropertyChanged(nameof(FridayTime));
             OnPropertyChanged(nameof(TotalHours));
             OnPropertyChanged(nameof(OverTime));
             OnPropertyChanged(nameof(TotalOverTime));
+            OnPropertyChanged(nameof(Hours));
         }
     }
-    public TimeSpan FridayBreak
+    public TimeSpan? FridayBreak
     {
         get
         {
-            return (FridayEnd - FridayStart).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
+            if (!FridayStart.HasValue || !FridayEnd.HasValue)
+                return null;
+
+            return (FridayEnd.Value - FridayStart.Value).TotalHours >= 6 ? TimeSpan.FromMinutes(30) : TimeSpan.Zero;
         }
     }
-    public double FridayTime
+    public double? FridayTime
     {
         get
         {
-            return (FridayEnd - FridayStart - FridayBreak).TotalMinutes / 60;
+            TimeSpan? fridayTime = FridayEnd - FridayStart - FridayBreak;
+            if (!fridayTime.HasValue)
+                return null;
+
+            return fridayTime.Value.TotalMinutes / 60;
         }
     }
     public double TotalHours
     {
         get
         {
-            return MondayTime + TuesdayTime + WednesdayTime + ThursdayTime + FridayTime;
+            return (MondayTime ?? default) + (TuesdayTime ?? default) + (WednesdayTime ?? default) + (ThursdayTime ?? default) + (FridayTime ?? default);
         }
     }
     public double OverTime

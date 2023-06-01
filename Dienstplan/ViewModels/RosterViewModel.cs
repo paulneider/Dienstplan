@@ -93,99 +93,162 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
     private TimeOnly? mondayStart;
     public TimeOnly? MondayStart
     {
-        get => mondayStart;
+        get => IsMondayFree ? null : mondayStart;
         set => SetProperty(ref mondayStart, value);
     }
     private TimeOnly? mondayEnd;
     public TimeOnly? MondayEnd
     {
-        get => mondayEnd;
+        get => IsMondayFree ? null : mondayEnd;
         set => SetProperty(ref mondayEnd, value);
     }
-    private bool isMondayFree;
     public bool IsMondayFree
     {
-        get => isMondayFree;
+        get => roster.Days.ElementAt(0).IsFree;
         set
         {
+            roster.Days.ElementAt(0).IsFree = value;
+
             MondayStart = value ? null : defaultStart;
             MondayEnd = value ? null : defaultEnd;
 
-            roster.Days.ElementAt(0).IsFree = value;
-            SetProperty(ref isMondayFree, value);
+            OnPropertyChanged(nameof(MondayStart));
+            OnPropertyChanged(nameof(MondayEnd));
+
+            foreach (var employee in EmployerItems)
+            {
+                employee.MondayStart = value ? null : new TimeOnly(7, 30);
+                employee.MondayEnd = value ? null : new TimeOnly(16, 0);
+            }
         }
     }
-    private TimeOnly tuesdayStart;
-    public TimeOnly TuesdayStart
+    private TimeOnly? tuesdayStart;
+    public TimeOnly? TuesdayStart
     {
-        get => tuesdayStart;
+        get => IsTuesdayFree ? null : tuesdayStart;
         set => SetProperty(ref tuesdayStart, value);
     }
-    private TimeOnly tuesdayEnd;
-    public TimeOnly TuesdayEnd
+    private TimeOnly? tuesdayEnd;
+    public TimeOnly? TuesdayEnd
     {
-        get => tuesdayEnd;
+        get => IsTuesdayFree ? null : tuesdayEnd;
         set => SetProperty(ref tuesdayEnd, value);
     }
-    private bool isTuesdayFree;
     public bool IsTuesdayFree
     {
-        get => isTuesdayFree;
-        set => SetProperty(ref isTuesdayFree, value);
+        get => roster.Days.ElementAt(1).IsFree;
+        set
+        {
+            roster.Days.ElementAt(1).IsFree = value;
+
+            TuesdayStart = value ? null : defaultStart;
+            TuesdayEnd = value ? null : defaultEnd;
+
+            OnPropertyChanged(nameof(TuesdayStart));
+            OnPropertyChanged(nameof(TuesdayEnd));
+
+            foreach (var employee in EmployerItems)
+            {
+                employee.TuesdayStart = value ? null : new TimeOnly(7, 30);
+                employee.TuesdayEnd = value ? null : new TimeOnly(16, 0);
+            }
+        }
     }
-    private TimeOnly wednesdayStart;
-    public TimeOnly WednesdayStart
+    private TimeOnly? wednesdayStart;
+    public TimeOnly? WednesdayStart
     {
-        get => wednesdayStart;
+        get => IsWednesdayFree ? null : wednesdayStart;
         set => SetProperty(ref wednesdayStart, value);
     }
-    private TimeOnly wednesdayEnd;
-    public TimeOnly WednesdayEnd
+    private TimeOnly? wednesdayEnd;
+    public TimeOnly? WednesdayEnd
     {
-        get => wednesdayEnd;
+        get => IsWednesdayFree ? null : wednesdayEnd;
         set => SetProperty(ref wednesdayEnd, value);
     }
-    private bool isWednesdayFree;
     public bool IsWednesdayFree
     {
-        get => isWednesdayFree;
-        set => SetProperty(ref isWednesdayFree, value);
+        get => roster.Days.ElementAt(2).IsFree;
+        set
+        {
+            roster.Days.ElementAt(2).IsFree = value;
+
+            WednesdayStart = value ? null : defaultStart;
+            WednesdayEnd = value ? null : defaultEnd;
+
+            OnPropertyChanged(nameof(WednesdayStart));
+            OnPropertyChanged(nameof(WednesdayEnd));
+
+            foreach (var employee in EmployerItems)
+            {
+                employee.WednesdayStart = value ? null : new TimeOnly(7, 30);
+                employee.WednesdayEnd = value ? null : new TimeOnly(16, 0);
+            }
+        }
     }
-    private TimeOnly thursdayStart;
-    public TimeOnly ThursdayStart
+    private TimeOnly? thursdayStart;
+    public TimeOnly? ThursdayStart
     {
-        get => thursdayStart;
+        get => IsThursdayFree ? null : thursdayStart;
         set => SetProperty(ref thursdayStart, value);
     }
-    private TimeOnly thursdayEnd;
-    public TimeOnly ThursdayEnd
+    private TimeOnly? thursdayEnd;
+    public TimeOnly? ThursdayEnd
     {
-        get => thursdayEnd;
+        get => IsThursdayFree ? null : thursdayEnd;
         set => SetProperty(ref thursdayEnd, value);
     }
-    private bool isThursdayFree;
     public bool IsThursdayFree
     {
-        get => isThursdayFree;
-        set => SetProperty(ref isThursdayFree, value);
+        get => roster.Days.ElementAt(3).IsFree;
+        set
+        {
+            roster.Days.ElementAt(3).IsFree = value;
+
+            ThursdayStart = value ? null : defaultStart;
+            ThursdayEnd = value ? null : defaultEnd;
+
+            OnPropertyChanged(nameof(ThursdayStart));
+            OnPropertyChanged(nameof(ThursdayEnd));
+
+            foreach (var employee in EmployerItems)
+            {
+                employee.ThursdayStart = value ? null : new TimeOnly(7, 30);
+                employee.ThursdayEnd = value ? null : new TimeOnly(16, 0);
+            }
+        }
     }
-    private TimeOnly fridayStart;
-    public TimeOnly FridayStart
+    private TimeOnly? fridayStart;
+    public TimeOnly? FridayStart
     {
-        get => fridayStart;
+        get => IsFridayFree ? null : fridayStart;
         set => SetProperty(ref fridayStart, value);
     }
-    private TimeOnly fridayEnd;
-    public TimeOnly FridayEnd
+    private TimeOnly? fridayEnd;
+    public TimeOnly? FridayEnd
     {
-        get => fridayEnd;
+        get => IsFridayFree ? null : fridayEnd;
         set => SetProperty(ref fridayEnd, value);
     }
-    private bool isFridayFree;
     public bool IsFridayFree
     {
-        get => isFridayFree;
-        set => SetProperty(ref isFridayFree, value);
+        get => roster.Days.ElementAt(4).IsFree;
+        set
+        {
+            roster.Days.ElementAt(4).IsFree = value;
+
+            FridayStart = value ? null : defaultStart;
+            FridayEnd = value ? null : defaultEnd;
+
+            OnPropertyChanged(nameof(FridayStart));
+            OnPropertyChanged(nameof(FridayEnd));
+
+            foreach (var employee in EmployerItems)
+            {
+                employee.FridayStart = value ? null : new TimeOnly(7, 30);
+                employee.FridayEnd = value ? null : new TimeOnly(16, 0);
+            }
+        }
     }
 
     public ICommand SaveCommand => new RelayCommand(Save);
@@ -318,5 +381,11 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
             context.Entry(roster).Collection(b => b.Employees).Load();
             InitUpdate(roster);
         }
+
+        OnPropertyChanged(nameof(MondayLabel));
+        OnPropertyChanged(nameof(TuesdayLabel));
+        OnPropertyChanged(nameof(WednesdayLabel));
+        OnPropertyChanged(nameof(ThursdayLabel));
+        OnPropertyChanged(nameof(FridayLabel));
     }
 }
