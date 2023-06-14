@@ -6,7 +6,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-        <sys:Double x:Key="WindowWidth">1205</sys:Double>
+        <sys:Double x:Key="WindowWidth">1358</sys:Double>
+        <sys:Double x:Key="WindowMinWidth">600</sys:Double>
         <sys:Double x:Key="WindowHeight">600</sys:Double>
         
         <Style x:Key="ActionButton" TargetType="Button">

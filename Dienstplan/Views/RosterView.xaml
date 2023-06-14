@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              DataContext="{local:ViewModelProvider Type=local:RosterViewModel}"
              d:DataContext="{d:DesignInstance Type=local:RosterViewModel, IsDesignTimeCreatable=True}"
+             d:Background="White"
              d:DesignHeight="{StaticResource WindowHeight}" 
              d:DesignWidth="{StaticResource WindowWidth}">
     <Grid VerticalAlignment="Stretch">
@@ -46,523 +47,564 @@
                         Command="{Binding SelectWeekCommand}"/>
             </Grid>
         </GroupBox>
-        
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="195"/>
-                <ColumnDefinition Width="175"/>
-                <ColumnDefinition Width="175"/>
-                <ColumnDefinition Width="175"/>
-                <ColumnDefinition Width="175"/>
-                <ColumnDefinition Width="175"/>
-                <ColumnDefinition Width="110"/>
-            </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="2"
+                      Margin="5 0"
+                      VerticalScrollBarVisibility="Disabled"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      HorizontalAlignment="Left">
+            <Grid Width="1326">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="188"/>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="110"/>
+                    </Grid.ColumnDefinitions>
 
                 
-            <Label Content="{x:Static resx:Resources.Employee}"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Margin="8 0 0 0"/>
+                    <Label Content="{x:Static resx:Resources.Employee}"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Margin="0 0 0 0"/>
 
-            <Label Content="{x:Static resx:Resources.OpeningHours}"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   Margin="0 0 0 0"
-                   Padding="5 5 5 5"
-                   HorizontalAlignment="Right"/>
+                    <Label Content="{x:Static resx:Resources.OpeningHours}"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="0 0 0 0"
+                           Padding="5 5 5 5"
+                           HorizontalAlignment="Right"/>
 
-            <Label Content="{Binding MondayLabel}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="1"/>
+                    <Label Content="{Binding MondayLabel}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
 
-            <Grid Grid.Row="1"
-                  Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1"
+                          Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Margin="5 0 0 0"
-                         Grid.Column="0"
-                         HorizontalContentAlignment="Center"
-                         IsReadOnly="{Binding IsMondayFree}"
-                         Text="{Binding MondayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Margin="5 0 0 0"
+                                 Grid.Column="0"
+                                 HorizontalContentAlignment="Center"
+                                 IsReadOnly="{Binding IsMondayFree}"
+                                 Text="{Binding MondayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
 
-                <Label Grid.Column="1"
-                       Content="-"
-                       Padding="3 5"/>
+                        <Label Grid.Column="1"
+                               Content="-"
+                               Padding="3 5"/>
 
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Grid.Column="2"
-                         HorizontalContentAlignment="Center"
-                         IsReadOnly="{Binding IsMondayFree}"
-                         Text="{Binding MondayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Grid.Column="2"
+                                 HorizontalContentAlignment="Center"
+                                 IsReadOnly="{Binding IsMondayFree}"
+                                 Text="{Binding MondayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
 
-                <Label Grid.Column="3"
-                       Content="{x:Static resx:Resources.Time}"/>
+                        <Label Grid.Column="3"
+                               Content="{x:Static resx:Resources.Time}"/>
 
-                <CheckBox Content="{x:Static resx:Resources.Free}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Grid.Column="4"
-                          IsChecked="{Binding IsMondayFree}"/>
-            </Grid>
+                        <CheckBox Content="{x:Static resx:Resources.Free}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Column="4"
+                                  IsChecked="{Binding IsMondayFree}"/>
+                    </Grid>
 
-            <Label Content="{Binding TuesdayLabel}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="2"/>
+                    <Label Content="{Binding TuesdayLabel}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="2"/>
             
-            <Grid Grid.Row="1"
-                  Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1"
+                          Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Margin="5 0 0 0"
-                         Grid.Column="0"
-                         Text="{Binding TuesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Margin="5 0 0 0"
+                                 Grid.Column="0"
+                                 Text="{Binding TuesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
 
-                <Label Grid.Column="1"
-                       Content="-"
-                       Padding="3 5"/>
+                        <Label Grid.Column="1"
+                               Content="-"
+                               Padding="3 5"/>
 
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Grid.Column="2"
-                         Text="{Binding TuesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Grid.Column="2"
+                                 Text="{Binding TuesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
 
-                <Label Grid.Column="3"
-                       Content="{x:Static resx:Resources.Time}"/>
+                        <Label Grid.Column="3"
+                               Content="{x:Static resx:Resources.Time}"/>
 
-                <CheckBox Content="{x:Static resx:Resources.Free}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Grid.Column="4"
-                          IsChecked="{Binding IsTuesdayFree}"/>
+                        <CheckBox Content="{x:Static resx:Resources.Free}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Column="4"
+                                  IsChecked="{Binding IsTuesdayFree}"/>
+                    </Grid>
+
+                    <Label Content="{Binding WednesdayLabel}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="3"/>
+
+                    <Grid Grid.Row="1"
+                          Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Margin="5 0 0 0"
+                                 Grid.Column="0"
+                                 Text="{Binding WednesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="1"
+                               Content="-"
+                               Padding="3 5"/>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Grid.Column="2"
+                                 Text="{Binding WednesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="3"
+                               Content="{x:Static resx:Resources.Time}"/>
+
+                        <CheckBox Content="{x:Static resx:Resources.Free}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Column="4"
+                                  IsChecked="{Binding IsWednesdayFree}"/>
+                    </Grid>
+
+                    <Label Content="{Binding ThursdayLabel}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="4"/>
+
+                    <Grid Grid.Row="1"
+                          Grid.Column="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Margin="5 0 0 0"
+                                 Grid.Column="0"
+                                 Text="{Binding ThursdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="1"
+                               Content="-"
+                               Padding="3 5"/>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Grid.Column="2"
+                                 Text="{Binding ThursdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="3"
+                               Content="{x:Static resx:Resources.Time}"/>
+
+                        <CheckBox Content="{x:Static resx:Resources.Free}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Column="4"
+                                  IsChecked="{Binding IsThursdayFree}"/>
+                    </Grid>
+
+                    <Label Content="{Binding FridayLabel}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="5"/>
+
+                    <Grid Grid.Row="1"
+                          Grid.Column="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Margin="5 0 0 0"
+                                 Grid.Column="0"
+                                 Text="{Binding FridayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="1"
+                               Content="-"
+                               Padding="3 5"/>
+
+                        <TextBox Width="35"
+                                 Height="18"
+                                 BorderThickness="0 0 0 1"
+                                 Grid.Column="2"
+                                 Text="{Binding FridayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+
+                        <Label Grid.Column="3"
+                               Content="{x:Static resx:Resources.Time}"/>
+
+                        <CheckBox Content="{x:Static resx:Resources.Free}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Column="4"
+                                  IsChecked="{Binding IsFridayFree}"/>
+                    </Grid>
+
+                    <Label Content="{x:Static resx:Resources.Total}"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Grid.Row="0"
+                           Grid.Column="6"/>
+
+                </Grid>
+
+                <DataGrid Grid.Row="1"
+                          Padding="0"
+                          Margin="0"
+                          HorizontalAlignment="Stretch"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserReorderColumns="False"
+                          CanUserDeleteRows="False"
+                          HeadersVisibility="Column"
+                          HorizontalScrollBarVisibility="Disabled"
+                          ItemsSource="{Binding EmployerItems}">
+                    <!--<DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="LightBlue"/>
+                        </Style>
+                    </DataGrid.RowStyle>-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Name}"
+                                            IsReadOnly="True"
+                                            Width="120"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.TS}"
+                                            IsReadOnly="True"
+                                            Width="25"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding WrittingHours}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.hPlanned}"
+                                            IsReadOnly="True"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding Hours}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
+                                            IsReadOnly="False"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding MondayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.End}"
+                                            IsReadOnly="False"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding MondayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
+                                            IsReadOnly="True"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding MondayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="30"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding MondayTime, TargetNullValue=-.-}"/>
+                        <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Binding="{Binding MondayFree}"
+                                                Width="30">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
+                                            IsReadOnly="False"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TuesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.End}"
+                                            IsReadOnly="False"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TuesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
+                                            IsReadOnly="True"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TuesdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="30"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TuesdayTime, TargetNullValue=-.-}"/>
+                        <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Binding="{Binding TuesdayFree}"
+                                                Width="30">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
+                                            IsReadOnly="False"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding WednesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.End}"
+                                            IsReadOnly="False"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding WednesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
+                                            IsReadOnly="True"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding WednesdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="30"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding WednesdayTime, TargetNullValue=-.-}"/>
+                        <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Binding="{Binding WednesdayFree}"
+                                                Width="30">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
+                                            IsReadOnly="False"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding ThursdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.End}"
+                                            IsReadOnly="False"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding ThursdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
+                                            IsReadOnly="True"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding ThursdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="30"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding ThursdayTime, TargetNullValue=-.-}"/>
+                        <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Binding="{Binding ThursdayFree}"
+                                                Width="30">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
+                                            IsReadOnly="False"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding FridayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.End}"
+                                            IsReadOnly="False"
+                                            Width="45"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding FridayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
+                                            IsReadOnly="True"
+                                            Width="50"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding FridayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="30"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding FridayTime, TargetNullValue=-.-}"/>
+                        <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Binding="{Binding FridayFree}"
+                                                Width="30">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 2 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                            <DataGridCheckBoxColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="BorderBrush" Value="Black" />
+                                    <Setter Property="BorderThickness" Value="0 0 3 0" />
+                                </Style>
+                            </DataGridCheckBoxColumn.HeaderStyle>
+                        </DataGridCheckBoxColumn>
+                        
+                        <DataGridTextColumn Header="{x:Static resx:Resources.h}"
+                                            IsReadOnly="True"
+                                            Width="35"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TotalHours}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.OT}"
+                                            IsReadOnly="True"
+                                            Width="35"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding OverTime}"/>
+                        <DataGridTextColumn Header="{x:Static resx:Resources.SOT}"
+                                            IsReadOnly="True"
+                                            Width="40"
+                                            CanUserResize="False"
+                                            CanUserReorder="False"
+                                            Binding="{Binding TotalOverTime}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
-
-            <Label Content="{Binding WednesdayLabel}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="3"/>
-
-            <Grid Grid.Row="1"
-                  Grid.Column="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Margin="5 0 0 0"
-                         Grid.Column="0"
-                         Text="{Binding WednesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="1"
-                       Content="-"
-                       Padding="3 5"/>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Grid.Column="2"
-                         Text="{Binding WednesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="3"
-                       Content="{x:Static resx:Resources.Time}"/>
-
-                <CheckBox Content="{x:Static resx:Resources.Free}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Grid.Column="4"
-                          IsChecked="{Binding IsWednesdayFree}"/>
-            </Grid>
-
-            <Label Content="{Binding ThursdayLabel}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="4"/>
-
-            <Grid Grid.Row="1"
-                  Grid.Column="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Margin="5 0 0 0"
-                         Grid.Column="0"
-                         Text="{Binding ThursdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="1"
-                       Content="-"
-                       Padding="3 5"/>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Grid.Column="2"
-                         Text="{Binding ThursdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="3"
-                       Content="{x:Static resx:Resources.Time}"/>
-
-                <CheckBox Content="{x:Static resx:Resources.Free}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Grid.Column="4"
-                          IsChecked="{Binding IsThursdayFree}"/>
-            </Grid>
-
-            <Label Content="{Binding FridayLabel}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="5"/>
-
-            <Grid Grid.Row="1"
-                  Grid.Column="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Margin="5 0 0 0"
-                         Grid.Column="0"
-                         Text="{Binding FridayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="1"
-                       Content="-"
-                       Padding="3 5"/>
-
-                <TextBox Width="35"
-                         Height="18"
-                         BorderThickness="0 0 0 1"
-                         Grid.Column="2"
-                         Text="{Binding FridayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-
-                <Label Grid.Column="3"
-                       Content="{x:Static resx:Resources.Time}"/>
-
-                <CheckBox Content="{x:Static resx:Resources.Free}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Right"
-                          Grid.Column="4"
-                          IsChecked="{Binding IsFridayFree}"/>
-            </Grid>
-
-            <Label Content="{x:Static resx:Resources.Total}"
-                   FontSize="14"
-                   FontWeight="SemiBold"
-                   Grid.Row="0"
-                   Grid.Column="6"/>
-
-        </Grid>
-
-        <DataGrid Grid.Row="3"
-                  Padding="0"
-                  Margin="0"
-                  HorizontalAlignment="Stretch"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserDeleteRows="False"
-                  ItemsSource="{Binding EmployerItems}">
-            <!--<DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="LightBlue"/>
-                </Style>
-            </DataGrid.RowStyle>-->
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Name}"
-                                    IsReadOnly="True"
-                                    Width="120"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.TS}"
-                                    IsReadOnly="True"
-                                    Width="25"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding WrittingHours}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.hPlanned}"
-                                    IsReadOnly="True"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding Hours}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
-                                    IsReadOnly="False"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding MondayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
-                                    IsReadOnly="False"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding MondayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
-                                    IsReadOnly="True"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding MondayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="30"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding MondayTime, TargetNullValue=-.-}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
-                                    IsReadOnly="False"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TuesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
-                                    IsReadOnly="False"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TuesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
-                                    IsReadOnly="True"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TuesdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="30"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TuesdayTime, TargetNullValue=-.-}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
-                                    IsReadOnly="False"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding WednesdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
-                                    IsReadOnly="False"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding WednesdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
-                                    IsReadOnly="True"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding WednesdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="30"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding WednesdayTime, TargetNullValue=-.-}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
-                                    IsReadOnly="False"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding ThursdayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
-                                    IsReadOnly="False"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding ThursdayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
-                                    IsReadOnly="True"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding ThursdayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="30"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding ThursdayTime, TargetNullValue=-.-}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
-                                    IsReadOnly="False"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding FridayStart, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.End}"
-                                    IsReadOnly="False"
-                                    Width="45"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding FridayEnd, StringFormat=HH:mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.Break}"
-                                    IsReadOnly="True"
-                                    Width="50"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding FridayBreak, StringFormat=mm, TargetNullValue=--:--}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="30"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding FridayTime, TargetNullValue=-.-}">
-                    <DataGridTextColumn.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 2 0" />
-                        </Style>
-                    </DataGridTextColumn.CellStyle>
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="BorderBrush" Value="Black" />
-                            <Setter Property="BorderThickness" Value="0 0 3 0" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-
-                <DataGridTextColumn Header="{x:Static resx:Resources.h}"
-                                    IsReadOnly="True"
-                                    Width="35"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TotalHours}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.OT}"
-                                    IsReadOnly="True"
-                                    Width="35"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding OverTime}"/>
-                <DataGridTextColumn Header="{x:Static resx:Resources.SOT}"
-                                    IsReadOnly="True"
-                                    Width="40"
-                                    CanUserResize="False"
-                                    CanUserReorder="False"
-                                    Binding="{Binding TotalOverTime}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
+        </ScrollViewer>
         
     </Grid>
 </UserControl>

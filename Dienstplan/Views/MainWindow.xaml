@@ -13,7 +13,7 @@
         DataContext="{local:ViewModelProvider Type=local:MainViewModel}"
         d:DataContext="{d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}"
         Height="{StaticResource WindowHeight}" 
-        MinWidth="{StaticResource WindowWidth}"
+        MinWidth="{StaticResource WindowMinWidth}"
         Width="{StaticResource WindowWidth}"
         MaxWidth="{StaticResource WindowWidth}">
     <Grid>
