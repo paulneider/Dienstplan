@@ -117,8 +117,9 @@ internal class RosterViewModel : ObservableObject, IRecipient<ValueChangedMessag
 
             foreach (var employee in EmployerItems)
             {
-                employee.MondayStart = value ? null : new TimeOnly(7, 30);
-                employee.MondayEnd = value ? null : new TimeOnly(16, 0);
+                //employee.MondayStart = value ? null : new TimeOnly(7, 30);
+                //employee.MondayEnd = value ? null : new TimeOnly(16, 0);
+                employee.MondayFree = value;
             }
         }
     }

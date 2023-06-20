@@ -140,6 +140,17 @@ class RosterEmployeeItemViewModel : ObservableObject
             return mondayTime.Value.TotalMinutes / 60;
         }
     }
+    private bool mondayFree;
+    public bool MondayFree
+    {
+        get => mondayFree;
+        set
+        {
+            MondayStart = value ? null : new TimeOnly(7, 30);
+            MondayEnd = value ? null : new TimeOnly(16, 0);
+            SetProperty(ref mondayFree, value);
+        }
+    }
     public TimeOnly? TuesdayStart
     {
         get => tuesdayShift.Start == TimeOnly.MinValue ? null : tuesdayShift.Start;

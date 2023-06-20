@@ -395,7 +395,8 @@
                         <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
                                                 CanUserReorder="False"
                                                 CanUserResize="False"
-                                                Binding="{Binding MondayFree}"
+                                                IsReadOnly="{Binding IsMondayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                Binding="{Binding MondayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Width="30">
                             <DataGridCheckBoxColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -409,7 +410,26 @@
                                     <Setter Property="BorderThickness" Value="0 0 3 0" />
                                 </Style>
                             </DataGridCheckBoxColumn.HeaderStyle>
+                            <DataGridCheckBoxColumn.ElementStyle>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsHitTestVisible" Value="False"/>
+                                </Style>
+                            </DataGridCheckBoxColumn.ElementStyle>
                         </DataGridCheckBoxColumn>
+                        <DataGridTemplateColumn Header="{x:Static resx:Resources.Free}"
+                                                CanUserReorder="False"
+                                                CanUserResize="False"
+                                                Width="30">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <CheckBox IsChecked="{Binding IsMondayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                  IsEnabled="{Binding MondayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource InvertBoolConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
 
                         <DataGridTextColumn Header="{x:Static resx:Resources.Start}"
                                             IsReadOnly="False"
@@ -438,7 +458,7 @@
                         <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
                                                 CanUserReorder="False"
                                                 CanUserResize="False"
-                                                Binding="{Binding TuesdayFree}"
+                                                Binding="{Binding TuesdayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Width="30">
                             <DataGridCheckBoxColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -481,7 +501,7 @@
                         <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
                                                 CanUserReorder="False"
                                                 CanUserResize="False"
-                                                Binding="{Binding WednesdayFree}"
+                                                Binding="{Binding WednesdayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Width="30">
                             <DataGridCheckBoxColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -524,7 +544,7 @@
                         <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
                                                 CanUserReorder="False"
                                                 CanUserResize="False"
-                                                Binding="{Binding ThursdayFree}"
+                                                Binding="{Binding ThursdayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Width="30">
                             <DataGridCheckBoxColumn.CellStyle>
                                 <Style TargetType="DataGridCell">
@@ -567,7 +587,7 @@
                         <DataGridCheckBoxColumn Header="{x:Static resx:Resources.Free}"
                                                 CanUserReorder="False"
                                                 CanUserResize="False"
-                                                Binding="{Binding FridayFree}"
+                                                Binding="{Binding FridayFree, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Width="30">
                             <DataGridCheckBoxColumn.CellStyle>
                                 <Style TargetType="DataGridCell">

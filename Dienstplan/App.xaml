@@ -9,7 +9,9 @@
         <sys:Double x:Key="WindowWidth">1358</sys:Double>
         <sys:Double x:Key="WindowMinWidth">600</sys:Double>
         <sys:Double x:Key="WindowHeight">600</sys:Double>
-        
+
+        <local:InvertBoolConverter x:Key="InvertBoolConverter"/>
+
         <Style x:Key="ActionButton" TargetType="Button">
             <Setter Property="Width" Value="150"/>
             <Setter Property="Height" Value="20"/>
