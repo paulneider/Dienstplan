@@ -8,3 +8,4 @@
 /Dienstplan/bin/Release/net7.0-windows
 /Dienstplan.db-shm
 *.db-wal
+/Dienstplan/Dienstplan.db
